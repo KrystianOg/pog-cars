@@ -1,0 +1,9 @@
+# ignore node modules
+server/node_modules
+client/node_modules
+
+# ignore environmental variables
+*.env
+.env
+
+# add something to ignore
