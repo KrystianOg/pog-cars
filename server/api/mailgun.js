@@ -7,7 +7,7 @@ const domain = process.env.MAILGUN_DOMAIN
 
 const mailgun = require('mailgun-js')({apiKey: api_Key, domain : domain, host: 'api.eu.mailgun.net'})
 
-function sendMessage(to, subject, text){
+function sendMessage(to, subject, text) {
     const data = {
         from: from,
         to: to,

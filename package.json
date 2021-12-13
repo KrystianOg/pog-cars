@@ -1,0 +1,9 @@
+{
+    "name": "build-scripts",
+    "version": "1.0.0",
+    "private": true,
+    "scripts": {
+        "init-server-modules": "cd server && npm i express dotenv auth0-js mailgun-js twilio && npm i -g nodemon",
+        "init-client-modules": "cd client && npm i react react-dom react-scripts"
+    }
+}
