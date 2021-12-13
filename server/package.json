@@ -6,11 +6,15 @@
     "start": "node ./bin/www"
   },
   "dependencies": {
+    "auth0-js": "^9.18.0",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
+    "dotenv": "^10.0.0",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
-    "jade": "~1.11.0",
-    "morgan": "~1.9.1"
+    "jade": "^0.29.0",
+    "mailgun-js": "^0.6.7",
+    "morgan": "~1.9.1",
+    "twilio": "^3.71.3"
   }
 }
