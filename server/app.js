@@ -1,5 +1,5 @@
 //require .env file reading
-require('dotenv').config();
+require('dotenv').config()
 
 var createError = require('http-errors');
 var express = require('express');
@@ -15,11 +15,8 @@ const port = process.env.PORT || 3000;
 var app = express();
 
 //APIs
-const twilio = require('./api/twilio.js')
-const mailgun = require('./api/mailgun.js')
-
-
-
+//const twilio = require('./api/twilio.js')
+//const mailgun = require('./api/mailgun.js')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -33,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/posts',require('./routes/postRoutes'));
+app.use('/cars',require('./routes/carRoutes'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) =>{
