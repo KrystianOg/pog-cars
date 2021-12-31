@@ -58,6 +58,14 @@ class Car{
 
         return db.execute(sql);
     }
+
+    static removeCar(id)
+    {
+        removedCar = this.findById(id);
+        removedCar.deleted = true;
+
+        return db.execute(sql);
+    }
 }
 
 module.exports = Car;

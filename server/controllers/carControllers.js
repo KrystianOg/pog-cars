@@ -33,3 +33,13 @@ exports.getCarById = async (req,res,next) => {
         next(err);
     }
 }
+
+exports.reserveCar = async (req,res,next) => {
+    try{
+        // idk
+    } catch(err){
+        console.log(err)
+        next(err);
+    }
+}
+
