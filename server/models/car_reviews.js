@@ -29,6 +29,8 @@ class Car_review{
         return db.execute(sql);
     }
 
+    // filters
+
     static findAll(){
         let sql = "SELECT * FROM car_reviews;"
 
@@ -40,6 +42,25 @@ class Car_review{
 
         return db.execute(sql);
     }
+
+    // find articles about a specific car
+
+    static findAboutACar(car_id){
+        let sql = `SELECT * FROM car_reviews WHERE car_id=${car_id}`;
+
+        return db.execute(sql);
+    }
+
+    // updating
+
+    //censor vulgar review
+
+    static censorReview(id){
+        let sql = ``;
+
+        return db.execute(sql);
+    }
 }
+
 
 module.exports = Car_review;

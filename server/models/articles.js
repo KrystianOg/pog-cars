@@ -1,8 +1,9 @@
 const db = require('../config/db')
 
 class Article{
-    constructor(creator_id, title, content){
+    constructor(creator_id, deleted, title, content){
         this.creator_id = creator_id;
+        this.deleted = deleted;
         this.title = title;
         this.content = content;
     }
@@ -14,10 +15,12 @@ class Article{
 
         let sql = `INSERT INTO articles(
             creator_id,
+            deleted,
             title,
             content
             ) VALUES (
             ${this.creator_id},
+            ${this.deleted},
             ${this.title},
             ${this.content}
             )`
@@ -25,6 +28,8 @@ class Article{
         
         return db.execute(sql);
     }
+
+    // filters
 
     static findAll(){
         let sql = "SELECT * FROM articles;"
@@ -36,6 +41,12 @@ class Article{
         let sql = `SELECT * FROM agencies WHERE agency_id=${id}`;
 
         return db.execute(sql);
+    }
+
+    // updating
+    static removeArticle(id)
+    {
+        let sql = 'UPDATE '
     }
 }
 

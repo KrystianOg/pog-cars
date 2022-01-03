@@ -29,6 +29,8 @@ class Log{
         return db.execute(sql);
     }
 
+    // filters
+
     static findAll(){
         let sql = "SELECT * FROM log;"
 
@@ -40,6 +42,8 @@ class Log{
 
         return db.execute(sql);
     }
+
+    // updating
 }
 
 module.exports = Log;

@@ -32,6 +32,8 @@ class Discount{
         return db.execute(sql);
     }
 
+    // filters
+
     static findAll(){
         let sql = "SELECT * FROM discounts;"
 
@@ -43,6 +45,10 @@ class Discount{
 
         return db.execute(sql);
     }
+
+    
+
+    // updating - shouldn't really be updated once it's added
 }
 
 module.exports = Discount;

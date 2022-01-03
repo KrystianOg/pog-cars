@@ -26,6 +26,8 @@ class Register_code{
         return db.execute(sql);
     }
 
+    // filters
+
     static findAll(){
         let sql = "SELECT * FROM register_codes;"
 
@@ -37,6 +39,8 @@ class Register_code{
 
         return db.execute(sql);
     }
+
+    // updating
 }
 
 module.exports = Register_code;

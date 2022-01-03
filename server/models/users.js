@@ -1,13 +1,14 @@
 const db = require('../config/db')
 
 class Rental_history{
-    constructor(firstname, lastname, birth_date, username, email, type, salt, password){
+    constructor(firstname, lastname, birth_date, username, email, type, deleted, salt, password){
         this.firstname = firstname;
         this.lastname = lastname;
         this.birth_date = birth_date;
         this.username = username;
         this.email = email;
         this.type = type;
+        this.deleted = deleted;
         this.salt = salt;
         this.password = password;
     }
@@ -24,6 +25,7 @@ class Rental_history{
             username,
             email,
             type,
+            deleted,
             salt,
             password
             ) VALUES (
@@ -33,6 +35,7 @@ class Rental_history{
             ${this.username},
             ${this.email},
             ${this.type},
+            ${this.deleted},
             ${this.salt},
             ${this.password}
             )`
@@ -40,6 +43,8 @@ class Rental_history{
         
         return db.execute(sql);
     }
+
+    // filters
 
     static findAll(){
         let sql = "SELECT * FROM users;"
@@ -49,6 +54,20 @@ class Rental_history{
 
     static findById(id){
         let sql = `SELECT * FROM users WHERE user_id=${id}`;
+
+        return db.execute(sql);
+    }
+
+    // updating
+
+    promoteToEmployee(id){
+        let sql = ``;
+
+        return db.execute(sql);
+    }
+
+    promoteToAdmin(id){
+        let sql = ``;
 
         return db.execute(sql);
     }

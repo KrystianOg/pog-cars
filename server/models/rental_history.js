@@ -35,6 +35,8 @@ class Rental_history{
         return db.execute(sql);
     }
 
+    // filters
+
     static findAll(){
         let sql = "SELECT * FROM rental_history;"
 
@@ -46,6 +48,8 @@ class Rental_history{
 
         return db.execute(sql);
     }
+
+    // updating
 }
 
 module.exports = Rental_history;

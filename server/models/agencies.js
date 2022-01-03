@@ -1,13 +1,14 @@
 const db = require('../config/db')
 
 class Agency{
-    constructor(country, voivodeship, city, postcode, street, address){
+    constructor(country, voivodeship, city, postcode, street, address, deleted){
         this.country = country;
         this.voivodeship = voivodeship;
         this.city = city;
         this.postcode = postcode;
         this.street = street;
         this.address = address;
+        this.deleted = deleted;
     }
 
     save(){
@@ -21,7 +22,8 @@ class Agency{
             city,
             postcode,
             street,
-            address
+            address,
+            deleted
             ) VALUES (
             ${this.country},
             ${this.voivodeship},
@@ -29,11 +31,14 @@ class Agency{
             ${this.postcode},
             ${this.street},
             ${this.address},
+            ${this.deleted}
             )`
 
         
         return db.execute(sql);
     }
+
+    // filters
 
     static findAll(){
         let sql = "SELECT * FROM agencies;"
@@ -43,6 +48,24 @@ class Agency{
 
     static findById(id){
         let sql = `SELECT * FROM agencies WHERE agency_id=${id}`;
+
+        return db.execute(sql);
+    }
+
+    // updating
+
+    // removal - same as update in this scenario
+
+    static removeAgency(id){
+        let sql = '';
+
+        return db.execute(sql);
+    }
+
+    // changing agency's location
+
+    static moveAgency(id, country, voivodeship, city, postcode, street, address){
+        let sql = '';
 
         return db.execute(sql);
     }
