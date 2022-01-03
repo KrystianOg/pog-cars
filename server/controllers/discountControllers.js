@@ -1,6 +1,6 @@
 const Discount = require('../models/discounts');
 
-exports.getAllComments = async (req,res,next) => {
+exports.getAllDiscounts = async (req,res,next) => {
     try{
         let [discounts,_] = await Discount.findAll();
         res.status(200).json(discounts);

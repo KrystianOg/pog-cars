@@ -1,6 +1,6 @@
 const db = require('../config/db')
 
-class Rental_history{
+class User{
     constructor(firstname, lastname, birth_date, username, email, type, deleted, salt, password){
         this.firstname = firstname;
         this.lastname = lastname;
@@ -60,13 +60,13 @@ class Rental_history{
 
     // updating
 
-    promoteToEmployee(id){
+    promoteToEmployee(){
         let sql = ``;
 
         return db.execute(sql);
     }
 
-    promoteToAdmin(id){
+    promoteToAdmin(){
         let sql = ``;
 
         return db.execute(sql);
