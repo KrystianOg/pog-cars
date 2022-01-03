@@ -25,7 +25,7 @@ var app = express();
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'jade'); // maybe this has to be commented out
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // use routes
 app.use('/', indexRouter);
 app.use('/', carRouter);
-//app.use('/users', usersRouter); //?
+app.use('/users', usersRouter); //?
 app.use('/agencies',require('./routes/agencyRoutes'));
 app.use('/articles',require('./routes/articleRoutes'));
 app.use('/car_articles',require('./routes/car_articleRoutes'));
@@ -47,8 +47,9 @@ app.use('/discounts',require('./routes/discountRoutes'));
 app.use('/log',require('./routes/logRoutes'));
 app.use('/register_codes',require('./routes/register_codeRoutes'));
 app.use('/rental_history',require('./routes/rental_historyRoutes'));
-app.use('/users',require('./routes/userRoutes'));
-app.use('/other', require('./routes/otherRoutes'));
+//app.use('/users',require('./routes/userRoutes'));
+app.use('/', otherRouter);
+//app.use('/other', require('./routes/otherRoutes'));
 
 // catch 404 and forward to error handler
 app.use((req, res, next) =>{

@@ -84,7 +84,6 @@ class Car{
         return db.execute(sql);
     }
 
-
     static findByMileage(mileage)
     {
         let sql = `SELECT * FROM cars WHERE mileage=${mileage}`;
