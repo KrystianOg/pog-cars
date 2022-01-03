@@ -41,7 +41,7 @@ app.use('/agencies',require('./routes/agencyRoutes'));
 app.use('/articles',require('./routes/articleRoutes'));
 app.use('/car_articles',require('./routes/car_articleRoutes'));
 app.use('/cars_reviews',require('./routes/car_reviewRoutes'));
-app.use('/cars',require('./routes/carRoutes'));
+//app.use('/cars',require('./routes/carRoutes'));
 app.use('/comments',require('./routes/commentRoutes'));
 app.use('/discounts',require('./routes/discountRoutes'));
 app.use('/log',require('./routes/logRoutes'));
@@ -74,7 +74,7 @@ app.use('/',()=>{
 
 app.listen(port, ()=>{
   console.log(`server is running on port ${port}`)
-  
+
   //mailgun.sendWelcomeMessage('uzytkownik451@gmail.com') // testing sending mail messages
   //twilio.sendToMe('Test message') //testing sending phone messages
 });

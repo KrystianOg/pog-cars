@@ -6,5 +6,24 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+router.post('/', function(req, res, next) {
+  res.render('index', { title: 'Express post' });
+});
+
+// test
+router.get('/cars', function(req, res, next) {
+  res.render('index', { title: 'I love cars' });
+});
+
+// test
+router.get('/cars/:allcars', function(req, res, next) {
+  res.render('index', { title: 'I love cars' });
+});
+
+// test
+router.get('/other', function(req, res, next) {
+  res.render('index', { title: 'Different stuff' });
+});
+
 
 module.exports = router;

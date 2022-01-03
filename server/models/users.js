@@ -71,6 +71,15 @@ class User{
 
         return db.execute(sql);
     }
+
+    // other things
+
+    // add a star rating from the user to the agent, where id is agent's id
+    rateAgent(id){
+        let sql = ``;
+
+        return db.execute(sql);
+    }
 }
 
 module.exports = User;
