@@ -31,25 +31,23 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 // use routes
-app.use('/', indexRouter);
-app.use('/', carRouter);
-app.use('/users', usersRouter); //?
+//app.use('/index', indexRouter);
+app.use('/users',require('./routes/userRoutes'));
 app.use('/agencies',require('./routes/agencyRoutes'));
 app.use('/articles',require('./routes/articleRoutes'));
 app.use('/car_articles',require('./routes/car_articleRoutes'));
-app.use('/cars_reviews',require('./routes/car_reviewRoutes'));
-//app.use('/cars',require('./routes/carRoutes'));
+app.use('/car_reviews',require('./routes/car_reviewRoutes'));
+app.use('/cars',require('./routes/carRoutes'));
 app.use('/comments',require('./routes/commentRoutes'));
 app.use('/discounts',require('./routes/discountRoutes'));
 app.use('/log',require('./routes/logRoutes'));
 app.use('/register_codes',require('./routes/register_codeRoutes'));
 app.use('/rental_history',require('./routes/rental_historyRoutes'));
-//app.use('/users',require('./routes/userRoutes'));
-app.use('/', otherRouter);
-//app.use('/other', require('./routes/otherRoutes'));
+app.use('/other', require('./routes/otherRoutes'));
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) =>{
