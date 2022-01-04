@@ -6,9 +6,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const { auth } = require('express-oauth2-jwt-bearer');
+const { auth } = require('express-openid-connect');
 
-var indexRouter = require('./routes/index');
+const jwt = require('express-jwt'); //auth0...?
+const jwksRsa = require('jwks-rsa'); //auth0...?
+
+//var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users'); //?
 var carRouter = require('./routes/carRoutes');
 var otherRouter = require('./routes/otherRoutes');
@@ -17,6 +20,16 @@ var otherRouter = require('./routes/otherRoutes');
 const port = process.env.PORT || 3000;
 
 var app = express();
+
+//auth0
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: process.env.SECRET,
+  baseURL: process.env.BASEURL,
+  clientID: process.env.CLIENTID,
+  issuerBaseURL: process.env.ISSUERBASEURL,
+};
 
 //APIs
 //const twilio = require('./api/twilio.js')
@@ -33,9 +46,10 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
+app.use(auth(config));
 
 // use routes
-//app.use('/index', indexRouter);
+app.use('/main',require('./routes/index')); //strona startowa
 app.use('/users',require('./routes/userRoutes'));
 app.use('/agencies',require('./routes/agencyRoutes'));
 app.use('/articles',require('./routes/articleRoutes'));
@@ -66,20 +80,25 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
+
 //Middlewares
 app.use('/',()=>{
 
 });
 
+//which one to choose?
+
+
 //auth0
-const checkJwt = auth({
+/*const checkJwt = auth({
   audience: 'YOUR_API_IDENTIFIER',
   issuerBaseURL: `http://localhost:3000/`,
 });
+*/
 
 app.listen(port, ()=>{
   console.log(`server is running on port ${port}`)
-
+  
   //mailgun.sendWelcomeMessage('uzytkownik451@gmail.com') // testing sending mail messages
   //twilio.sendToMe('Test message') //testing sending phone messages
 });
