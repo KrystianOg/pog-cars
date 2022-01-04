@@ -48,8 +48,8 @@ class Car{
             ${this.agency_id},
             ${this.year},
             ${this.deleted},
-            ${this.model},
-            ${this.make}
+            '${this.model}',
+            '${this.make}'
             )`
 
         

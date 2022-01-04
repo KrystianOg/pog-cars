@@ -45,7 +45,6 @@ class User{
     }
 
     // filters
-
     static findAll(){
         let sql = "SELECT * FROM users;"
 
@@ -68,7 +67,6 @@ class User{
         return type == requirement
     }
 
-
     // usuwanie pracownikow
     static deleteUser(id){
         let sql = `DELETE FROM users WHERE user_id=${id}`;
@@ -83,7 +81,8 @@ class User{
 
     //security
     static login(email,password){
-        //let sql = `SELECT * FROM users WHERE users.email='${email}' AND users.password=SHA256('${password+process.env.}
+        let sql = `SELECT 1 FROM users WHERE users.email='${email}' AND users.password=SHA256('${password+process.env.PEPPER}`;
+        return db.execute(sql);
     }
 
     static register(){
