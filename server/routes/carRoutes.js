@@ -7,6 +7,7 @@ router.route("/").get(carControllers.getAllCars).post(carControllers.addNewCar);
 
 router.route("/:id").get(carControllers.getCarById);
 
+router.route("/delete:id").delete(carControllers.deleteCarById);
 //router.route("/").get(carControllers.getAllCars);
 
 module.exports = router;
