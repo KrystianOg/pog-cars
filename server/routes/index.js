@@ -25,5 +25,4 @@ router.get('/other', function(req, res, next) {
   res.render('index', { title: 'Different stuff' });
 });
 
-
 module.exports = router;

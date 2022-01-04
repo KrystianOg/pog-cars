@@ -5,6 +5,6 @@ const router = express.Router();
 //@route GET && POST /cars
 router.route("/").get(rental_historyControllers.getAllRentalHistory).post(rental_historyControllers.addNewRentalHistory);
 
-router.route("/:id").get(rental_historyControllers.getRentalHistoryById);
+router.route("/:id").get(rental_historyControllers.getRentalHistoryByUserId);
 
 module.exports = router;

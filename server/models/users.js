@@ -57,28 +57,37 @@ class User{
 
         return db.execute(sql);
     }
-
-    // updating
-
-    promoteToEmployee(){
-        let sql = ``;
-
-        return db.execute(sql);
+    
+    // fullfill requirements
+    static fullfillRequirement(requirement,id){
+        let sql = `CALL fullfillRequirement('${requirement}',${id});`;
+        return parseBoolean(db.execute(sql))
     }
 
-    promoteToAdmin(){
-        let sql = ``;
-
-        return db.execute(sql);
+    fullfillRequirement(requirement){
+        return type == requirement
     }
 
+
+    // usuwanie pracownikow
+    static deleteUser(id){
+        let sql = `DELETE FROM users WHERE user_id=${id}`;
+        return db.execute(sql);
+    }
     // other things
 
     // add a star rating from the user to the agent, where id is agent's id
     rateAgent(id){
-        let sql = ``;
-
         return db.execute(sql);
+    }
+
+    //security
+    static login(email,password){
+        //let sql = `SELECT * FROM users WHERE users.email='${email}' AND users.password=SHA256('${password+process.env.}
+    }
+
+    static register(){
+        
     }
 }
 

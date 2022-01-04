@@ -43,3 +43,11 @@ exports.reserveCar = async (req,res,next) => {
     }
 }
 
+exports.deleteCarById = async (req,res,next) => {
+    try{
+        // idk
+    } catch(err){
+        console.log(err)
+        next(err);
+    }
+}

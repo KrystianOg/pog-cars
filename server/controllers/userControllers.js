@@ -1,4 +1,4 @@
-const user = require('../models/users');
+const User = require('../models/users');
 
 exports.getAllUsers = async (req,res,next) => {
     try{
@@ -26,7 +26,7 @@ exports.addNewUser = async (req,res,next) => {
 
 exports.getUserById = async (req,res,next) => {
     try{
-        let [user,_] = await user.findById(req.params.id);
+        let [user,_] = await User.findById(req.params.id);
         res.status(200).json(user);
     } catch(err){
         console.log(err)

@@ -17,14 +17,17 @@ exports.addNewRentalHistory = async (req,res,next) => {
         let rental_history = new Rental_history(car_id, user_id, agency_id, rental_begin, rental_end, price)
 
         rental_history= await rental_history.save();
-        res.status(201).json({message:"Rental history added successfully"});
+        res.status(201).json({message:"Successfully added Car to rental history "});
     } catch(err){
         console.log(err)
         next(err); 
     }
 }
 
-exports.getRentalHistoryById = async (req,res,next) => {
+exports.getRentalHistoryByUserId = async (req,res,next) => {
+    //check requirements
+    
+
     try{
         let [rental_history,_] = await Rental_history.findById(req.params.id);
         res.status(200).json(rental_history);
