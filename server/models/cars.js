@@ -48,8 +48,8 @@ class Car{
             ${this.agency_id},
             ${this.year},
             ${this.deleted},
-            ${this.model},
-            ${this.make}
+            '${this.model}',
+            '${this.make}'
             )`
 
         
@@ -93,10 +93,12 @@ class Car{
 
     // updating
 
-    static removeCar(id)
+    static deleteCarById(id)
     {
         //removedCar = this.findById(id); chyba bzdury
         //removedCar.deleted = true; tu też
+
+        //sprawdzic czy uzytkownik jest adminem
 
         let sql = `UPDATE cars SET deleted = 1 WHERE car_id=${id}`;
 
