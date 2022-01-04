@@ -6,6 +6,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const { auth } = require('express-oauth2-jwt-bearer');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users'); //?
@@ -68,6 +69,12 @@ app.use((err, req, res, next) => {
 //Middlewares
 app.use('/',()=>{
 
+});
+
+//auth0
+const checkJwt = auth({
+  audience: 'YOUR_API_IDENTIFIER',
+  issuerBaseURL: `http://localhost:3000/`,
 });
 
 app.listen(port, ()=>{
