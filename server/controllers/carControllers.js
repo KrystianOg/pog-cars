@@ -13,8 +13,8 @@ exports.getAllCars = async (req,res,next) => {
 exports.addNewCar = async (req,res,next) => {
     try{
         //extracting parameters from request body
-        let {mileage, horsepower, seats, transmission, drivetrain, fuel, fuel_consumption, price, agency_id, year} = req.body;
-        let car = new Car(mileage, horsepower, seats, transmission, drivetrain, fuel, fuel_consumption, price, agency_id, year)
+        let {mileage, horsepower, seats, transmission, drivetrain, fuel, fuel_consumption, price, agency_id, year,deleted,model,make} = req.body;
+        let car = new Car(mileage, horsepower, seats, transmission, drivetrain, fuel, fuel_consumption, price, agency_id, year,deleted,model,make)
 
         car= await car.save();
         res.status(201).json({message:"Car added successfully"});
@@ -43,3 +43,11 @@ exports.reserveCar = async (req,res,next) => {
     }
 }
 
+exports.deleteCarById = async (req,res,next) => {
+    try{
+        // idk
+    } catch(err){
+        console.log(err)
+        next(err);
+    }
+}
