@@ -92,11 +92,3 @@ function createID(length) {
     }
     return result;
 }
-
-function sha2(message) {
-    // encode as UTF-8
-    var hash = sha256.create();
-    hash.update(message);
-
-    return hash.hex();
-}
