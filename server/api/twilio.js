@@ -7,7 +7,7 @@ const serviceSID = process.env.TWILIO_SERVICE_SID
 
 const client = require('twilio')(accountSid, authToken); 
 
-function sendMessage(to, body){
+exports.sendMessage =(to, body)=>{
 
     client.messages.create
         ({
@@ -19,7 +19,7 @@ function sendMessage(to, body){
         .done();
 }
 
-function sendToMe(body){
+exports.sendToMe = (body) =>{
     client.messages.create
         ({ 
             body: body,
@@ -29,9 +29,4 @@ function sendToMe(body){
         })
         .then(message => console.log(message.sid))
         .done();
-}
-
-module.exports ={
-    sendMessage,
-    sendToMe
 }
