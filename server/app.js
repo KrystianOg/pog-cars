@@ -6,7 +6,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-const { auth } = require('express-openid-connect');
+const { auth } = require('express-openid-connect'); // auth0
 
 const jwt = require('express-jwt'); //auth0...?
 const jwksRsa = require('jwks-rsa'); //auth0...?
