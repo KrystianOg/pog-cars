@@ -3,26 +3,20 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  console.log(req.oidc.isAuthenticated());
+  res.status(201).json({message:"Main site."});
 });
 
-router.post('/', function(req, res, next) {
-  res.render('index', { title: 'Express post' });
+router.get('/login', function(req, res, next) {
+  console.log(req.oidc.isAuthenticated());
+  req.oidc.lo
+  res.status(201).json({message:"Login."});
 });
 
-// test
-router.get('/cars', function(req, res, next) {
-  res.render('index', { title: 'I love cars' });
+router.get('/logout', function(req, res, next) {
+  console.log(req.oidc.isAuthenticated());
+  res.status(201).json({message:"Logout."});
 });
 
-// test
-router.get('/cars/:allcars', function(req, res, next) {
-  res.render('index', { title: 'I love cars' });
-});
-
-// test
-router.get('/other', function(req, res, next) {
-  res.render('index', { title: 'Different stuff' });
-});
 
 module.exports = router;

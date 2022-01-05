@@ -25,12 +25,12 @@ class Agency{
             address,
             deleted
             ) VALUES (
-            ${this.country},
-            ${this.voivodeship},
-            ${this.city},
-            ${this.postcode},
-            ${this.street},
-            ${this.address},
+            '${this.country}',
+            '${this.voivodeship}',
+            '${this.city}',
+            '${this.postcode}',
+            '${this.street}',
+            '${this.address}',
             ${this.deleted}
             )`
 
@@ -40,8 +40,16 @@ class Agency{
 
     // filters
 
+    //maybe do this one for agent/admin?
     static findAll(){
         let sql = "SELECT * FROM agencies;"
+
+        return db.execute(sql);
+    }
+
+     //find non-deleted - maybe useful for user?
+    static findNotDeleted(id){
+        let sql = `SELECT * FROM agencies WHERE deleted = 0`;
 
         return db.execute(sql);
     }
@@ -52,23 +60,53 @@ class Agency{
         return db.execute(sql);
     }
 
+    static findByCountry(id){
+        let sql = `SELECT * FROM agencies WHERE country=${country}`;
+
+        return db.execute(sql);
+    }
+
+    static findByVoivodeship(id){
+        let sql = `SELECT * FROM agencies WHERE voivodeship=${voivodeship}`;
+
+        return db.execute(sql);
+    }
+
+    static findByCity(id){
+        let sql = `SELECT * FROM agencies WHERE city=${city}`;
+
+        return db.execute(sql);
+    }
+
+    static findByPostcode(id){
+        let sql = `SELECT * FROM agencies WHERE postcode=${postcode}`;
+
+        return db.execute(sql);
+    }
+
+    static findByStreet(street){
+        let sql = `SELECT * FROM agencies WHERE street=${street}`;
+    }
+
+
     // updating
 
     // removal - same as update in this scenario
-
-    static removeAgency(id){
-        let sql = '';
+    // pamietac o przesunieciu aut z tej agencji
+    static removeAgencyById(id){
+        let sql = `UPDATE agencies SET deleted = 1 WHERE agency_id=${id}`;
 
         return db.execute(sql);
     }
 
     // changing agency's location
-
-    static moveAgency(id, country, voivodeship, city, postcode, street, address){
-        let sql = '';
+    /* to nawet nie jest w wymaganiach
+    static moveAgencyById(id, country, voivodeship, city, postcode, street, address){
+        let sql = `UPDATE agencies SET country=${country} WHERE agency_id=${id}`;
 
         return db.execute(sql);
     }
+    */
 }
 
 module.exports = Agency;

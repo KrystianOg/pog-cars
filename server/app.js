@@ -6,11 +6,26 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const { auth } = require('express-openid-connect'); // auth0
+
+
+const jwt = require('express-jwt'); //auth0...?
+const jwksRsa = require('jwks-rsa'); //auth0...?
 
 const port = process.env.PORT || 3000;
 var app = express();
 var session = require('express-session');
 var bodyParser = require('body-parser');
+
+//auth0
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: process.env.SECRET,
+  baseURL: process.env.BASEURL,
+  clientID: process.env.CLIENTID,
+  issuerBaseURL: process.env.ISSUERBASEURL,
+};
 
 //APIs
 //const twilio = require('./api/twilio.js')
@@ -26,7 +41,8 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
+app.use(auth(config));
 
 //session storage
 app.use(session({secret: 'secret', resave: true, saveUninitialized: true}));
@@ -34,12 +50,13 @@ app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
 // use routes
-//app.use('/', require('./routes/index'));
-app.use('/users', require('./routes/userRoutes')); 
+
+//app.use('/main',require('./routes/index')); //strona startowa
+app.use('/users',require('./routes/userRoutes'));
 app.use('/agencies',require('./routes/agencyRoutes'));
 app.use('/articles',require('./routes/articleRoutes'));
 app.use('/car_articles',require('./routes/car_articleRoutes'));
-app.use('/cars_reviews',require('./routes/car_reviewRoutes'));
+app.use('/car_reviews',require('./routes/car_reviewRoutes'));
 app.use('/cars',require('./routes/carRoutes'));
 app.use('/comments',require('./routes/commentRoutes'));
 app.use('/discounts',require('./routes/discountRoutes'));
@@ -48,6 +65,7 @@ app.use('/register_codes',require('./routes/register_codeRoutes'));
 app.use('/rental_history',require('./routes/rental_historyRoutes'));
 app.use('/auth',require('./routes/authRoutes'));
 //app.use('/other', require('./routes/otherRoutes'));
+
 
 // catch 404 and forward to error handler
 app.use((req, res, next) =>{
@@ -65,14 +83,25 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
+
 //Middlewares
 app.use('/',()=>{
 
 });
 
+//which one to choose?
+
+
+//auth0
+/*const checkJwt = auth({
+  audience: 'YOUR_API_IDENTIFIER',
+  issuerBaseURL: `http://localhost:3000/`,
+});
+*/
+
 app.listen(port, ()=>{
   console.log(`server is running on port ${port}`)
-
+  
   //mailgun.sendWelcomeMessage('uzytkownik451@gmail.com') // testing sending mail messages
   //twilio.sendToMe('Test message') //testing sending phone messages
 });
