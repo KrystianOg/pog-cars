@@ -37,8 +37,10 @@ class Comment{
     }
 
     // filters
-    static findById(article_id){
-        let sql = `SELECT * FROM comments WHERE article_id=${article_id};`;
+
+
+    static findById(id){
+        let sql = `SELECT * FROM comments WHERE comment_id=${id} AND deleted = 0;`;
 
         return db.execute(sql);
     }
@@ -53,7 +55,7 @@ class Comment{
 
     static removeComment(id)
     {
-        let sql = `UPDATE comments SET deleted=1 WHERE comment_id=${id};`;
+        let sql = `UPDATE comments SET deleted = 1 WHERE comment_id=${id};`;
         return db.execute(sql);
     }
 }

@@ -64,6 +64,82 @@ class Car{
         return db.execute(sql);
     }
 
+    static findById(id){
+        let sql = `SELECT * FROM cars WHERE car_id=${id}`;
+
+        return db.execute(sql);
+    }
+//cena ocena 
+    static filter(req)
+    {
+        'use strict'
+        let {mileage_min, mileage_max, horsepower_min, horsepower_max,price_min,price_max,year_min,year_max,seats,transmission,drivetrain,fuel,agency_id,make,model} = req.body
+        
+        let sql = `SELECT * FROM cars WHERE `;
+
+        var dictionary = {}
+        dictionary[ `mileage >= ${mileage_min}`] = mileage_min == null;
+        dictionary[ `mileage <= ${mileage_max}`] = mileage_max == null;
+        dictionary[ `horsepower >= ${horsepower_min}`] = horsepower_min == null;
+        dictionary[ `horsepower >= ${horsepower_max}`] = horsepower_max == null;
+        dictionary[ `price >= ${price_min}`] = price_min == null;
+        dictionary[ `price <= ${price_max}`] = price_max == null;
+        dictionary[ `year >= ${year_min}`] = year_min == null;
+        dictionary[ `year <= ${year_max}`] = year_min == null;
+        dictionary[ `seats = ${seats}`] = seats == null;
+        dictionary[ `transmission = '${transmission}'`] = transmission == null;
+        dictionary[ `fuel = '${fuel}'`] = fuel == null;
+        dictionary[ `agency_id = ${agency_id}`] = agency_id == null;
+        dictionary[ `make = '${make}'`] = make == null;
+        dictionary[ `model = '${model}'`] = model == null;
+        dictionary[ `drivetrain = '${drivetrain}'`] = drivetrain == null;
+        for(const[key,value] of Object.entries(dictionary)){
+            sql += value == false ? key+" AND " : ""
+        }
+
+        sql = sql.slice(0,sql.lastIndexOf("AND"))
+        sql += ";";
+        return db.execute(sql);
+    }
+
+    static sort(type)
+    {
+        let sql
+        switch(type){
+            case "mileage_asc":
+                sql = "SELECT * FROM cars ORDER BY mileage ASC"
+                break
+            case "mileage_desc":
+                sql = "SELECT * FROM cars ORDER BY mileage DESC"
+                break
+            case "horsepower_asc":
+                sql = "SELECT * FROM cars ORDER BY horsepower ASC"
+                break
+            case "horsepower_desc":
+                sql = "SELECT * FROM cars ORDER BY horsepower DESC"
+                break
+            case "fuel_consumption_asc":
+                sql = "SELECT * FROM cars ORDER BY fuel_consumption ASC"
+                break
+            case "fuel_consumption_desc":
+                sql = "SELECT * FROM cars ORDER BY fuel_consumption DESC"
+                break
+            case "price_asc":
+                sql = "SELECT * FROM cars ORDER BY price ASC"
+                break
+            case "price_desc":
+                sql = "SELECT * FROM cars ORDER BY price DESC"
+                break
+            case "year_asc":
+                sql = "SELECT * FROM cars ORDER BY year ASC"
+                break
+            case "year_desc":
+                sql = "SELECT * FROM cars ORDER BY year DESC"
+                break
+        }
+        return db.execute(sql);
+    }
+    
     // updating
 
     static deleteCarById(id)

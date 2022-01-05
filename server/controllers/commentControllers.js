@@ -36,3 +36,13 @@ exports.getCommentById = async (req,res,next) => {
         next(err);
     }
 }
+
+exports.removeCommentById = async(req,res,next) => {
+    try{
+        let [comment,_] = await Comment.removeComment(req.params.id);
+        res.status(204).json({message:"Comment removed successfully"});
+    } catch(err){
+    console.log(err)
+    next(err);
+    }
+}

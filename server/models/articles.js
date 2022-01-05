@@ -33,7 +33,7 @@ class Article{
     }
 
     static findById(id){
-        let sql = `SELECT * FROM agencies WHERE agency_id=${id}`;
+        let sql = `SELECT * FROM articles WHERE article_id=${id}`;
 
         return db.execute(sql);
     }
@@ -41,7 +41,8 @@ class Article{
     // updating
     static removeArticle(id)
     {
-        let sql = 'UPDATE '
+        let sql = `UPDATE articles SET deleted = 1 WHERE article_id=${id}`;
+        return db.execute(sql);
     }
 }
 

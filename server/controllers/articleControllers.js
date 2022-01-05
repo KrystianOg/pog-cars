@@ -43,3 +43,13 @@ exports.getArticleById = async (req,res,next) => {
         next(err);
     }
 }
+
+exports.removeArticleById = async(req,res,next) => {
+    try{
+        await Article.removeArticle(req.params.id);
+        res.status(204).json({message:"Article removed successfully"});
+    } catch(err){
+    console.log(err)
+    next(err);
+    }
+}

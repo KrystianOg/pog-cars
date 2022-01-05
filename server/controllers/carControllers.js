@@ -52,10 +52,35 @@ exports.reserveCar = async (req,res,next) => {
     }
 }
 
-exports.deleteCarById = async (req,res,next) => {
+exports.removeCarById = async (req,res,next) => {
     try{
-        // idk
-    } catch(err){
+        let[car,_] = await Car.removeCar(req.params.id);
+        res.status(204).json({message:"Car removed successfully"});
+    }
+    catch(err){
+        console.log(err)
+        next(err);
+    }
+}
+
+exports.filter = async (req,res,next) => {
+    try{
+        let[cars,_] = await Car.filter(req);
+        res.status(200).json(cars);
+    }
+    catch(err){
+        console.log(err)
+        next(err);
+    }
+}
+
+exports.sort = async (req,res,next) => {
+    try{
+        let type = req.params.type;
+        let[cars,_] = await Car.sort(type);
+        res.status(200).json(cars);
+    }
+    catch(err){
         console.log(err)
         next(err);
     }

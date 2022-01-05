@@ -5,6 +5,8 @@ const router = express.Router();
 //@route GET && POST /cars
 router.route("/").get(articleControllers.getAllArticles).post(articleControllers.addNewArticle);
 
-router.route("/:id").get(articleControllers.getArticleById);
+
+
+router.route("/:id").get(articleControllers.getArticleById).patch(articleControllers.removeArticleById);
 
 module.exports = router;
