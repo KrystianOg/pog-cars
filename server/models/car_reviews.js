@@ -21,7 +21,7 @@ class Car_review{
             ) VALUES (
             ${this.car_id},
             ${this.user_id},
-            ${this.message},
+            '${this.message}',
             ${this.star_rating}
             )`
 

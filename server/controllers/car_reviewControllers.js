@@ -14,7 +14,7 @@ exports.addNewCarReview = async (req,res,next) => {
     try{
         //extracting parameters from request body
         let {car_id, user_id, message, star_rating} = req.body; 
-        let car_review = new Car_review(car_id, user_id, message, star_rating); 
+        let car_review = new Car_review(car_id, user_id, message, star_rating)
 
         car_review= await car_review.save();
         res.status(201).json({message:"Car review added successfully"});

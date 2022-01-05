@@ -22,7 +22,7 @@ class Comment{
             ${this.user_id},
             ${this.article_id},
             ${this.deleted},
-            ${this.content}
+            '${this.content}'
             )`
 
         
@@ -32,13 +32,13 @@ class Comment{
     // filters
 
     static findAll(){
-        let sql = "SELECT * FROM comments;"
+        let sql = "SELECT * FROM comments WHERE deleted = 0;"
 
         return db.execute(sql);
     }
 
     static findById(id){
-        let sql = `SELECT * FROM comments WHERE comment_id=${id}`;
+        let sql = `SELECT * FROM comments WHERE comment_id=${id} AND deleted = 0;`;
 
         return db.execute(sql);
     }
@@ -53,9 +53,9 @@ class Comment{
         return db.execute(sql);
     }
 
-    removeComment(id)
+    static removeComment(id)
     {
-        let sql = 'UPDATE';
+        let sql = `UPDATE comments SET deleted = 1 WHERE comment_id=${id};`;
 
         return db.execute(sql);
     }
