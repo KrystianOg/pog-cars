@@ -1,5 +1,6 @@
 const Comment = require('../models/comments');
 
+/*
 exports.getAllComments = async (req,res,next) => {
     try{
         let [comments,_] = await Comment.findAll();
@@ -9,12 +10,14 @@ exports.getAllComments = async (req,res,next) => {
         next(err);
     }
 }
+*/
 
 exports.addNewComment = async (req,res,next) => {
     try{
         //extracting parameters from request body
-        let {user_id, article_id, deleted, content} = req.body;
-        let comment = new Comment(user_id, article_id, deleted, content)
+        let {article_id, content} = req.body;
+        let creator_id = req.session.user_id;
+        let comment = new Comment(creator_id, article_id, content)
 
         comment= await comment.save();
         res.status(201).json({message:"Comment added successfully"});

@@ -10,39 +10,31 @@ class Discount{
     }
 
     save(){
-        // save to db
-        let d = new Date();
-        let yyyy = d.getFullYear();
-
-        let sql = `INSERT INTO comments(
+        let sql = `INSERT INTO discounts(
             code,
             expiration_date,
             user_id,
             value,
             car_id
             ) VALUES (
-            ${this.code},
-            ${this.expiration_date},
+            '${this.code}',
+            '${this.expiration_date}',
             ${this.user_id},
             ${this.value},
             ${this.car_id}
-            )`
-
-        
+            );`
         return db.execute(sql);
     }
 
     // filters
-
     static findAll(){
         let sql = "SELECT * FROM discounts;"
 
         return db.execute(sql);
     }
 
-    static findById(id){
-        let sql = `SELECT * FROM discounts WHERE discount_id=${id}`;
-
+    static findByCode(code){
+        let sql = `SELECT expiration_date,user_id,value,car_id FROM discounts WHERE discount_id=${id}`;
         return db.execute(sql);
     }
 

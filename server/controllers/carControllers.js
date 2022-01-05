@@ -1,4 +1,5 @@
 const Car = require('../models/cars');
+const db = require('../config/db')
 
 exports.getAllCars = async (req,res,next) => {
     try{
@@ -36,7 +37,15 @@ exports.getCarById = async (req,res,next) => {
 
 exports.reserveCar = async (req,res,next) => {
     try{
-        // idk
+        let {rental_begin,rental_end, agency_id} = req.body;
+        let user_id = req.session.user_id
+        let car_id = req.params.id
+
+        let _sql = `SELECT price, agency_id FROM cars WHERE car_id = ${car_id};`
+        let [rows,_]= await db.execute(_sql)
+
+        await Car.reserveCar(car_id,user_id,agency_id,rental_begin,rental_end, rows[0].agency_id,rows[0].price)
+        res.status(201).json({message:"Car reserved successfully"});
     } catch(err){
         console.log(err)
         next(err);

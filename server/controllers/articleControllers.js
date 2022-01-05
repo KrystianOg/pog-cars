@@ -13,14 +13,24 @@ exports.getAllArticles = async (req,res,next) => {
 exports.addNewArticle = async (req,res,next) => {
     try{
         //extracting parameters from request body
-        let {creator_id, title, content} = req.body; //zastanawiam sie, czy tu powinno byc creator_id, jezeli technicznie dana osoba wstawia artykul? nie mozna tego jakos automatycznie od niej przypisac?
-        let article = new Article(creator_id, title, content); //tu i na gorze niezainicjalizowane deleted - z tego co rozumiem to nie trzeba, bo nie wstawiamy usunietych artykulow (a default value jest rowne '0')?
+        let {title, content} = req.body; 
+        let creator_id = req.session.user_id;
+        let article = new Article(creator_id, 0, title, content); 
 
         article= await article.save();
         res.status(201).json({message:"Article added successfully"});
     } catch(err){
         console.log(err)
         next(err); 
+    }
+}
+
+exports.deleteArticle = async (req,res,next) => {
+    try{
+        
+    } catch(err){
+        console.log(err)
+        next(err);
     }
 }
 
@@ -32,6 +42,4 @@ exports.getArticleById = async (req,res,next) => {
         console.log(err)
         next(err);
     }
-
-
 }

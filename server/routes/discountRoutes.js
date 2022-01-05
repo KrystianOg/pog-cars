@@ -3,8 +3,8 @@ const discountControllers = require('../controllers/discountControllers')
 const router = express.Router();
 
 //@route GET && POST /cars
-router.route("/").get(discountControllers.getAllDiscounts).post(discountControllers.addNewDiscount);
+router.route("/").post(discountControllers.addNewDiscount);
 
-router.route("/:id").get(discountControllers.getDiscountById);
+router.route("/code=:code").get(discountControllers.useDiscount);
 
 module.exports = router;

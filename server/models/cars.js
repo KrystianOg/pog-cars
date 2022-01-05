@@ -64,33 +64,6 @@ class Car{
         return db.execute(sql);
     }
 
-    static findById(id){
-        let sql = `SELECT * FROM cars WHERE car_id=${id}`;
-
-        return db.execute(sql);
-    }
-
-    static findByMileage(mileage)
-    {
-        let sql = `SELECT * FROM cars WHERE mileage=${mileage}`;
-
-        return db.execute(sql);
-    }
-
-    static findByHorsepower(horsepower)
-    {
-        let sql = `SELECT * FROM cars WHERE horsepower=${horsepower}`;
-
-        return db.execute(sql);
-    }
-
-    static findByMileage(mileage)
-    {
-        let sql = `SELECT * FROM cars WHERE mileage=${mileage}`;
-
-        return db.execute(sql);
-    }
-
     // updating
 
     static deleteCarById(id)
@@ -115,11 +88,46 @@ class Car{
     //update agency_id after an agency is removed, agency with id = 0 is a dummy agency
     static updateAgencyId(agency_id)
     {
-        let sql = `UPDATE cars SET agency_id=${0} WHERE agency_id=${agency_id}`;
+        let sql = `UPDATE cars SET agency_id = 0 WHERE agency_id = ${agency_id}`;
 
         return db.execute(sql);
     }
 
-    
+    static reserveCar(car_id, user_id, agency_id, rental_begin, rental_end,car_agency_id, price){
+        //check rental history
+
+        let rb = new Date(rental_begin)
+        let re = new Date(rental_end)
+
+        //throw error if begin is after end
+        if(rb > re)
+        {
+            throw new Error("Rental begin date is after rental end date");
+        }
+        //throw error if already reserved in that period
+        
+        //policzyc dodatkowo jesli agencja nie jest agencja w ktorej znajduje sie samochod - wedlug odleglosci czy cos
+
+        // To calculate the no. of days between two dates
+        var daysBetween = Math.round(re - rb) / (1000 * 3600 * 24);
+
+        //obliczenie ceny za okres
+        let p = price * daysBetween / 30
+        //opłata za przetransportowanie samochodu
+        price += car_agency_id === agency_id ? 0 : 200 
+
+        let sql = `INSERT INTO rental_history(user_id, car_id, agency_id, rental_begin, rental_end, price) VALUES (
+            ${user_id},
+            ${car_id},
+            ${agency_id},
+            '${rb.getFullYear()}-${rb.getMonth()+1}-${rb.getDate()}',
+            '${re.getFullYear()}-${re.getMonth()+1}-${re.getDate()}', 
+            ${price}
+            )`
+        
+        return db.execute(sql);
+    }
 }
+
+
 module.exports = Car;

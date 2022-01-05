@@ -1,10 +1,9 @@
 const db = require('../config/db')
 
 class Comment{
-    constructor(user_id, article_id, deleted, content){
+    constructor(user_id, article_id, content){
         this.user_id = user_id;
         this.article_id = article_id;
-        this.deleted = deleted;
         this.content = content;
     }
 
@@ -21,8 +20,7 @@ class Comment{
             ) VALUES (
             ${this.user_id},
             ${this.article_id},
-            ${this.deleted},
-            ${this.content}
+            '${this.content}'
             )`
 
         
@@ -30,33 +28,23 @@ class Comment{
     }
 
     // filters
-
-    static findAll(){
-        let sql = "SELECT * FROM comments;"
-
-        return db.execute(sql);
-    }
-
-    static findById(id){
-        let sql = `SELECT * FROM comments WHERE comment_id=${id}`;
+    static findById(article_id){
+        let sql = `SELECT * FROM comments WHERE article_id=${article_id};`;
 
         return db.execute(sql);
     }
 
     // updating
 
-    // censor vulgar comment
-
+    // censor vulgar comment - PATCH
     static censorComment(id){
-        let sql = ``;
-
+        let sql = `UPDATE comments SET deleted=2 WHERE comment_id=${id};`;
         return db.execute(sql);
     }
 
-    removeComment(id)
+    static removeComment(id)
     {
-        let sql = 'UPDATE';
-
+        let sql = `UPDATE comments SET deleted=1 WHERE comment_id=${id};`;
         return db.execute(sql);
     }
 }

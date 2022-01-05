@@ -10,9 +10,6 @@ class Article{
 
     save(){
         // save to db
-        let d = new Date();
-        let yyyy = d.getFullYear();
-
         let sql = `INSERT INTO articles(
             creator_id,
             deleted,
@@ -21,11 +18,9 @@ class Article{
             ) VALUES (
             ${this.creator_id},
             ${this.deleted},
-            ${this.title},
-            ${this.content}
-            )`
-
-        
+            '${this.title}',
+            '${this.content}'
+            );`
         return db.execute(sql);
     }
 

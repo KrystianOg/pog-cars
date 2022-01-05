@@ -3,8 +3,8 @@ const register_codeControllers = require('../controllers/register_codeController
 const router = express.Router();
 
 //@route GET && POST /cars
-router.route("/").get(register_codeControllers.getAllRegisterCodes).post(register_codeControllers.addNewRegisterCode);
+router.route("/").post(register_codeControllers.addNewRegisterCode);
 
-router.route("/:id").get(register_codeControllers.getRegisterCodeById);
+router.route("/:id").delete(register_codeControllers.useRegisterCode);
 
 module.exports = router;

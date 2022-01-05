@@ -9,6 +9,8 @@ var logger = require('morgan');
 
 const port = process.env.PORT || 3000;
 var app = express();
+var session = require('express-session');
+var bodyParser = require('body-parser');
 
 //APIs
 //const twilio = require('./api/twilio.js')
@@ -26,6 +28,11 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//session storage
+app.use(session({secret: 'secret', resave: true, saveUninitialized: true}));
+app.use(bodyParser.urlencoded({extended : true}));
+app.use(bodyParser.json());
+
 // use routes
 //app.use('/', require('./routes/index'));
 app.use('/users', require('./routes/userRoutes')); 
@@ -39,6 +46,7 @@ app.use('/discounts',require('./routes/discountRoutes'));
 app.use('/log',require('./routes/logRoutes'));
 app.use('/register_codes',require('./routes/register_codeRoutes'));
 app.use('/rental_history',require('./routes/rental_historyRoutes'));
+app.use('/auth',require('./routes/authRoutes'));
 //app.use('/other', require('./routes/otherRoutes'));
 
 // catch 404 and forward to error handler

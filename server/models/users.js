@@ -63,30 +63,18 @@ class User{
         return parseBoolean(db.execute(sql))
     }
 
-    fullfillRequirement(requirement){
-        return type == requirement
-    }
-
     // usuwanie pracownikow
     static deleteUser(id){
-        let sql = `DELETE FROM users WHERE user_id=${id}`;
+        let sql = `UPDATE users SET deleted=1 WHERE user_id=${id};`;
+
         return db.execute(sql);
     }
     // other things
 
     // add a star rating from the user to the agent, where id is agent's id
-    rateAgent(id){
+    static rateAgent(agent_id,user_id,message,star_rating){
+        let sql = `INSERT INTO agent_reviews (agent_id,user_id,message,star_rating) VALUES (${agent_id},${user_id},'${message}',${star_rating});`;
         return db.execute(sql);
-    }
-
-    //security
-    static login(email,password){
-        let sql = `SELECT 1 FROM users WHERE users.email='${email}' AND users.password=SHA256('${password+process.env.PEPPER}`;
-        return db.execute(sql);
-    }
-
-    static register(){
-        
     }
 }
 

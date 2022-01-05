@@ -12,4 +12,7 @@ router.get('/', function(req, res, next) {
 
 router.route("/:id").get(userControllers.getUserById);
 
+router.route("/delete=:id").patch(userControllers.deleteUser)
+
+router.route("/rate=:id").post(userControllers.rateAgent)
 module.exports = router;

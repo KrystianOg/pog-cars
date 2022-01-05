@@ -39,13 +39,16 @@ class Rental_history{
 
     static findAll(){
         let sql = "SELECT * FROM rental_history;"
-
         return db.execute(sql);
     }
 
     static findById(id){
         let sql = `SELECT * FROM rental_history WHERE rent_id=${id}`;
+        return db.execute(sql);
+    }
 
+    static findByUserId(user_id){
+        let sql = `SELECT * FROM rental_history WHERE user_id=${user_id}`;
         return db.execute(sql);
     }
 
