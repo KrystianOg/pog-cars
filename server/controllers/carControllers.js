@@ -13,12 +13,17 @@ exports.getAllCars = async (req,res,next) => {
 
 exports.addNewCar = async (req,res,next) => {
     try{
-        //extracting parameters from request body
-        let {mileage, horsepower, seats, transmission, drivetrain, fuel, fuel_consumption, price, agency_id, year,deleted,model,make} = req.body;
-        let car = new Car(mileage, horsepower, seats, transmission, drivetrain, fuel, fuel_consumption, price, agency_id, year,deleted,model,make)
 
-        car= await car.save();
-        res.status(201).json({message:"Car added successfully"});
+        if(req.session.user_type =='ADMIN' || req.session.user_type == 'AGENT'){
+            //extracting parameters from request body
+            let {mileage, horsepower, seats, transmission, drivetrain, fuel, fuel_consumption, price, agency_id, year,deleted,model,make} = req.body;
+            let car = new Car(mileage, horsepower, seats, transmission, drivetrain, fuel, fuel_consumption, price, agency_id, year,deleted,model,make)
+
+            car= await car.save();
+            res.status(201).json({message:"Car added successfully"});
+        } else {
+            res.status(401).json({message:"Unauthorized"});
+        }
     } catch(err){
         console.log(err)
         next(err); 
@@ -54,8 +59,12 @@ exports.reserveCar = async (req,res,next) => {
 
 exports.removeCarById = async (req,res,next) => {
     try{
-        let[car,_] = await Car.removeCar(req.params.id);
-        res.status(204).json({message:"Car removed successfully"});
+        if(req.session.user_type == 'ADMIN' || req.session.user_type == 'AGENT'){
+            await Car.deleteCarById(req.params.id);
+            res.status(204).json({message:"Car removed successfully"});
+        } else {
+            res.status(401).json({message:"Unauthorized"});
+        }
     }
     catch(err){
         console.log(err)

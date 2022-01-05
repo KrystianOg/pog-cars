@@ -10,7 +10,7 @@ class Comment{
     constructor(user_id, article_id, content){
         this.user_id = user_id;
         this.article_id = article_id;
-        this.deleted = deleted;
+        this.deleted = 0;
         var filter = new Filter();
         this.content = filter.clean(content);
     }
@@ -38,10 +38,14 @@ class Comment{
 
     // filters
 
-
     static findById(id){
         let sql = `SELECT * FROM comments WHERE comment_id=${id} AND deleted = 0;`;
 
+        return db.execute(sql);
+    }
+
+    static findByArticleId(id){
+        let sql = `SELECT * FROM comments WHERE article_id=${id} AND deleted = 0;`;
         return db.execute(sql);
     }
 

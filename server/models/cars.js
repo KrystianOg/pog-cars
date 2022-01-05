@@ -105,6 +105,8 @@ class Car{
     static sort(type)
     {
         let sql
+
+        //change that to asc / desc on everything
         switch(type){
             case "mileage_asc":
                 sql = "SELECT * FROM cars ORDER BY mileage ASC"
