@@ -1,11 +1,6 @@
 const db = require('../config/db')
 var Filter = require('bad-words'); // bad word filter - test
 
-/*
-var filter = new Filter();
-console.log(filter.clean("chuj dupa kupa fiut kurwa"));
-*/
-
 class Comment{
     constructor(user_id, article_id, content){
         this.user_id = user_id;
