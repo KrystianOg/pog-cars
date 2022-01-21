@@ -13,8 +13,7 @@ Najprostrzy sposob to niestety reinstall appki, kroki:
 - - - -
 ### Jak dodać ikonę z fontawesome?
 1. intalujemy fontawesome do projektu: 
-  `npm install --save @fortawesome/free-solid-svg-icons
-   npm install --save @fortawesome/react-fontawesome`
+  `npm install --save @fortawesome/free-solid-svg-icons && npm install --save @fortawesome/react-fontawesome`
 2. Dodajemy do pliku .js w którym zdefiniowaliśmy component gdzie chcemy użyć ikony takie coś:
   ```javascript
   import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' //to zawsze
