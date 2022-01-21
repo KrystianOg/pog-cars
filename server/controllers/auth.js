@@ -25,9 +25,20 @@ exports.login = async (req,res,next) =>{
 
 exports.tempLogin = async(req,res,next) =>{
     try{
-        req.session.user_id = 2;
-        req.session.user_type = 'ADMIN'
-        res.status(200).json({message:`Currently logged in as user ${req.session.user_id}`})
+        req.session.user_id = req.params.id;
+        req.session.user_type = req.params.type
+        res.status(200).json({message:`Currently logged in as user ${req.session.user_id} type ${req.session.user_type}`})
+    } catch(err){
+        console.log(err)
+        next(err);
+    }
+}
+
+exports.tempLogout = async(req,res,next) =>{
+    try{
+        req.session.user_id = null;
+        req.session.user_type = null;
+        res.status(200).json({message:`Currently logged out. user ${req.session.user_id}`})
     } catch(err){
         console.log(err)
         next(err);

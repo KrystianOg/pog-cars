@@ -10,10 +10,12 @@
     },
     "dependencies": {
         "bad-words": "^3.0.4",
+        "create-react-app": "^1.2.1",
         "express": "^4.17.2",
         "express-jwt": "^6.1.0",
         "express-oauth2-jwt-bearer": "^1.1.0",
         "express-openid-connect": "^2.5.2",
-        "jwks-rsa": "^2.0.5"
+        "jwks-rsa": "^2.0.5",
+        "react-scripts": "^5.0.0"
     }
 }

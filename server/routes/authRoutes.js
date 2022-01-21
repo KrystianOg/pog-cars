@@ -15,7 +15,9 @@ router.get('/logout', function(req, res, next) {
     res.status(201).json({message:"Logout."});
 });
 
-router.route('/tempLogin').get(authControllers.tempLogin)
+router.route('/tempLogin=:id&type=:type').get(authControllers.tempLogin)
+
+router.route('/tempLogout=:id').get(authControllers.tempLogout)
 
 router.route('/register').post(authControllers.register)
 
