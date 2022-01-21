@@ -11,6 +11,37 @@ Najprostrzy sposob to niestety reinstall appki, kroki:
 6. instalujemy inne dependencies: `npm install`
 7. dodajemy tym razem do projektu react-scripts: `npm install react-scripts --save`
 - - - -
+### Jak dodać ikonę z fontawesome?
+1. intalujemy fontawesome do projektu: 
+  `npm install --save @fortawesome/free-solid-svg-icons
+   npm install --save @fortawesome/react-fontawesome`
+2. Dodajemy do pliku .js w którym zdefiniowaliśmy component gdzie chcemy użyć ikony takie coś:
+  ```javascript
+  import { FontAwesomeIcon } from '@fortawesome/react-fontawesome' //to zawsze
+  import { faCar } from '@fortawesome/free-solid-svg-icons' //tutaj przykladowo 'faCar' ale mozemy importować wiele różnych (free) ikon
+  ```
+3. na końcu używamy tego co dodaliśmy (tego niżej)
+  ```javascript
+  <FontAwesomeIcon icon={faCar} />
+  ```
+  np w taki sposób:
+  ```javascript
+import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCar } from '@fortawesome/free-solid-svg-icons'
+
+const Navbar = () => {
+    return (
+        <>
+            <FontAwesomeIcon icon={faCar} />
+        </>
+    )
+}
+
+export default Navbar
+```
+
+- - - -
 ### How to setup
 1. Otwieramy terminal (ja korzystam z VSC) w folderze do którego chcemy sklonować aplikację  
 ![Terminal](https://imgur.com/GoNcsi0.jpg)  
