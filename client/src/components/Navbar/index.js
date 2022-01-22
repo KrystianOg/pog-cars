@@ -1,22 +1,42 @@
 //here we store entire content
 import React from 'react'
-import {FaBars} from 'react-icons/fa'
-import {Nav, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks} from './NavbarElements'
+import { FaBars } from 'react-icons/fa'
+import { Nav, NavIcon, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, NavLinkLI, NavBtn, NavBtnLink} from './NavbarElements'
 
-const Navbar = () => {
+const Navbar = ({toggle}) => {
     return (
         <>
             <Nav>
                 <NavbarContainer>
-                    <NavLogo to='/'>som</NavLogo>
-                    <MobileIcon>
+                    <NavLogo to='/'>
+                        <NavIcon/>
+                        <NavLinkLI to="/">HOME</NavLinkLI>
+                    </NavLogo>
+                    <MobileIcon onClick={toggle}>
                         <FaBars/>
                     </MobileIcon>
                     <NavMenu>
                         <NavItem>
-                            <NavLinks to='about'>About</NavLinks>
+                            <NavLinkLI to='cars'>CARS</NavLinkLI>
                         </NavItem>
-                    </NavMenu>
+                        <NavItem>
+                            <NavLinkLI to='articles'>ARTICLES</NavLinkLI>
+                        </NavItem>
+                        <NavItem>
+                            <NavLinkLI to='discounts'>DISCOUNTS</NavLinkLI>
+                        </NavItem>
+                        <NavItem>
+                            <NavLinkLI to='account'>ACCOUNT</NavLinkLI>
+                        </NavItem>
+                        </NavMenu>
+                        <NavMenu>
+                            <NavBtn>
+                                <NavBtnLink to='login'>LOG IN</NavBtnLink>
+                            </NavBtn>
+                            <NavBtn>
+                                <NavBtnLink to='register'>SIGN UP</NavBtnLink>
+                            </NavBtn>
+                        </NavMenu>
                 </NavbarContainer>
             </Nav>
         </>

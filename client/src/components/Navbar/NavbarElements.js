@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { COLORS } from '../../colors'
+import { FaCar } from 'react-icons/fa'
 import { Link as LinkR } from 'react-router-dom'
 import { Link as LinkS } from 'react-scroll'
 
@@ -19,6 +20,11 @@ export const Nav = styled.nav`
     }
 `
 
+export const NavIcon = styled(FaCar)`
+    color: #fff;
+    font-size: 2.5rem;
+`
+
 export const NavbarContainer = styled.div`
     display: flex;
     justify-content: space-between;
@@ -29,16 +35,45 @@ export const NavbarContainer = styled.div`
     max-width: 1100px;
 `
 
+export const NavLinkLI = styled(LinkR)`
+    white-space: nowrap;
+    color: ${COLORS.White};
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+    padding: 0 1rem;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    &:hover {
+        transition: all 0.2s ease-in-out;
+        color: ${COLORS.BlueGreen}
+    }
+`
+
 export const NavLogo = styled(LinkR)`
-    color: ${COLORS.Indigo};
+    color: ${COLORS.White};
     justify-self: flex-start;
     cursor: pointer;
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     display: flex;
     align-items: center;
     margin-left: 24px;
     font-weight: bold;
     text-decoration: none;
+
+    &:hover{
+        ${NavIcon} {
+            transition: all 0.2s ease-in-out;
+            color: ${COLORS.BlueGreen};
+        }
+
+        ${NavLinkLI} {
+            transition: all 0.2s ease-in-out;
+            color: ${COLORS.BlueGreen};
+        }
+    }
 `
 
 export const MobileIcon = styled.div`
@@ -71,17 +106,31 @@ export const NavItem = styled.li`
 height: 80px;
 `
 
-export const NavLinks = styled(LinkS)`
-color: COLORS.Indigo;
-display: flex;
-align-items: center;
-text-decoration: none;
-padding: 0 1rem;
-height: 100%;
-cursor: pointer;
+export const NavBtn = styled.nav`
+    display: flex;
+    align-items: center;
+    margin: 0 10px;
 
-&.active{
-    border-boittom: 3px solid ${COLORS.Indigo};
-}
+    @media screen and (max-width:768px){
+        display: none;
+    }
+`
 
+export const NavBtnLink = styled(LinkR)`
+    border-radius: 50px;
+    background: ${COLORS.BlueGreen};
+    white-space: nowrap;
+    padding: 10px 22px;
+    color: ${COLORS.White};
+    font-size: 16px;
+    outline: none;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    text-decoration: none;
+
+    &:hover {
+        transition: all 0.2s ease-in-out;
+        background: ${COLORS.White};
+        color: ${COLORS.BlueGreen}
+    }
 `

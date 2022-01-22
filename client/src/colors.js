@@ -4,5 +4,7 @@ export const COLORS = {
     MagentaPantone: '#DA3A7E',
     LightSalmon: '#FC9D71',
     BlueGreen: '#008FB8',
-    EgyptianBlue: '#00389A'
+    EgyptianBlue: '#00389A',
+    DarkGray: '#0D0D0D',
+    White: '#fff'
 }
