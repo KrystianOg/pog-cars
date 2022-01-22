@@ -18,7 +18,7 @@
     grid-template-columns: 1fr 1fr;
   }
   
-  .close-btn {
+  .close-btn a{
     position: absolute;
     top: 2%;
     right: 3%;
@@ -28,7 +28,7 @@
     cursor: pointer;
   }
 
-  .close-btn:hover{
+  .close-btn:hover a{
       color: #27cdff;
       transition: 0.2s ease-in-out;
   }

@@ -1,12 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=PT+Sans&display=swap');
 
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-    font-family: 'PT Sans', sans-serif;
-}
-
 .form-container {
     margin: 100px auto;
     width: 1000px;
@@ -28,10 +21,10 @@
     cursor: pointer;
   }
 
-  .close-btn:hover{
+  .close-btn:hover {
     color: #27cdff;
     transition: 0.2s ease-in-out;
-}
+  }
   
   .form-content-left {
     background: linear-gradient(

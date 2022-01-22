@@ -28,7 +28,7 @@ const FormLogin = ({submitForm}) => {
                     Login
                 </button>
                 <span class="form-input-login">Not a member?
-                    <a href='#'> Register</a>
+                    <a href='/register'> Register</a>
                 </span>
             </form>
         </div>

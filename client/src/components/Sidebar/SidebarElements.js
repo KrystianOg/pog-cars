@@ -53,7 +53,7 @@ export const SidebarMenu = styled.ul`
     }
 `
 
-export const SidebarLink = styled(LinkS)`
+export const SidebarLink = styled(LinkR)`
     display: flex;
     align-items: center;
     justify-content: center;
@@ -62,7 +62,7 @@ export const SidebarLink = styled(LinkS)`
     list-style: none;
     transition: 0.2s ease-in-out;
     text-decoration: none;
-    color: ${COLORS.White};
+    color: ${props => props.$active ? COLORS.MagentaPantone : COLORS.White};
     cursor: pointer;
     
     &:hover{

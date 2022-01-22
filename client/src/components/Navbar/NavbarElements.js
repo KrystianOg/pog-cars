@@ -21,7 +21,7 @@ export const Nav = styled.nav`
 `
 
 export const NavIcon = styled(FaCar)`
-    color: #fff;
+    color: ${props => props.$active ? COLORS.MagentaPantone : COLORS.White};
     font-size: 2.5rem;
 `
 
@@ -37,7 +37,7 @@ export const NavbarContainer = styled.div`
 
 export const NavLinkLI = styled(LinkR)`
     white-space: nowrap;
-    color: ${COLORS.White};
+    color: ${props => props.$active ? COLORS.MagentaPantone : COLORS.White};
     cursor: pointer;
     transition: all 0.2s ease-in-out;
     text-decoration: none;

@@ -15,10 +15,10 @@ render(
       <Route path="/" element={<App/>}/>
       <Route path="login" element={<Login/>}/>
       <Route path="register" element={<Register/>}/>
-      <Route path="cars" elements={<Cars/>}/>
-      <Route path="articles" elements={<Articles/>}/>
-      <Route path="Discounts" elements={<Discounts/>}/>
-      <Route path="Account" elements={<Account/>}/>
+      <Route path="cars" element={<Cars/>}/>
+      <Route path="articles" element={<Articles/>}/>
+      <Route path="discounts" element={<Discounts/>}/>
+      <Route path="account" element={<Account/>}/>
       <Route path="*" element={
         <main style={{ padding: "1rem" }}>
           <p>There's nothing here!</p>
