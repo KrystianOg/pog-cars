@@ -1,17 +1,18 @@
 import React, {  useState, useEffect } from 'react';
-import { CarComponent } from './CarComponent';
-import './CarComponent.css'
+
+import {UserIcon,Container } from './AccountElements';
+import { ReactSession } from 'react-client-session'
 import { useNavigate } from 'react-router-dom'
 
-const CarsContainer = () => {
+const AccountContainer = () => {
 
-    const [cars,setCars] = useState(null);
+    const [user,setUser] = useState(null);
     const navigate = useNavigate();
     const [loading,isLoading] = useState(true);
 
     useEffect(() =>{
         const loadUser = () => {
-            return fetch(`http://192.168.0.102:5000/cars`,{
+            return fetch(`http://192.168.0.102:5000/users/${ReactSession.get('user_id')}`,{
                 "method": "GET",
                 "headers": {
                     "Content-Type": "application/json",
@@ -25,7 +26,7 @@ const CarsContainer = () => {
                     navigate('/', {replace: true})
                 } else {
                     response = await response.json()
-                    setCars(response)
+                    setUser(response)
                     isLoading(false)
                 }
             })
@@ -34,17 +35,18 @@ const CarsContainer = () => {
         loadUser()
     },[])
 
-    return (
-        <>
-            {!loading ?
-            <div className="offers">
-                {/* automatyzacja tego */}
-                {cars.map((car)=>
-                    <CarComponent car={car}/>
-                )}
-            </div> : null}
-        </>
+    return(
+        <React.Suspense falllback='Loading ...'>
+            <Container>
+                <UserIcon/>
+                {!loading > 0? 
+                <div>
+                    <h1>{user[0].firstname}</h1>
+                    <h2>{user[0].user_id}</h2>
+                </div> : null}
+            </Container>
+        </React.Suspense>
     )
 };
 
-export {CarsContainer}
+export default AccountContainer;

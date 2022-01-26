@@ -12,29 +12,26 @@ const Register = () => {
     const  [isSubmitted, setIsSubmitted] = useState(false)
     const navigate = useNavigate()
 
-    async function submitForm (values) {
-        setIsSubmitted(true)        
-        
-        //on proper register call to api
-        const requestOptions = {
-            method: 'POST',
-            mode: 'cors',
-            'Access-Control-Allow-Origin': '*',
-            headers:{'Content-Type': 'application/json'},
-            body: JSON.stringify({  username: values.username,
-                email: values.email,
-                password: values.password})
+    async function submitForm (credentials) {
 
-        }
-
-        fetch('http://localhost:5000/auth/register',requestOptions).then(async response =>{
-            
-            if(response.ok){
-                const data = await response.json()
-                console.log(data)
-                navigate('/', {replace: true})
+        //call to api
+        fetch("http://192.168.0.102:5000/auth/register",{
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Access-Control-Allow-Origin": "no-cors"
+            },
+            "body": JSON.stringify(credentials)
+        })
+        .then(response => response.json())
+        .then(response =>{
+            if(response.status == 201){
+                setIsSubmitted(true)
+                navigate('/login', {replace: true})
             }
         })
+        .catch(err => console.log(err))
 
         console.log('Logged in')
     }

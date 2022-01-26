@@ -11,39 +11,41 @@ exports.checkAuth = async (req,res,next) =>{
 exports.login = async (req,res,next) =>{
     try{
     let {email, password} = req.body;
-    let sql = `SELECT user_id, type FROM users WHERE users.email='${email}' AND users.password=SHA256('${password+process.env.PEPPER}`;
-    let row = db.execute(sql);
-    req.session.user_id = row[0].user_id
-    re1.session.user_type = row[0].type
+    //let sql = `SELECT user_id, type FROM users WHERE users.email='${email}' AND users.password=SHA2('${process.env.PEPPER+password}'+users.salt,256);`;
+    
+    //get usersalt
+    let sql = `SELECT salt FROM users WHERE users.email='${email}'`;
+    let [rows,fields] = await db.execute(sql);
 
-    console.log(`login successful for ${req.session.user_id}`)
-    res.status(200).json({user_id: req.session.user_id, user_type: req.session.user_type})
+    let salt = rows[0].salt
+    let hash= sha256( process.env.PEPPER+password+salt);
+
+    console.log(hash)
+
+    if(rows.length == 0){
+        res.status(401).json({message:"Wrong email or password"});
+        throw new Error("Wrong email or password");
+    }
+
+    sql = `SELECT user_id, type FROM users WHERE users.email='${email}' AND users.password='${hash}' AND users.deleted=0;`;
+    [rows,fields] = await db.execute(sql);
+    //req.session.user_id = row[0].user_id
+    //req.session.user_type = row[0].type
+
+    if(rows.length == 0 || rows.length > 1){
+        res.status(401).json({message:"Wrong email or password"});
+        throw new Error("User not found");
+    }
+    console.log(rows)
+    res.status(200).json(rows[0])
     } catch(err){
         console.log(err)
         next(err);
     }
 }
 
-exports.tempLogin = async(req,res,next) =>{
-    try{
-        req.session.user_id = req.params.id;
-        req.session.user_type = req.params.type
-        res.status(200).json({message:`Currently logged in as user ${req.session.user_id} type ${req.session.user_type}`})
-    } catch(err){
-        console.log(err)
-        next(err);
-    }
-}
+exports.logout = (req,res,next) => {
 
-exports.tempLogout = async(req,res,next) =>{
-    try{
-        req.session.user_id = null;
-        req.session.user_type = null;
-        res.status(200).json({message:`Currently logged out. user ${req.session.user_id}`})
-    } catch(err){
-        console.log(err)
-        next(err);
-    }
 }
 
 //controller najwyzej przenieść
@@ -60,14 +62,16 @@ exports.register = (req,res,next) =>{
         bcrypt.genSalt(10,(err,salt) => {
             //login check
             let hash= sha256( process.env.PEPPER+password+salt);
+
+            console.log(hash)
             let sql = `INSERT INTO users(username,email,password,salt) VALUES('${username}','${email}','${hash}','${salt}')`;
             db.execute(sql);
         })
         
-        res.sendStatus(200);
+        res.sendStatus(201);
     } catch(err){
         console.log(err)
-        res.sendStatus(400)
+        res.sendStatus(401)
         next(err); 
     }
 }

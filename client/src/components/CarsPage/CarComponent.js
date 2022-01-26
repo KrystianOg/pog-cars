@@ -1,13 +1,12 @@
 import React from 'react';
 import {FaCogs, FaTachometerAlt, FaGasPump, FaCheck} from 'react-icons/fa'
-import Car from '../../models/car'
 import './CarComponent.css'
 import carPng from '../../images/cars/mustang.png';
 import { Button, ButtonLink} from './CarComponents'
 
-const CarComponent = (car, days) => {
+const CarComponent = ({car}) => {
 
-    let c = new Car(12000, 200, 5, 'manual', 'AWD', 'PB', 10, 3200, 1, 2019, 0, 'A4', 'Audi');
+    //let c = new Car(12000, 200, 5, 'manual', 'AWD', 'PB', 10, 3200, 1, 2019, 0, 'A4', 'Audi');
 
     //obliczyć tutaj cenę za okres
     let d =6;
@@ -20,49 +19,49 @@ const CarComponent = (car, days) => {
             </div>
             <div className="car-info">
                 <div className="car-header">
-                    <h3>{c.make} {c.model}</h3>
-                    <h5>Rok produkcji: {c.year}</h5>
+                    <h3>{car.make} {car.model}</h3>
+                    <h5>Rok produkcji: {car.year}</h5>
                 </div>
 
                 <span>
-                    <span content="Skrzynia biegów" tabindex="0">
+                    <span content="Skrzynia biegów" >
                         {/* some icon */}
                         <FaCogs/>
                         {/* and description */}
-                        {c.transmission === "manual" ? "M" : "A"}
+                        {car.transmission === "manual" ? "M" : "A"}
                     </span>
 
-                    <span content="Ilość miejsc" tabindex="0">
+                    <span content="Ilość miejsc" >
                         {/* some icon */}
 
                         {/* and description */}
-                        Seats: {c.seats}
+                        Seats: {car.seats}
                     </span>
-                    <span content="Średnie spalanie" tabindex="0">
+                    <span content="Średnie spalanie" >
                         {/* some icon */}
                         <FaGasPump/>
                         {/* and description */}
-                        [l/100km]: {c.fuelConsumption}
+                        [l/100km]: {car.fuelConsumption}
                     </span>
-                    <span content="Napęd" tabindex="0">
+                    <span content="Napęd" >
                         {/* some icon */}
 
                         {/* and description */}
-                        Napęd: {c.drivetrain}
+                        Napęd: {car.drivetrain}
                     </span>
                 </span>
 
                 <div className="options">
-                    <span tabindex="0">
+                    <span >
                         <FaCheck/>Bezpłatne odwołanie rezerwacji
                     </span>
-                    <span tabindex="0">
+                    <span >
                         <FaCheck/>Bez limitu km
                     </span>
                 </div>
 
                 <div className="price">
-                    <h1>{c.price/30*d} PLN</h1>
+                    <h1>{car.price/30*d} PLN</h1>
                     <h3> cena za {d} dni</h3>
                     <h5>Opłata przygotowawcza +29 PLN</h5>
                     <h5>Wydanie pojazdu poza godzinami pracy +39 PLN</h5>

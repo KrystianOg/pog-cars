@@ -3,6 +3,7 @@ import React from 'react'
 import { FaBars } from 'react-icons/fa'
 import { useLocation} from 'react-router-dom'
 import { Nav, NavIcon, NavbarContainer, NavLogo, MobileIcon, NavMenu, NavItem, NavLinks, NavLinkLI, NavBtn, NavBtnLink} from './NavbarElements'
+import { ReactSession } from 'react-client-session'
 
 const Navbar = ({toggle}) => {
     const [path, setPath] = React.useState("/")
@@ -11,6 +12,11 @@ const Navbar = ({toggle}) => {
     React.useEffect(()=>{
         setPath(window.location.pathname)
     }, [location]);
+
+    function logout(){
+        ReactSession.set('user_id',null)
+        ReactSession.set('type',null)
+    }
 
     return (
         <>
@@ -31,12 +37,20 @@ const Navbar = ({toggle}) => {
                             <NavLinkLI to='/articles' $active={path === "/articles"} >ARTICLES</NavLinkLI>
                         </NavItem>
                         <NavItem>
-                            <NavLinkLI to='/discounts' $active={path === "/discounts"} >DISCOUNTS</NavLinkLI>
+                            <NavLinkLI to='/discounts' $active={path === "/discounts"}>DISCOUNTS</NavLinkLI>
                         </NavItem>
+                        {ReactSession.get('type') === 'ADMIN' || ReactSession.get('type') === 'AGENT' ? 
                         <NavItem>
-                            <NavLinkLI to='/account' $active={path === "/account"} >ACCOUNT</NavLinkLI>
-                        </NavItem>
+                            <NavLinkLI to='/users' $active={path === "/users"}>USERS</NavLinkLI>
+                        </NavItem> : null }
+                        <NavItem onClick={
+                        console.log(`User id: ${ReactSession.get('user_id')}, and type: ${ReactSession.get('type')}`)
+                        }>
+                            <NavLinkLI to='/' $active={path === "/"}>CLICK</NavLinkLI>
+                        </NavItem> 
+
                     </NavMenu>
+                    {ReactSession.get('user_id') === null ?
                     <NavMenu>
                         <NavBtn>
                             <NavBtnLink to='/login'>LOG IN</NavBtnLink>
@@ -45,6 +59,15 @@ const Navbar = ({toggle}) => {
                             <NavBtnLink to='/register'>SIGN UP</NavBtnLink>
                         </NavBtn>
                     </NavMenu>
+                    : <NavMenu> 
+                        <NavBtn>
+                            <NavBtnLink to='/account'>ACCOUNT</NavBtnLink>
+                        </NavBtn>
+                        <NavBtn>
+                            <NavBtnLink to='/' onClick={logout}>LOGOUT</NavBtnLink>
+                        </NavBtn>
+                    </NavMenu>}
+
                 </NavbarContainer>
             </Nav>
         </>

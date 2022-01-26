@@ -1,11 +1,9 @@
 import {useState, useEffect} from 'react';
 
-const useSignupForm = (callback,validate) => {
+const useLoginForm = (callback,validate) => {
     const [values,setValues] = useState({
-        username: '',
         email: '',
-        password: '',
-        password2: ''
+        password: ''
     })
 
     const [errors,setErrors] = useState({})
@@ -29,11 +27,11 @@ const useSignupForm = (callback,validate) => {
 
     useEffect(()=>{
         if(Object.keys(errors).length === 0 && isSubmitting){
-            callback()
+            callback(values)
         }
     }, [errors])
 
     return {handleChange, values, handleSubmit, errors}
 }
 
-export default useSignupForm
+export default useLoginForm
