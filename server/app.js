@@ -8,11 +8,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const { auth } = require('express-openid-connect'); // auth0
 
+//const jwt = require('express-jwt'); //auth0...?
+//const jwksRsa = require('jwks-rsa'); //auth0...?
 
-const jwt = require('express-jwt'); //auth0...?
-const jwksRsa = require('jwks-rsa'); //auth0...?
-
-const port = process.env.PORT || 3000;
+const port = process.env.API_PORT || 5000;
 var app = express();
 var session = require('express-session');
 var bodyParser = require('body-parser');
@@ -51,7 +50,6 @@ app.use(bodyParser.json());
 
 // use routes
 
-//app.use('/main',require('./routes/index')); //strona startowa
 app.use('/users',require('./routes/userRoutes'));
 app.use('/agencies',require('./routes/agencyRoutes'));
 app.use('/articles',require('./routes/articleRoutes'));
