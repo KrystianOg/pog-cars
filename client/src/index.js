@@ -1,5 +1,7 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import {render} from 'react-dom';
+import { ReactSession } from 'react-client-session';
+
 //all routes
 import App from './App'; //home page
 import Login from './pages/login'
@@ -8,6 +10,8 @@ import Cars from './pages/cars'
 import Articles from './pages/articles'
 import Discounts from './pages/discounts'
 import Account from './pages/account'
+
+ReactSession.setStoreType("localStorage")
 
 render(
   <BrowserRouter>

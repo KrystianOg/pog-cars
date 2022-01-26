@@ -7,14 +7,20 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import pogCars1 from '../images/pog-cars-1-white.svg';
 import Spinner from 'react-bootstrap/Spinner'
 import { Helmet } from 'react-helmet'
+import { useNavigate } from 'react-router-dom'
+import { ReactSession } from 'react-client-session'
 
 const Login = () => {
     //something here
     const  [isSubmitted, setIsSubmitted] = useState(false)
     //const [isLoading, setIsLoading] = useState(true)
-
+    const navigate = useNavigate()
+    
     function submitForm(){
         setIsSubmitted(true)
+        
+        ReactSession.set('user',)
+        navigate('/', {replace: true})
     }
 
     return (

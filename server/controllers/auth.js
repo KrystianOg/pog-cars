@@ -17,6 +17,7 @@ exports.login = async (req,res,next) =>{
     re1.session.user_type = row[0].type
 
     console.log(`login successful for ${req.session.user_id}`)
+    res.status(200).json({user_id: req.session.user_id, user_type: req.session.user_type})
     } catch(err){
         console.log(err)
         next(err);
@@ -46,35 +47,27 @@ exports.tempLogout = async(req,res,next) =>{
 }
 
 //controller najwyzej przenieść
-exports.register = async (req,res,next) =>{
+exports.register = (req,res,next) =>{
     try{
         //extracting parameters from request body
-        const {email, password, password2} = req.body;
+        const {username, email, password} = req.body;
         let errors = []
 
-        if(!email || !password || !password2) {
+        if(!email || !password ) {
             errors.push({msg : "Please fill in all fields"})
         }
-
-        //check if match
-        if(password !== password2) {
-            errors.push({msg : "passwords don't match"});
-            //some res status
-            throw new Error({msg : "passwords don't match"});
-        }
-
-        u = new User(email,password)
 
         bcrypt.genSalt(10,(err,salt) => {
             //login check
             let hash= sha256( process.env.PEPPER+password+salt);
-            let sql = `INSERT INTO users(email,password,salt) VALUES('${u.email}','${hash}','${salt}')`;
+            let sql = `INSERT INTO users(username,email,password,salt) VALUES('${username}','${email}','${hash}','${salt}')`;
             db.execute(sql);
         })
-
-        res.status(200).json({message:"User added successfully"});
+        
+        res.sendStatus(200);
     } catch(err){
         console.log(err)
+        res.sendStatus(400)
         next(err); 
     }
 }

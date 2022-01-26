@@ -37,8 +37,8 @@ const FormSignup = ({submitForm}) => {
                 <button className="form-input-btn" type="submit">
                     Sign up
                 </button>
-                <span class="form-input-login">Already have an account?
-                    <a href='#'> Login</a>
+                <span className="form-input-login">Already have an account?
+                    <a href='/login'> Login</a>
                 </span>
             </form>
         </div>

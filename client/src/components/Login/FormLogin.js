@@ -27,7 +27,7 @@ const FormLogin = ({submitForm}) => {
                 <button className="form-input-btn" type="submit">
                     Login
                 </button>
-                <span class="form-input-login">Not a member?
+                <span className="form-input-login">Not a member?
                     <a href='/register'> Register</a>
                 </span>
             </form>
