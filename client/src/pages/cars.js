@@ -12,7 +12,7 @@ const Cars = () => {
     }
 
     return (
-        <>           
+        <>  
             <Helmet>
                 <title>PogCars | Cars</title>
                 <link rel="icon" type="image/png" href="favicon.ico" sizes="16x16"/>

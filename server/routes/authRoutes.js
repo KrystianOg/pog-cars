@@ -5,22 +5,12 @@ const router = express.Router();
 const cors = require('cors')
 
 //@ POST ROUTE
-router.get('/login', function(req, res, next) {
-    console.log(req.oidc.isAuthenticated());
-    //req.oidc.lo
-    res.status(201).json({message:"Login."});
-});
+router.post('/login', authControllers.login);
 
-router.get('/logout', function(req, res, next) {
-    console.log(req.oidc.isAuthenticated());
-    res.status(201).json({message:"Logout."});
-});
+router.get('/logout', authControllers.logout);
 
-router.route('/tempLogin=:id&type=:type').get(authControllers.tempLogin)
+//router.options('/register',cors())
 
-router.route('/tempLogout=:id').get(authControllers.tempLogout)
-
-router.options('/register',cors())
 router.route('/register').post(authControllers.register)
 
 router.route('/checkAuth').get(authControllers.checkAuth)

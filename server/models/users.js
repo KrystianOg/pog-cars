@@ -1,7 +1,7 @@
 const db = require('../config/db')
 
 class User{
-    constructor(firstname, lastname, birth_date, username, email, type, deleted, salt, password){
+    constructor(firstname, lastname, birth_date, username, email, type, deleted){
         this.firstname = firstname;
         this.lastname = lastname;
         this.birth_date = birth_date;
@@ -9,8 +9,6 @@ class User{
         this.email = email;
         this.type = type;
         this.deleted = deleted;
-        this.salt = salt;
-        this.password = password;
     }
 
     save(){
@@ -18,48 +16,42 @@ class User{
         let d = new Date();
         let yyyy = d.getFullYear();
 
-        let sql = `INSERT INTO comments(
+        let sql = `INSERT INTO users(
             firstname,
             lastname,
             birth_date,
             username,
             email,
             type,
-            deleted,
-            salt,
-            password
+            deleted
             ) VALUES (
-            ${this.firstname},
-            ${this.lastname},
-            ${this.birth_date},
-            ${this.username},
-            ${this.email},
-            ${this.type},
-            ${this.deleted},
-            ${this.salt},
-            ${this.password}
+            '${this.firstname}',
+            '${this.lastname}',
+            '${this.birth_date}',
+            '${this.username}',
+            '${this.email}',
+            '${this.type}',
+            ${this.deleted}
             )`
-
-        
         return db.execute(sql);
     }
 
     // filters
     static findAll(){
-        let sql = "SELECT * FROM users;"
+        let sql = "SELECT user_id, firstname, lastname, birth_date, username, email, type, deleted FROM users;"
 
         return db.execute(sql);
     }
 
     static findById(id){
-        let sql = `SELECT * FROM users WHERE user_id=${id}`;
+        let sql = `SELECT user_id, firstname, lastname, birth_date, username, email, type, deleted FROM users WHERE user_id=${id}`;
 
         return db.execute(sql);
     }
     
     // fullfill requirements
     static fullfillRequirement(requirement,id){
-        let sql = `CALL fullfillRequirement('${requirement}',${id});`;
+        //let sql = `CALL fullfillRequirement('${requirement}',${id});`; ??
         return parseBoolean(db.execute(sql))
     }
 

@@ -6,6 +6,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var cors = require('cors');
 const { auth } = require('express-openid-connect'); // auth0
 
 //const jwt = require('express-jwt'); //auth0...?
@@ -41,6 +42,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 //app.use(express.static(path.join(__dirname, 'public')));
+
 //app.use(auth(config));
 
 //session storage
@@ -48,7 +50,18 @@ app.use(session({secret: 'secret', resave: true, saveUninitialized: true}));
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
-// use routes
+// headers before routes
+// app.use(function (req,res,next){
+//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
+//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
+
+//   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
+
+//   res.setHeader('Access-Control-Allow-Credentials',true)
+//   next();
+// })
+
+app.use(cors({origin: 'http://localhost:3000'}))
 
 app.use('/users',require('./routes/userRoutes'));
 app.use('/agencies',require('./routes/agencyRoutes'));

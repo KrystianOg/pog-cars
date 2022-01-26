@@ -1,11 +1,10 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import FormLogin from '../components/Login/FormLogin';
 import FormSuccess from '../components/Login/FormSuccess';
 import '../components/Login/LoginForm.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTimes } from '@fortawesome/free-solid-svg-icons'
 import pogCars1 from '../images/pog-cars-1-white.svg';
-import Spinner from 'react-bootstrap/Spinner'
 import { Helmet } from 'react-helmet'
 import { useNavigate } from 'react-router-dom'
 import { ReactSession } from 'react-client-session'
@@ -16,11 +15,30 @@ const Login = () => {
     //const [isLoading, setIsLoading] = useState(true)
     const navigate = useNavigate()
     
-    function submitForm(){
-        setIsSubmitted(true)
-        
-        ReactSession.set('user',)
-        navigate('/', {replace: true})
+    async function submitForm(credentials){
+        //call to api
+        fetch("http://192.168.0.102:5000/auth/login",{
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Access-Control-Allow-Origin": "no-cors"
+            },
+            "body": JSON.stringify(credentials)
+        })
+        .then(async response =>{
+            //let [user_id,type]= await response.data
+            if(response.status != 200){
+                throw new Error("Wrong email or password")
+            } else {
+                response = await response.json()
+                setIsSubmitted(true)
+                ReactSession.set('user_id',response.user_id)
+                ReactSession.set('type',response.type)
+                navigate('/', {replace: true})
+            }
+        })
+        .catch(err => console.log(err))
     }
 
     return (
@@ -39,6 +57,7 @@ const Login = () => {
                     <img src={pogCars1} alt="car" className="form-img"/>
                 </div>
                 {!isSubmitted ? <FormLogin submitForm={submitForm}/> : <FormSuccess/>}
+
             </div>
         </>
     );
