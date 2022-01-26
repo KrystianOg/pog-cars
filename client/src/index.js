@@ -11,6 +11,7 @@ import Articles from './pages/articles'
 import Discounts from './pages/discounts'
 import Account from './pages/account'
 
+
 ReactSession.setStoreType("localStorage")
 
 render(

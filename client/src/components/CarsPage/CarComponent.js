@@ -15,7 +15,7 @@ const CarComponent = (car, days) => {
     return (
         <div className="car-container">
             <div className="image">
-                {/* tutaj zaimportowane zdjęcie */}\
+                {/* tutaj zaimportowane zdjęcie */}
                 <img src={carPng} alt="car"/>
             </div>
             <div className="car-info">
@@ -54,7 +54,7 @@ const CarComponent = (car, days) => {
 
                 <div className="options">
                     <span tabindex="0">
-                        <FaCheck/>Bezpłatne odwołanie rezerwacji
+                        <FaCheck/> Bezpłatne odwołanie rezerwacji
                     </span>
                     <span tabindex="0">
                         <FaCheck/>Bez limitu km
