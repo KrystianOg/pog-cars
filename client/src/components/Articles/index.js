@@ -39,8 +39,8 @@ const ArticleContainer = () => {
             {!loading ?
             <div className="offers">
                 {/* automatyzacja tego */}
-                {articles.map((article)=>
-                    <ArticleComponent article={article}/>
+                {articles.map((article,i)=>
+                    <ArticleComponent article={article} key={i}/>
                 )}
             </div> : null}
         </>

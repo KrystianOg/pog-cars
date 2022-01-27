@@ -31,7 +31,7 @@ render(
       <Route path="account" element={<Account/>}/>
       <Route path="account/changedata" element={<Changedata/>}/>
       <Route path="account/resetpassword" element={<Resetpassword/>}/>
-      <Route path="account/reserve" element={<Reserve/>}/>
+      <Route path="reserve" element={<Reserve/>}/>
       <Route path="*" element={
         <main style={{ padding: "1rem" }}>
           <p>There's nothing here!</p>

@@ -10,34 +10,37 @@ exports.checkAuth = async (req,res,next) =>{
 //security
 exports.login = async (req,res,next) =>{
     try{
-    let {email, password} = req.body;
-    //let sql = `SELECT user_id, type FROM users WHERE users.email='${email}' AND users.password=SHA2('${process.env.PEPPER+password}'+users.salt,256);`;
-    
-    //get usersalt
-    let sql = `SELECT salt FROM users WHERE users.email='${email}'`;
-    let [rows,fields] = await db.execute(sql);
+        let {email, password} = req.body;
+        //let sql = `SELECT user_id, type FROM users WHERE users.email='${email}' AND users.password=SHA2('${process.env.PEPPER+password}'+users.salt,256);`;
+        
+        //get usersalt
+        let sql = `SELECT salt FROM users WHERE users.email='${email}'`;
+        let [rows,fields] = await db.execute(sql);
 
-    let salt = rows[0].salt
-    let hash= sha256( process.env.PEPPER+password+salt);
+        let salt = rows[0].salt
+        let hash= sha256( process.env.PEPPER+password+salt);
 
-    console.log(hash)
+        console.log(hash)
 
-    if(rows.length == 0){
-        res.status(401).json({message:"Wrong email or password"});
-        throw new Error("Wrong email or password");
-    }
+        if(rows.length == 0){
+            throw new Error("Wrong email or password");
+        }
 
-    sql = `SELECT user_id, type FROM users WHERE users.email='${email}' AND users.password='${hash}' AND users.deleted=0;`;
-    [rows,fields] = await db.execute(sql);
-    //req.session.user_id = row[0].user_id
-    //req.session.user_type = row[0].type
+        sql = `SELECT user_id, type FROM users WHERE users.email='${email}' AND users.password='${hash}' AND users.deleted=0;`;
+        try{
+            [rows,fields] = await db.execute(sql);
 
-    if(rows.length == 0 || rows.length > 1){
-        res.status(401).json({message:"Wrong email or password"});
-        throw new Error("User not found");
-    }
-    console.log(rows)
-    res.status(200).json(rows[0])
+            if(rows.length == 0 || rows.length > 1){
+                throw new Error("User not found");
+            }
+        } catch(e){
+            console.log(e)
+        }
+        //req.session.user_id = row[0].user_id
+        //req.session.user_type = row[0].type
+
+        console.log(rows)
+        res.status(200).json(rows[0])
     } catch(err){
         res.status(400).json({message:"Wrong email or password"});
         console.log(err)
@@ -54,26 +57,20 @@ exports.register = (req,res,next) =>{
     try{
         //extracting parameters from request body
         const {username, email, password} = req.body;
-        let errors = []
 
-        if(!email || !password ) {
-            errors.push({msg : "Please fill in all fields"})
-        }
-
-        bcrypt.genSalt(10,(err,salt) => {
+        bcrypt.genSalt(10,async (err,salt) => {
             //login check
             try{
                 let hash= sha256( process.env.PEPPER+password+salt);
                 console.log(hash)
                 let sql = `INSERT INTO users(username,email,password,salt) VALUES('${username}','${email}','${hash}','${salt}')`;
-                db.execute(sql);
-            }catch(err){
-                console.log(err)
-                next(err);
+                await db.execute(sql);
+                res.sendStatus(201);
+            }catch(e){
+                console.log(e)
+                res.sendStatus(400);
             }
         })
-        
-        res.sendStatus(201);
     } catch(err){
         res.status(400).json({message:"Wrong email or password"});
         console.log(err)
