@@ -13,9 +13,7 @@ const CarComponent = ({car}) => {
     //let c = new Car(12000, 200, 5, 'manual', 'AWD', 'PB', 10, 3200, 1, 2019, 0, 'A4', 'Audi');
 
     //obliczyć tutaj cenę za okres
-    let d =6;
-
-
+    let d =30;
 
     const stars = (amount) => {
         amount = Math.ceil(amount)
