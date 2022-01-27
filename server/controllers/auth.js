@@ -39,6 +39,7 @@ exports.login = async (req,res,next) =>{
     console.log(rows)
     res.status(200).json(rows[0])
     } catch(err){
+        res.status(400).json({message:"Wrong email or password"});
         console.log(err)
         next(err);
     }
@@ -61,17 +62,21 @@ exports.register = (req,res,next) =>{
 
         bcrypt.genSalt(10,(err,salt) => {
             //login check
-            let hash= sha256( process.env.PEPPER+password+salt);
-
-            console.log(hash)
-            let sql = `INSERT INTO users(username,email,password,salt) VALUES('${username}','${email}','${hash}','${salt}')`;
-            db.execute(sql);
+            try{
+                let hash= sha256( process.env.PEPPER+password+salt);
+                console.log(hash)
+                let sql = `INSERT INTO users(username,email,password,salt) VALUES('${username}','${email}','${hash}','${salt}')`;
+                db.execute(sql);
+            }catch(err){
+                console.log(err)
+                next(err);
+            }
         })
         
         res.sendStatus(201);
     } catch(err){
+        res.status(400).json({message:"Wrong email or password"});
         console.log(err)
-        res.sendStatus(401)
         next(err); 
     }
 }
@@ -81,7 +86,7 @@ exports.generateRegisterCode = async (req,res,next) => {
 
     try{
         let {email} = req.body
-        let sql = `INSERT INTO register_codes (email,code, expiration) VALUES ('${email}','${createID(8)}', NOW() + INTERVAL 5 DAY);`;
+        let sql = `INSERT INTO register_codes (email, code, expiration) VALUES ('${email}','${createID(8)}', NOW() + INTERVAL 5 DAY);`;
         db.execute(sql);
         res.status(200).json({message:"Code generated successfully"});
     } catch(err){

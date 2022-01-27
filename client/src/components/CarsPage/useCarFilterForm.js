@@ -1,11 +1,14 @@
 import {useState, useEffect} from 'react';
 
-const useSignupForm = (callback, validate) => {
+const useCarFilterForm = (callback,validate) => {
     const [values,setValues] = useState({
-        username: '',
-        email: '',
-        password: '',
-        password2: ''
+        make: '',
+        price_min: '',
+        price_max: '',
+        horsepower_min: '',
+        horsepower_max: '',
+        year_min: '',
+        year_max: ''
     })
 
     const [errors,setErrors] = useState({})
@@ -36,4 +39,4 @@ const useSignupForm = (callback, validate) => {
     return {handleChange, values, handleSubmit, errors}
 }
 
-export default useSignupForm
+export default useCarFilterForm

@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import Sidebar from '../components/Sidebar/index';
 import Navbar from '../components/Navbar/index';
 import { Helmet } from 'react-helmet'
-import { AccountsContainer } from '../components/AccountsPage/index';
+import { ReserveContainer } from '../components/AccountsPage/ReservePage/index';
 
-const Account = () => {
+const Reserve = () => {
     const [isOpen, setIsOpen] = useState(false)
 
     const toggle = () => {
@@ -14,15 +14,15 @@ const Account = () => {
     return (
         <>
             <Helmet>
-                <title>PogCars | Account</title>
+                <title>PogCars | Reserve</title>
                 <link rel="icon" type="image/png" href="favicon.ico" sizes="16x16"/>
             </Helmet>
             
             <Sidebar isOpen={isOpen} toggle={toggle}/>
             <Navbar toggle={toggle}/>
-            <AccountsContainer/>
+            <ReserveContainer/>
         </>
     )
 };
 
-export default Account;
+export default Reserve;

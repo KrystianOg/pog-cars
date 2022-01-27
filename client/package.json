@@ -4,11 +4,13 @@
   "private": true,
   "proxy": "http://localhost:5000",
   "dependencies": {
+    "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.16",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "module": "^1.2.5",
     "react": "^17.0.2",
     "react-bootstrap": "^2.1.1",
     "react-client-session": "^0.0.7",

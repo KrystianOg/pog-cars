@@ -7,4 +7,6 @@ router.route("/").post(discountControllers.addNewDiscount);
 
 router.route("/code=:code").get(discountControllers.useDiscount);
 
+router.route("/all").get(discountControllers.getAllDiscounted);
+
 module.exports = router;

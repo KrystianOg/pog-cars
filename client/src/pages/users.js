@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import Sidebar from '../components/Sidebar/index';
 import Navbar from '../components/Navbar/index';
 import { Helmet } from 'react-helmet'
-import { AccountsContainer } from '../components/AccountsPage/index';
+import UsersContainer from '../components/UsersPage/index';
 
-const Account = () => {
+const Users = () => {
     const [isOpen, setIsOpen] = useState(false)
 
     const toggle = () => {
@@ -20,9 +20,9 @@ const Account = () => {
             
             <Sidebar isOpen={isOpen} toggle={toggle}/>
             <Navbar toggle={toggle}/>
-            <AccountsContainer/>
+            <UsersContainer/>
         </>
     )
 };
 
-export default Account;
+export default Users;

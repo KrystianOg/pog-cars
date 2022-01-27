@@ -50,17 +50,6 @@ app.use(session({secret: 'secret', resave: true, saveUninitialized: true}));
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
-// headers before routes
-// app.use(function (req,res,next){
-//   res.setHeader('Access-Control-Allow-Origin', 'http://localhost:3000')
-//   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE')
-
-//   res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type')
-
-//   res.setHeader('Access-Control-Allow-Credentials',true)
-//   next();
-// })
-
 app.use(cors({origin: 'http://localhost:3000'}))
 
 app.use('/users',require('./routes/userRoutes'));
@@ -75,8 +64,6 @@ app.use('/log',require('./routes/logRoutes'));
 app.use('/register_codes',require('./routes/register_codeRoutes'));
 app.use('/rental_history',require('./routes/rental_historyRoutes'));
 app.use('/auth',require('./routes/authRoutes'));
-//app.use('/other', require('./routes/otherRoutes'));
-
 
 // catch 404 and forward to error handler
 app.use((req, res, next) =>{
@@ -95,13 +82,7 @@ app.use((err, req, res, next) => {
 });
 
 
-//Middlewares
-app.use('/',()=>{
-
-});
-
 //which one to choose?
-
 
 //auth0
 /*const checkJwt = auth({

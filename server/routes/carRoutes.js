@@ -11,6 +11,6 @@ router.route("/id=:id").get(carControllers.getCarById).patch(carControllers.remo
 //router.route("/").get(carControllers.getAllCars);
 
 router.route("/reserve=:id").post(carControllers.reserveCar);
-router.route("/filter").get(carControllers.filter);
+router.route("/filter").post(carControllers.filter);
 router.route("/sort=:type").get(carControllers.sort);
 module.exports = router;
