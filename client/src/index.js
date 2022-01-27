@@ -10,6 +10,9 @@ import Cars from './pages/cars'
 import Articles from './pages/articles'
 import Discounts from './pages/discounts'
 import Account from './pages/account'
+import Changedata from './pages/changedata'
+import Resetpassword from './pages/resetpassword'
+import Reserve from './pages/reserve'
 
 ReactSession.setStoreType("localStorage")
 
@@ -23,6 +26,9 @@ render(
       <Route path="articles" element={<Articles/>}/>
       <Route path="discounts" element={<Discounts/>}/>
       <Route path="account" element={<Account/>}/>
+      <Route path="account/changedata" element={<Changedata/>}/>
+      <Route path="account/resetpassword" element={<Resetpassword/>}/>
+      <Route path="account/reserve" element={<Reserve/>}/>
       <Route path="*" element={
         <main style={{ padding: "1rem" }}>
           <p>There's nothing here!</p>

@@ -2,10 +2,9 @@ import React, {useState} from 'react';
 import Sidebar from '../components/Sidebar/index';
 import Navbar from '../components/Navbar/index';
 import { Helmet } from 'react-helmet'
-import { AccountsContainer } from '../components/AccountsPage/index';
+import { ChangedataContainer } from '../components/AccountsPage/ChangedataPage/index';
 
-import AccountContainer from '../components/AccountPage/index'
-const Account = () => {
+const Changedata = () => {
     const [isOpen, setIsOpen] = useState(false)
 
     const toggle = () => {
@@ -15,15 +14,15 @@ const Account = () => {
     return (
         <>
             <Helmet>
-                <title>PogCars | Account</title>
+                <title>PogCars | Changedata</title>
                 <link rel="icon" type="image/png" href="favicon.ico" sizes="16x16"/>
             </Helmet>
             
             <Sidebar isOpen={isOpen} toggle={toggle}/>
             <Navbar toggle={toggle}/>
-            <AccountsContainer/>
+            <ChangedataContainer/>
         </>
     )
 };
 
-export default Account;
+export default Changedata;
