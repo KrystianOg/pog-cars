@@ -70,8 +70,8 @@ const CarsContainer = () => {
             {!loading ?
             <div className="offers">
                 {/* automatyzacja tego */}
-                {cars.map((car)=>
-                    <CarComponent car={car}/>
+                {cars.map((car,i)=>
+                    <CarComponent car={car} key={i}/>
                 )}
             </div> : null}
         </>

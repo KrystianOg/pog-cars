@@ -43,11 +43,6 @@ const Navbar = ({toggle}) => {
                         <NavItem>
                             <NavLinkLI to='/users' $active={path === "/users"}>USERS</NavLinkLI>
                         </NavItem> : null }
-                        <NavItem onClick={
-                        console.log(`User id: ${ReactSession.get('user_id')}, and type: ${ReactSession.get('type')}`)
-                        }>
-                            <NavLinkLI to='/' $active={path === "/"}>CLICK</NavLinkLI>
-                        </NavItem> 
 
                     </NavMenu>
                     {ReactSession.get('user_id') === null ?
