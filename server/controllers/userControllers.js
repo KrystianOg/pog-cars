@@ -3,9 +3,23 @@ const db = require('../config/db')
 
 exports.getAllUsers = async (req,res,next) => {
     try{
-        let [users,_] = await user.findAll();
+        let [users,_] = await User.findAll();
         res.status(200).json(users);
     }  catch(err){
+        console.log(err)
+        next(err);
+    }
+}
+
+exports.getUsersWithAnchor = async (req,res,next) => {
+    try{
+        let anchor = req.params.anchor
+        let amount = req.params.amount
+        let sql = `SELECT user_id, firstname, lastname, birth_date, username, email, type, deleted FROM users WHERE user_id>${anchor} AND user_id<${anchor+amount}`
+        let [users,_]= await db.execute(sql)
+        res.status(200).json(users);
+    } catch(err){
+        res.status(400).json({message:"Bad request"});
         console.log(err)
         next(err);
     }

@@ -1,6 +1,6 @@
 import React from 'react';
 import {FaCogs, FaTachometerAlt, FaGasPump, FaCheck} from 'react-icons/fa'
-import Account from 'C:/Users/Kornel/pog-cars/client/src/models/account.js'
+import Account from '../../../models/account';
 import './ResetpasswordComponent.css'
 import { Button, ButtonLink} from './ResetpasswordComponents'
 

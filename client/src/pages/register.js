@@ -12,7 +12,7 @@ const Register = () => {
     const  [isSubmitted, setIsSubmitted] = useState(false)
     const navigate = useNavigate()
 
-    async function submitForm (credentials) {
+    function submitForm (credentials) {
 
         //call to api
         fetch("http://192.168.0.102:5000/auth/register",{
@@ -24,16 +24,14 @@ const Register = () => {
             },
             "body": JSON.stringify(credentials)
         })
-        .then(response => response.json())
-        .then(response =>{
+        .then(async response =>{
+            //let [user_id,type]= await response.data
             if(response.status === 201){
                 setIsSubmitted(true)
                 navigate('/login', {replace: true})
             }
         })
         .catch(err => console.log(err))
-
-        console.log('Logged in')
     }
 
     return (

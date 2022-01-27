@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { COLORS } from 'C:/Users/Kornel/pog-cars/client/src/colors.js'
+import { COLORS } from '../../../colors'
 import { Link as LinkR } from 'react-router-dom'
 
 export const Button = styled.nav`

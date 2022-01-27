@@ -15,6 +15,6 @@ router.route('/register').post(authControllers.register)
 
 router.route('/checkAuth').get(authControllers.checkAuth)
 
-router.route('/generateRegisterCode').post(authControllers.generateRegisterCode)
+router.route('/generateRegisterCode').get(authControllers.generateRegisterCode)
 
 module.exports = router;

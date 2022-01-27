@@ -5,6 +5,8 @@ const router = express.Router();
 //@route GET && POST /cars
 router.route("/").get(car_reviewControllers.getAllCarReviews).post(car_reviewControllers.addNewCarReview);
 
+router.route("/avg").get(car_reviewControllers.getAvgCarReviews);
+
 router.route("/:id").get(car_reviewControllers.getCarReviewById);
 
 module.exports = router;

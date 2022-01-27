@@ -10,6 +10,7 @@ import Cars from './pages/cars'
 import Articles from './pages/articles'
 import Discounts from './pages/discounts'
 import Account from './pages/account'
+import Users from './pages/users'
 import Changedata from './pages/changedata'
 import Resetpassword from './pages/resetpassword'
 import Reserve from './pages/reserve'
@@ -25,6 +26,7 @@ render(
       <Route path="cars" element={<Cars/>}/>
       <Route path="articles" element={<Articles/>}/>
       <Route path="discounts" element={<Discounts/>}/>
+      <Route path="users" element={<Users/>}/>
       <Route path="account" element={<Account/>}/>
       <Route path="account/changedata" element={<Changedata/>}/>
       <Route path="account/resetpassword" element={<Resetpassword/>}/>

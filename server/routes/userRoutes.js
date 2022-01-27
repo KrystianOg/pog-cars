@@ -5,10 +5,9 @@ const router = express.Router();
 //@route GET && POST /cars
 //router.route("/").get(userControllers.getAllUsers).post(userControllers.addNewUser);
 
-router.get('/', function(req, res, next) {
-    res.render('userRoutes', { title: 'Express' });
-    res.send('respond with a resource');
-  });
+router.get('/', userControllers.getAllUsers);
+
+router.get('/anchor=:anchor&amount=:amount', userControllers.getUsersWithAnchor);
 
 router.route("/:id").get(userControllers.getUserById);
 

@@ -1,4 +1,5 @@
 const Discount = require('../models/discounts');
+const db = require('../config/db')
 
 exports.addNewDiscount = async (req,res,next) => {
     try{
@@ -12,6 +13,7 @@ exports.addNewDiscount = async (req,res,next) => {
             res.status(401).json({message:"Unauthorized"});
         }
     } catch(err){
+        res.status(400).json({message:"Discount not added"});
         console.log(err)
         next(err); 
     }
@@ -43,5 +45,18 @@ exports.useDiscount = async (req,res,next) => {
     } catch(err){
         console.log(err)
         next(err);
+    }
+}
+
+exports.getAllDiscounted = async (req, res, next) => {
+    try{
+        let sql = `SELECT expiration_date,user_id,value,car_id FROM discounts WHERE car_id IS NULL AND user_id IS NOT NULL`;
+        let [rows,_] = await db.execute(sql);
+
+        res.status(200).json(rows)
+    } catch(err){
+        res.status(400).json({message:"Discounts not found"});
+        console.log(err)
+        next(err)
     }
 }
