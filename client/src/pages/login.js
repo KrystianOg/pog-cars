@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import FormLogin from '../components/Login/FormLogin';
 import FormSuccess from '../components/Login/FormSuccess';
 import '../components/Login/LoginForm.css';
@@ -28,7 +28,7 @@ const Login = () => {
         })
         .then(async response =>{
             //let [user_id,type]= await response.data
-            if(response.status != 200){
+            if(response.status !== 200){
                 throw new Error("Wrong email or password")
             } else {
                 response = await response.json()

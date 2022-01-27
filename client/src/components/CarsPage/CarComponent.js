@@ -4,6 +4,10 @@ import './CarComponent.css'
 import carPng from '../../images/cars/mustang.png';
 import { Button, ButtonLink} from './CarComponents'
 
+import {faStar} from '@fortawesome/free-solid-svg-icons'
+import {faStar as emptyStar}  from '@fortawesome/free-regular-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 const CarComponent = ({car}) => {
 
     //let c = new Car(12000, 200, 5, 'manual', 'AWD', 'PB', 10, 3200, 1, 2019, 0, 'A4', 'Audi');
@@ -11,10 +15,28 @@ const CarComponent = ({car}) => {
     //obliczyć tutaj cenę za okres
     let d =6;
 
+
+
+    const stars = (amount) => {
+        amount = Math.ceil(amount)
+
+        return (
+            <div className="stars">
+                {amount>=1 ? <FontAwesomeIcon icon={faStar}/> : <FontAwesomeIcon icon={emptyStar}/>}
+                {amount>=2 ? <FontAwesomeIcon icon={faStar}/> : <FontAwesomeIcon icon={emptyStar}/>}
+                {amount>=3 ? <FontAwesomeIcon icon={faStar}/> : <FontAwesomeIcon icon={emptyStar}/>}
+                {amount>=4 ? <FontAwesomeIcon icon={faStar}/> : <FontAwesomeIcon icon={emptyStar}/>}
+                {amount>=5 ? <FontAwesomeIcon icon={faStar}/> : <FontAwesomeIcon icon={emptyStar}/>}
+            </div>
+        )
+    }
+
     return (
         <div className="car-container">
+
+            {stars(4)}
             <div className="image">
-                {/* tutaj zaimportowane zdjęcie */}\
+                {/* tutaj zaimportowane zdjęcie */}
                 <img src={carPng} alt="car"/>
             </div>
             <div className="car-info">

@@ -26,7 +26,7 @@ const Register = () => {
         })
         .then(response => response.json())
         .then(response =>{
-            if(response.status == 201){
+            if(response.status === 201){
                 setIsSubmitted(true)
                 navigate('/login', {replace: true})
             }
