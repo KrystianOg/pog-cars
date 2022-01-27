@@ -7,4 +7,4 @@ export const COLORS = {
     EgyptianBlue: '#00389A',
     DarkGray: '#0D0D0D',
     White: '#fff'
-}
+} 

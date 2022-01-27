@@ -5,11 +5,8 @@ import './CarComponent.css'
 import carPng from '../../images/cars/mustang.png';
 import { Button, ButtonLink} from './CarComponents'
 
-const CarComponent = (car, days) => {
+const CarComponent = (c, days) => {
 
-    let c = new Car(12000, 200, 5, 'manual', 'AWD', 'PB', 10, 3200, 1, 2019, 0, 'A4', 'Audi');
-
-    //obliczyć tutaj cenę za okres
     let d =6;
 
     return (
@@ -25,26 +22,26 @@ const CarComponent = (car, days) => {
                 </div>
 
                 <span>
-                    <span content="Skrzynia biegów" tabindex="0">
+                    <span content="Skrzynia biegów" tabIndex="1">
                         {/* some icon */}
                         <FaCogs/>
                         {/* and description */}
                         {c.transmission === "manual" ? "M" : "A"}
                     </span>
 
-                    <span content="Ilość miejsc" tabindex="0">
+                    <span content="Ilość miejsc" tabIndex="2">
                         {/* some icon */}
 
                         {/* and description */}
                         Seats: {c.seats}
                     </span>
-                    <span content="Średnie spalanie" tabindex="0">
+                    <span content="Średnie spalanie" tabIndex="3">
                         {/* some icon */}
                         <FaGasPump/>
                         {/* and description */}
                         [l/100km]: {c.fuelConsumption}
                     </span>
-                    <span content="Napęd" tabindex="0">
+                    <span content="Napęd" tabIndex="4">
                         {/* some icon */}
 
                         {/* and description */}
@@ -53,10 +50,10 @@ const CarComponent = (car, days) => {
                 </span>
 
                 <div className="options">
-                    <span tabindex="0">
+                    <span tabindex="5">
                         <FaCheck/>Bezpłatne odwołanie rezerwacji
                     </span>
-                    <span tabindex="0">
+                    <span tabindex="6">
                         <FaCheck/>Bez limitu km
                     </span>
                 </div>
