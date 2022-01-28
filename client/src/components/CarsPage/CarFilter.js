@@ -39,7 +39,7 @@ const CarFilter = ({submit}) => {
 
             <button className="form-input-btn submit-small" type="submit">
                     Submit
-                </button>
+            </button>
         </form>
     )
 };

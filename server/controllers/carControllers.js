@@ -42,8 +42,8 @@ exports.getCarById = async (req,res,next) => {
 
 exports.reserveCar = async (req,res,next) => {
     try{
-        let {rental_begin,rental_end, agency_id} = req.body;
-        let user_id = req.session.user_id
+        let {rental_begin,rental_end, user_id, agency_id} = req.body;
+
         let car_id = req.params.id
 
         let _sql = `SELECT price, agency_id FROM cars WHERE car_id = ${car_id};`

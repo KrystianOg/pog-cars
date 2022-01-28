@@ -28,6 +28,16 @@
     margin: 8px;
 }
 
+.rent{
+    width: 20%;
+    margin: 8px;
+    border-radius: 5px;
+}
+
+h3 {
+    margin: 10px;
+}
+
 .car-form-inputs label{ 
     color: black;
     border-radius: 4px;
