@@ -12,6 +12,8 @@
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
     "module": "^1.2.5",
+    "ngx-pagination": "^5.1.1",
+    "pagination": "^0.4.6",
     "react": "^17.0.2",
     "react-bootstrap": "^2.1.1",
     "react-client-session": "^0.0.7",

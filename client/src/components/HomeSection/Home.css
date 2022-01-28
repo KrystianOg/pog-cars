@@ -1,0 +1,9 @@
+img {
+    width: 100%;
+   }
+.cat {
+    display: block;
+    margin: auto;
+    height: 425px;
+    width: 900px;
+   }
