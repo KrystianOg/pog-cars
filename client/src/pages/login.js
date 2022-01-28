@@ -8,6 +8,7 @@ import pogCars1 from '../images/pog-cars-1-white.svg';
 import { Helmet } from 'react-helmet'
 import { useNavigate } from 'react-router-dom'
 import { ReactSession } from 'react-client-session'
+import {GLOBAL} from '../config'
 
 const Login = () => {
     //something here
@@ -17,7 +18,7 @@ const Login = () => {
     
     async function submitForm(credentials){
         //call to api
-        fetch("http://192.168.0.102:5000/auth/login",{
+        fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/auth/login`,{
             "method": "POST",
             "headers": {
                 "Content-Type": "application/json",

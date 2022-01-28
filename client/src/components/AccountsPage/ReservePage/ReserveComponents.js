@@ -12,7 +12,7 @@ export const ButtonLink = styled(LinkR)`
     border-radius: 50px;
     background: ${COLORS.BlueGreen};
     white-space: nowrap;
-    padding: 12px 80px;
+    padding: 12px 35px;
     color: ${COLORS.White};
     font-size: 18px;
     outline: none;
@@ -24,3 +24,4 @@ export const ButtonLink = styled(LinkR)`
         background: ${COLORS.MagentaPantone};
     }
 `
+

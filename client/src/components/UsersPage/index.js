@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import { AccountComponent} from '../AccountsPage/AccountComponent'
 import { Container,PaginationContainer } from './usersComponents'
 import {Spinner} from 'react-bootstrap'
+import {GLOBAL} from '../../config'
 
 const UsersContainer = () =>{
     const [users, setUsers] = useState(null);
@@ -12,7 +13,7 @@ const UsersContainer = () =>{
     let amount = 32
     
     const loadUsers = () => {
-        fetch(`http://192.168.0.102:5000/users/anchor=${(page-1)*amount}&amount=${amount}`,{
+        fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/users/anchor=${(page-1)*amount}&amount=${amount}`,{
             "method": "GET",
             "headers": {
                 "Content-Type": "application/json",

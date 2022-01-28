@@ -1,8 +1,9 @@
 import React, {  useState, useEffect }  from 'react';
-import { AccountComponent } from './AccountComponent';
-import './AccountComponent.css'
+import { DiscountComponent } from './DiscountComponent';
+import './DiscountComponent.css'
 import { useNavigate } from 'react-router-dom'
 import { ReactSession } from 'react-client-session'
+import {GLOBAL} from '../../config'
 
 const DiscountContainer = () => {
 
