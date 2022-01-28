@@ -3,17 +3,21 @@ import { AccountComponent } from './AccountComponent';
 import './AccountComponent.css'
 import { useNavigate } from 'react-router-dom'
 import { ReactSession } from 'react-client-session'
+
+import {GLOBAL} from '../../config'
+
 const AccountsContainer = () => {
 
     const [user,setUser] = useState(null);
     const navigate = useNavigate();
     const [loading,isLoading] = useState(true);
 
+
     useEffect(() =>{
         // + dane o ocenach
 
         const loadUser = () => {
-            return fetch(`http://192.168.0.102:5000/users/${ReactSession.get('user_id')}`,{
+            return fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/users/${ReactSession.get('user_id')}`,{
                 "method": "GET",
                 "headers": {
                     "Content-Type": "application/json",

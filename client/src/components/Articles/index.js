@@ -2,6 +2,7 @@ import React, {  useState, useEffect } from 'react';
 import { ArticleComponent } from './ArticleComponent';
 import './ArticleComponent.css'
 import { useNavigate } from 'react-router-dom'
+import {GLOBAL} from '../../config'
 
 const ArticleContainer = () => {
     
@@ -11,7 +12,7 @@ const ArticleContainer = () => {
 
     useEffect(() =>{
         const loadUser = () => {
-            return fetch(`http://192.168.0.102:5000/articles`,{
+            return fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/articles`,{
                 "method": "GET",
                 "headers": {
                     "Content-Type": "application/json",

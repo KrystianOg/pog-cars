@@ -7,6 +7,7 @@ import '../components/Signup/SignupForm.css';
 import { Helmet } from 'react-helmet'
 import { useNavigate } from 'react-router-dom'
 import pogCars1 from '../images/pog-cars-1-white.svg';
+import {GLOBAL} from '../config'
 
 const Register = () => {
     const  [isSubmitted, setIsSubmitted] = useState(false)
@@ -15,7 +16,7 @@ const Register = () => {
     function submitForm (credentials) {
 
         //call to api
-        fetch("http://192.168.0.102:5000/auth/register",{
+        fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/auth/register`,{
             "method": "POST",
             "headers": {
                 "Content-Type": "application/json",
