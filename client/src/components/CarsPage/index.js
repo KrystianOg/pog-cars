@@ -4,6 +4,7 @@ import { CarComponent } from './CarComponent';
 import './CarComponent.css'
 import { useNavigate } from 'react-router-dom'
 import { CarFilter} from './CarFilter'
+import {GLOBAL} from '../../config'
 
 const CarsContainer = () => {
 
@@ -14,7 +15,7 @@ const CarsContainer = () => {
     function submit(values){
         console.log('SUBMITING...')
         
-        fetch(`http://192.168.0.102:5000/cars/filter`,{
+        fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/cars/filter`,{
             "method": "POST",
             "headers": {
                 "Content-Type": "application/json",
@@ -41,7 +42,7 @@ const CarsContainer = () => {
         // + dane o ocenach
 
         const loadUser = () => {
-            return fetch(`http://192.168.0.102:5000/cars`,{
+            return fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/cars`,{
                 "method": "GET",
                 "headers": {
                     "Content-Type": "application/json",
