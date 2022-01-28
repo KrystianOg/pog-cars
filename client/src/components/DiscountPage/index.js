@@ -1,18 +1,31 @@
-import React, {  useState, useEffect } from 'react';
-import './ArticleComponent.css'
-import {FaBookOpen} from 'react-icons/fa'
+import React, {  useState, useEffect }  from 'react';
+import { DiscountComponent } from './DiscountComponent';
+import './DiscountComponent.css'
 import { useNavigate } from 'react-router-dom'
+import { ReactSession } from 'react-client-session'
 import {GLOBAL} from '../../config'
 
-const ArticleComponent = ({article}) => {
+const DiscountContainer = () => {
 
-    const [creator,setCreator] = useState(null);
+    return (
+        <div className="data">
+            {/* automatyzacja tego */}
+            <DiscountComponent/>
+        </div>
+    )
+
+    //zostawilem to zakomentowane, bo ja jestem zbyt duzym betonem, zeby to zaimplementowac
+    /*
+    const [user,setUser] = useState(null);
     const navigate = useNavigate();
     const [loading,isLoading] = useState(true);
 
     useEffect(() =>{
+        // + dane o ocenach
+
+        
         const loadUser = () => {
-            return fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/articles`,{
+            return fetch(`http://192.168.0.102:5000/users/${ReactSession.get('user_id')}`,{
                 "method": "GET",
                 "headers": {
                     "Content-Type": "application/json",
@@ -26,7 +39,7 @@ const ArticleComponent = ({article}) => {
                     navigate('/', {replace: true})
                 } else {
                     response = await response.json()
-                    setCreator(response)
+                    setUser(response[0])
                     isLoading(false)
                 }
             })
@@ -35,27 +48,15 @@ const ArticleComponent = ({article}) => {
         loadUser()
     },[])
 
-
     return (
-        <>
-        {!loading ?
-        <div className="article-container">
-            
-            <div className="article-info">
-                
-                <div className="article-header">
-                
-                    <h3> <FaBookOpen/> Autor: {creator[0].firstname} {creator[0].lastname}</h3>
-                    <h5>Tytuł: {article.title}</h5>
-                </div>
-            </div>
-            <div className="article-content">
-            
-                {article.content}
-            </div>
-        </div>: null}
-        </>
+        <div className="data">
+            { automatyzacja tego }
+            {!loading ?
+            <DiscountComponent account={user}/> : null }
+            { jakiś footer }
+        </div>
     )
+    */
 };
 
-export {ArticleComponent}
+export {DiscountContainer}

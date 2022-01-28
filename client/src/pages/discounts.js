@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import Sidebar from '../components/Sidebar/index';
 import Navbar from '../components/Navbar/index';
 import { Helmet } from 'react-helmet'
+import { DiscountContainer } from '../components/DiscountPage/index';
 
 const Discounts = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -18,6 +19,7 @@ const Discounts = () => {
             </Helmet>
             <Sidebar isOpen={isOpen} toggle={toggle}/>
             <Navbar toggle={toggle}/>
+            <DiscountContainer/>
         </>
     )
 };
