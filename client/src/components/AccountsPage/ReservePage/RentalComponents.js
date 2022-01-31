@@ -17,7 +17,6 @@ const RentalComponents = (params) => {
     let agency_id 
     let car_rev //(by id)
     
-
     return (
         <tr>
         <td width="25">{params.model}</td>

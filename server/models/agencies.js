@@ -95,7 +95,6 @@ class Agency{
     // pamietac o przesunieciu aut z tej agencji
     static removeAgencyById(id){
         let sql = `UPDATE agencies SET deleted = 1 WHERE agency_id=${id}`;
-
         return db.execute(sql);
     }
 

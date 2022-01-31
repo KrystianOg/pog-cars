@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { COLORS } from '../../colors'
 import { Link as LinkR } from 'react-router-dom'
+import {Button as MButton} from '@mui/material';
 
 export const Button = styled.nav`
     display: flex;
@@ -23,4 +24,14 @@ export const ButtonLink = styled(LinkR)`
     &:hover {
         background: ${COLORS.MagentaPantone};
     }
+`
+
+export const StarsContainer = styled.div`
+    display: grid;
+`
+
+export const CarImage = styled.img`
+    width: 80%;
+    height: 80%;
+    display: block;
 `

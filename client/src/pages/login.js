@@ -28,7 +28,6 @@ const Login = () => {
             "body": JSON.stringify(credentials)
         })
         .then(async response =>{
-            //let [user_id,type]= await response.data
             if(response.status !== 200){
                 throw new Error("Wrong email or password")
             } else {

@@ -2,6 +2,7 @@ const express = require('express');
 const agencyControllers = require('../controllers/agencyControllers')
 const router = express.Router();
 
+//router.use(validator)
 //@route GET && POST /cars
 router.route("/").get(agencyControllers.getAllAgencies).post(agencyControllers.addNewAgency);
 router.route("/getnd").get(agencyControllers.getNotDeletedAgencies);
