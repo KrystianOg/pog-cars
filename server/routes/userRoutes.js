@@ -7,6 +7,8 @@ const router = express.Router();
 
 router.get('/', userControllers.getAllUsers);
 
+router.get('/employees', userControllers.getAllEmployees);
+
 router.get('/anchor=:anchor&amount=:amount', userControllers.getUsersWithAnchor);
 
 router.route("/:id").get(userControllers.getUserById);

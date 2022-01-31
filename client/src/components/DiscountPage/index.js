@@ -57,6 +57,6 @@ const DiscountContainer = () => {
         </div>
     )
     */
-};
+}; 
 
 export {DiscountContainer}

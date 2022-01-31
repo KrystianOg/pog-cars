@@ -33,7 +33,7 @@ render(
       <Route path="account" element={<Account/>}/>
       <Route path="account/changedata" element={<Changedata/>}/>
       <Route path="account/resetpassword" element={<Resetpassword/>}/>
-      <Route path="reserve" element={<Reserve/>}/>
+      <Route path="account/reserve" element={<Reserve/>}/>
       <Route path="employees" element={<Employees/>}/>
       <Route path="FAQ" element={<FAQ/>}/>
       <Route path="*" element={

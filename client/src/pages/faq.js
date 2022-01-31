@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Sidebar from '../components/Sidebar/index';
 import Navbar from '../components/Navbar/index';
 import { Helmet } from 'react-helmet'
-import FAQContainer from '../components/FAQPage/index';
+import { FAQContainer } from '../components/FAQPage/index';
 
 const FAQ = () => {
     const [isOpen, setIsOpen] = useState(false)

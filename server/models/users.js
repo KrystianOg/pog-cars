@@ -43,6 +43,13 @@ class User{
         return db.execute(sql);
     }
 
+       // filters
+       static findEmployees(){
+        let sql = "SELECT user_id, firstname, lastname, birth_date, username, email, type, deleted FROM users WHERE type='AGENT';"
+
+        return db.execute(sql);
+    }
+
     static findById(id){
         let sql = `SELECT user_id, firstname, lastname, birth_date, username, email, type, deleted FROM users WHERE user_id=${id}`;
 
