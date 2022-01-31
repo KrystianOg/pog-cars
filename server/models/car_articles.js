@@ -31,7 +31,6 @@ class Car_article{
         return db.execute(sql);
     }
 
-
     static findById(id){
         let sql = `SELECT * FROM car_articles WHERE car_article_id=${id}`;
 

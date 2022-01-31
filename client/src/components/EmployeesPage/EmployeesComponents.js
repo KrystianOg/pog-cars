@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { COLORS } from '../../../colors'
+import { COLORS } from '../../colors'
 import { Link as LinkR } from 'react-router-dom'
 
 export const Button = styled.nav`
@@ -12,7 +12,7 @@ export const ButtonLink = styled(LinkR)`
     border-radius: 50px;
     background: ${COLORS.BlueGreen};
     white-space: nowrap;
-    padding: 12px 35px;
+    padding: 12px 80px;
     color: ${COLORS.White};
     font-size: 18px;
     outline: none;
@@ -24,4 +24,3 @@ export const ButtonLink = styled(LinkR)`
         background: ${COLORS.MagentaPantone};
     }
 `
-

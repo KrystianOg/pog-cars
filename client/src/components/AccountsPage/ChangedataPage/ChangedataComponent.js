@@ -4,6 +4,7 @@ import Account from '../../../models/account';
 import './ChangedataComponent.css'
 import { Button, ButtonLink} from './ChangedataComponents'
 
+
 const ChangedataComponent = (account, days) => {
 
     let a = new Account('Anna', 'Stawska', '05.06.1976', 'anna1976', 'poczta@jakas.tam', 'klient', false, 'aaaaa', 'a&7gv6H{g4');

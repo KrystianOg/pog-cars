@@ -14,6 +14,8 @@ import Users from './pages/users'
 import Changedata from './pages/changedata'
 import Resetpassword from './pages/resetpassword'
 import Reserve from './pages/reserve'
+import Employees from './pages/employees'
+import FAQ from './pages/faq'
 
 
 ReactSession.setStoreType("localStorage")
@@ -31,7 +33,9 @@ render(
       <Route path="account" element={<Account/>}/>
       <Route path="account/changedata" element={<Changedata/>}/>
       <Route path="account/resetpassword" element={<Resetpassword/>}/>
-      <Route path="reserve" element={<Reserve/>}/>
+      <Route path="account/reserve" element={<Reserve/>}/>
+      <Route path="employees" element={<Employees/>}/>
+      <Route path="FAQ" element={<FAQ/>}/>
       <Route path="*" element={
         <main style={{ padding: "1rem" }}>
           <p>There's nothing here!</p>

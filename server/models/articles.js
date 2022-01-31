@@ -32,6 +32,12 @@ class Article{
         return db.execute(sql);
     }
 
+    static findNotDeleted(){
+        let sql = "SELECT * FROM articles WHERE deleted='0';"
+
+        return db.execute(sql);
+    }
+
     static findById(id){
         let sql = `SELECT * FROM articles WHERE article_id=${id}`;
 

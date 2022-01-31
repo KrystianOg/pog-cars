@@ -11,6 +11,26 @@ exports.getAllUsers = async (req,res,next) => {
     }
 }
 
+exports.getAllEmployees = async (req,res,next) => {
+    try{
+        let [users,_] = await User.findEmployees();
+        res.status(200).json(users);
+    }  catch(err){
+        console.log(err)
+        next(err);
+    }
+}
+
+exports.getNotDeleted = async (req,res,next) => {
+    try{
+        let [users,_] = await User.findNotDeleted();
+        res.status(200).json(users);
+    }  catch(err){
+        console.log(err)
+        next(err);
+    }
+}
+
 exports.getUsersWithAnchor = async (req,res,next) => {
     try{
         let anchor = req.params.anchor

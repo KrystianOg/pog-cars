@@ -6,6 +6,7 @@ import accountJpg from '../../images/account/profilepicture.jpg';
 import { Button, ButtonLink} from './AccountComponents'
 import { ReactSession } from 'react-client-session'
 
+
 import { faUser }  from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 

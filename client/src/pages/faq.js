@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import Sidebar from '../components/Sidebar/index';
 import Navbar from '../components/Navbar/index';
 import { Helmet } from 'react-helmet'
-import { DiscountContainer } from '../components/DiscountPage/index';
+import { FAQContainer } from '../components/FAQPage/index';
 
-const Discounts = () => {
+const FAQ = () => {
     const [isOpen, setIsOpen] = useState(false)
 
     const toggle = () => {
@@ -12,16 +12,17 @@ const Discounts = () => {
     }
 
     return (
-        <>            
+        <>
             <Helmet>
-                <title>PogCars | Discounts</title>
+                <title>PogCars | FQ</title>
                 <link rel="icon" type="image/png" href="favicon.ico" sizes="16x16"/>
             </Helmet>
+            
             <Sidebar isOpen={isOpen} toggle={toggle}/>
             <Navbar toggle={toggle}/>
-            <DiscountContainer/>
+            <FAQContainer/>
         </>
     )
 };
 
-export default Discounts;
+export default FAQ;

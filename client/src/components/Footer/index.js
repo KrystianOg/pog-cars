@@ -26,8 +26,9 @@ const Footer = () => {
                         <FooterLinkItems>
                             <FooterLinkTitle> About us </FooterLinkTitle>
                                 <FooterLink to="/contact">Kontakt</FooterLink>
+                                <FooterLink to="/employees">Pracownicy</FooterLink>
                                 <FooterLink to="/articles">Artykuły</FooterLink>
-                                <FooterLink to="/signin">FAQ</FooterLink>
+                                <FooterLink to="/FAQ">FAQ</FooterLink>
                                 <FooterLink to="/signin">About us</FooterLink>
                         </FooterLinkItems>
                     </FooterLinksWrapper>
