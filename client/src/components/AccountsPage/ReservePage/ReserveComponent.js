@@ -1,13 +1,49 @@
-import React from 'react';
-import {FaCogs, FaTachometerAlt, FaGasPump, FaCheck} from 'react-icons/fa'
-import Account from '../../../models/account'
+import React, {useState, useEffect} from 'react';
 import './ReserveComponent.css'
+import { useNavigate } from 'react-router-dom'
 import { Button, ButtonLink} from './ReserveComponents'
+import RentalComponent from './RentalComponents'
+import {GLOBAL} from '../../../config'
+import { ReactSession } from 'react-client-session';
 
-const ReserveComponent = (account, days) => {
+const ReserveComponent = (params) => {
 
-    let a = new Account('Anna', 'Stawska', '05.06.1976', 'anna1976', 'poczta@jakas.tam', 'klient', false, 'aaaaa', 'a&7gv6H{g4');
+    const [cars,setCars] = useState(null)
+    const [agencies,setAgency] = useState(null)
+    const [ratings,setRating] = useState(null)
 
+    const navigate = useNavigate();
+    const [loading,isLoading] = useState(true);
+
+    let p = params
+
+    useEffect(() =>{
+        // + dane o ocenach
+
+        const loadCars = () => {
+            return fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/rental_history/user=${ReactSession.get(params.user_id)}`,{
+                "method": "GET",
+                "headers": {
+                    "Content-Type": "application/json",
+                    "Accept": "application/json",
+                    "Access-Control-Allow-Origin": "no-cors"
+                }, "body": JSON.stringify({ user_id : ReactSession.get('user_id')})
+            })
+            .then(async response =>{
+                //let [user_id,type]= await response.data
+                if(response.status !== 200){
+                    navigate('/', {replace: true})
+                } else {
+                    response = await response.json()
+                    setCars(response)
+                    isLoading(false)
+                }
+            })
+            .catch(err => console.log(err))
+        }
+        
+        loadCars()
+    },[])
 
     return (
         <div className="reserve-container">

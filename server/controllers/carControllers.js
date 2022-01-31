@@ -1,6 +1,8 @@
 const Car = require('../models/cars');
 const db = require('../config/db')
 
+const checkAuth = require('./auth').checkAuth;
+
 exports.getAllCars = async (req,res,next) => {
     try{
         let [cars,_] = await Car.findAll();
@@ -13,13 +15,14 @@ exports.getAllCars = async (req,res,next) => {
 
 exports.addNewCar = async (req,res,next) => {
     try{
+        console.log(req.body)
 
-        if(req.session.user_type =='ADMIN' || req.session.user_type == 'AGENT'){
+        if(checkAuth(req.body.user_id,'AGENT')){
             //extracting parameters from request body
-            let {mileage, horsepower, seats, transmission, drivetrain, fuel, fuel_consumption, price, agency_id, year,deleted,model,make} = req.body;
+            let {mileage, horsepower, seats, transmission, drivetrain, fuel, fuel_consumption, price, agency_id, year, deleted, model, make} = req.body.car;
             let car = new Car(mileage, horsepower, seats, transmission, drivetrain, fuel, fuel_consumption, price, agency_id, year,deleted,model,make)
 
-            car= await car.save();
+            await car.save();
             res.status(201).json({message:"Car added successfully"});
         } else {
             res.status(401).json({message:"Unauthorized"});
@@ -42,8 +45,8 @@ exports.getCarById = async (req,res,next) => {
 
 exports.reserveCar = async (req,res,next) => {
     try{
-        let {rental_begin,rental_end, agency_id} = req.body;
-        let user_id = req.session.user_id
+        let {rental_begin,rental_end, user_id, agency_id} = req.body;
+
         let car_id = req.params.id
 
         let _sql = `SELECT price, agency_id FROM cars WHERE car_id = ${car_id};`
@@ -59,7 +62,7 @@ exports.reserveCar = async (req,res,next) => {
 
 exports.removeCarById = async (req,res,next) => {
     try{
-        if(req.session.user_type == 'ADMIN' || req.session.user_type == 'AGENT'){
+        if(checkAuth('AGENT','AGENT')){
             await Car.deleteCarById(req.params.id);
             res.status(204).json({message:"Car removed successfully"});
         } else {

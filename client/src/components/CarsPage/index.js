@@ -1,5 +1,4 @@
 import React, {  useState, useEffect } from 'react';
-import Car from '../../models/car'
 import { CarComponent } from './CarComponent';
 import './CarComponent.css'
 import { useNavigate } from 'react-router-dom'
@@ -67,7 +66,9 @@ const CarsContainer = () => {
 
     return (
         <>
-            <CarFilter submit={submit}/>
+            <>
+                <CarFilter submit={submit}/>
+            </>
             {!loading ?
             <div className="offers">
                 {/* automatyzacja tego */}

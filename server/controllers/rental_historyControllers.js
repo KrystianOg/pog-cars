@@ -1,10 +1,10 @@
 const Rental_history = require('../models/rental_history');
+const Auth = require('./auth');
 
 exports.getAllRentalHistory = async (req,res,next) => {
     
-
     try{
-        if(req.session.user_type =='ADMIN'||req.session.user_type == 'AGENT'){
+        if(await Auth.checkAuth(req.body.user_id,'AGENT')){
             let [rental_history,_] = await Rental_history.findAll();
             res.status(200).json(rental_history);
         } else {
@@ -18,7 +18,8 @@ exports.getAllRentalHistory = async (req,res,next) => {
 
 exports.getRentalHistoryById = async (req,res,next) => {
     try{
-        if(req.session.user_type =='ADMIN'||req.session.user_type == 'AGENT'){
+
+        if(await Auth.checkAuth(req.body.user_id,'AGENT')){
             let [rental_history,_] = await Rental_history.findById(req.params.id)
             res.status(200).json(rental_history);
         } else {
@@ -32,10 +33,8 @@ exports.getRentalHistoryById = async (req,res,next) => {
 
 exports.getRentalHistoryByUserId = async (req,res,next) => {
     //check requirements
-    let user_id = req.params.id
-
     try{
-        if(req.session.user_type =='ADMIN'||req.session.user_type == 'AGENT'||user_id == req.session.user_id){
+        if(await Auth.checkAuth(req.body.user_id,'AGENT')||req.body.user_id === req.params.id){
             let [rental_history,_] = await Rental_history.findByUserId(req.params.id)
             res.status(200).json(rental_history);
         } else {

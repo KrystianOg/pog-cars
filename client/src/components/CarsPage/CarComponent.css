@@ -28,6 +28,10 @@
     margin: 8px;
 }
 
+.top-right {
+    margin-right: auto;
+}
+
 .car-form-inputs label{ 
     color: black;
     border-radius: 4px;
@@ -62,12 +66,6 @@
     width: 70%;
 }
 
-.image img{ 
-    width: 80%;
-    display: block;
-    margin: auto;
-}
-
 .car-info span{ 
     justify-content: space-between;
     flex-wrap: wrap;
@@ -89,19 +87,4 @@
     direction: rtl;
     flex-direction: column;
     justify-content: flex-end;
-}
-
-.offers{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    row-gap: 0.2em;
-    column-gap: 0.2em;
-}
-
-.submit-small{
-    width: 4.5rem;
-    height: 3.5rem;
-    margin: 10px;
-    border-radius: 25%;
 }
