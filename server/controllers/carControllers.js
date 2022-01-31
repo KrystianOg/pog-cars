@@ -62,8 +62,8 @@ exports.reserveCar = async (req,res,next) => {
 
 exports.removeCarById = async (req,res,next) => {
     try{
-        if(checkAuth('AGENT','AGENT')){
-            await Car.deleteCarById(req.params.id);
+        if(checkAuth('AGENT','AGENT')){ 
+            await Car.deleteCarById(req.params.id); 
             res.status(204).json({message:"Car removed successfully"});
         } else {
             res.status(401).json({message:"Unauthorized"});

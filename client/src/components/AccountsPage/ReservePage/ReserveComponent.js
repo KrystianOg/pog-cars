@@ -82,7 +82,7 @@ const ReserveComponent = (params) => {
 
             <table>
             <tr>
-            <th colspan="8">Aktualne wypożyczenia</th>
+            <th colspan="8">Nieaktualne wypożyczenia</th>
             </tr>
             <tr>
                 <th WIDTH="150">model</th>

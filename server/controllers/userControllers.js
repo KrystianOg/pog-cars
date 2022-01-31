@@ -95,6 +95,27 @@ exports.rateAgent = async (req,res,next) => {
 
 exports.deleteUser = async (req,res,next) => {
     try{
+        console.log(req.body)
+
+        if(checkAuth(req.body.user_id,'AGENT')){
+            //extracting parameters from request body
+            let {mileage, horsepower, seats, transmission, drivetrain, fuel, fuel_consumption, price, agency_id, year, deleted, model, make} = req.body.car;
+            await User.deleteUser(req.body.car.user_id)
+            res.status(200).json({message:"User removed successfully"});
+        } else {
+            res.status(403).json({message:"Unauthorized"});
+        }
+    } catch(err){
+        console.log(err)
+        next(err); 
+    }
+}
+
+/*
+//sprawdzic na front endzie - przeslac user id i sprawdzic typ (czy admin, czy klient, czy user) - najczesciej w body
+//jak w carsach
+exports.deleteUser = async (req,res,next) => {
+    try{
         switch(rew.session.user_type){
             case 'ADMIN':
                 let [rows,_] = await db.execute(`SELECT COUNT(*) AS count FROM users WHERE type='ADMIN';`);
@@ -118,3 +139,7 @@ exports.deleteUser = async (req,res,next) => {
         next(err);
     }
 }
+*/
+//robic jak w add new car
+//1 param id uzytkownika, drugi jakie powinno byc
+//jak z body to req.body.id
