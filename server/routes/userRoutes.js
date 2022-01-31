@@ -5,7 +5,7 @@ const router = express.Router();
 //@route GET && POST /cars
 //router.route("/").get(userControllers.getAllUsers).post(userControllers.addNewUser);
 
-router.get('/', userControllers.getAllUsers);
+router.get('/', userControllers.getNotDeleted);
 
 router.get('/employees', userControllers.getAllEmployees);
 

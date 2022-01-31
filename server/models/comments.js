@@ -38,6 +38,7 @@ class Comment{
 
         return db.execute(sql);
     }
+    
 
     static findByArticleId(id){
         let sql = `SELECT * FROM comments WHERE article_id=${id} AND deleted = 0;`;
