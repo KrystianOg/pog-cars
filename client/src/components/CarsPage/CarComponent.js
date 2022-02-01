@@ -13,7 +13,6 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider'
 import Rating from '@mui/material/Rating';
 import { useNavigate } from 'react-router-dom'
 import DesktopDatePicker from '@mui/lab/DesktopDatePicker'
-
 import dateFormat from 'dateformat'
 
 const CarComponent = (props) => {
@@ -113,104 +112,106 @@ const CarComponent = (props) => {
 
     const classes = useStyles();
     return (
-        <div className="car-container">
-            <Rating name="read-only" value={rating} readOnly defaultValue={5.0} precision={0.2}/>
+        <>
+            {!props.car.deleted || ReactSession.get('type') === 'AGENT' || ReactSession.get('type') === 'ADMIN' ? <div className="car-container">
+                <Rating name="read-only" value={rating} readOnly defaultValue={5.0} precision={0.2}/>
 
-                { (ReactSession.get('type') === 'ADMIN' || ReactSession.get('type') === 'AGENT') && !props.car.deleted && props.car.car_id !== undefined?
-                    <>
-                        {!discount && !del &&
-                            <Box sx={{display: 'grid', gap: 1, gridTemplateColumns: 'repeat(2,1fr)'}}>
-                                <MButton variant="outlined" onClick={() => {setDelete(true); setDeleteCode(makeid(6))}} className={classes.root}>Delete</MButton>
-                                <MButton variant="outlined" onClick={()=>{setDiscount(true); setDiscountCode(makeid(6))}} className={classes.root}>Add discount</MButton>
-                            </Box>
-                        }
+                    { (ReactSession.get('type') === 'ADMIN' || ReactSession.get('type') === 'AGENT') && !props.car.deleted && props.car.car_id !== undefined?
+                        <>
+                            {!discount && !del &&
+                                <Box sx={{display: 'grid', gap: 1, gridTemplateColumns: 'repeat(2,1fr)'}}>
+                                    <MButton variant="outlined" onClick={() => {setDelete(true); setDeleteCode(makeid(6))}} className={classes.root}>Delete</MButton>
+                                    <MButton variant="outlined" onClick={()=>{setDiscount(true); setDiscountCode(makeid(6))}} className={classes.root}>Add discount</MButton>
+                                </Box>
+                            }
 
-                        { del &&
-                            <Box sx={{display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1,1fr)'}}>
-                                Confirm delete by typing: {delCode}
-                                <MTextField label="Code" onChange={(e) => deleteCar(e)} style={{width: '180px', margin: '8px auto'}}/>
-                                <MButton variant="outlined" onClick={()=>{setDelete(false)}} className={classes.root}>Cancel</MButton>
-                            </Box>
-                        }
+                            { del &&
+                                <Box sx={{display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1,1fr)'}}>
+                                    Confirm delete by typing: {delCode}
+                                    <MTextField label="Code" onChange={(e) => deleteCar(e)} style={{width: '180px', margin: '8px auto'}}/>
+                                    <MButton variant="outlined" onClick={()=>{setDelete(false)}} className={classes.root}>Cancel</MButton>
+                                </Box>
+                            }
 
-                        { discount &&
-                            <Box sx={{display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1,1fr)'}}>
+                            { discount &&
+                                <Box sx={{display: 'grid', gap: 1, gridTemplateColumns: 'repeat(1,1fr)'}}>
 
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DesktopDatePicker label="Data wygaśnięcia" value={expiration} inputFormat="dd/MM/yyyy" onChange={(newDate)=>{setDate(newDate)}} renderInput={(params)=><MTextField {...params}/>}/>
-                                </LocalizationProvider>
-                                <Slider valueLabelDisplay="auto" aria-label="Zniżka [%]" defaultValue={discountAmount} min={1} max={30} onChange={(e, newAmount)=>{setAmount(newAmount)}}/>
-                                <h2>Confirm add by typing: {discountCode}</h2>
-                                <MTextField label="Code" onChange={(e) => addDiscount(e)} style={{width: '180px', margin: '8px auto'}}/>
+                                    <LocalizationProvider dateAdapter={AdapterDateFns}>
+                                        <DesktopDatePicker label="Data wygaśnięcia" value={expiration} inputFormat="dd/MM/yyyy" onChange={(newDate)=>{setDate(newDate)}} renderInput={(params)=><MTextField {...params}/>}/>
+                                    </LocalizationProvider>
+                                    <Slider valueLabelDisplay="auto" aria-label="Zniżka [%]" defaultValue={discountAmount} min={1} max={30} onChange={(e, newAmount)=>{setAmount(newAmount)}}/>
+                                    <h2>Confirm add by typing: {discountCode}</h2>
+                                    <MTextField label="Code" onChange={(e) => addDiscount(e)} style={{width: '180px', margin: '8px auto'}}/>
 
-                                <MButton variant="outlined" onClick={()=>{setDelete(false)}} className={classes.root}>Cancel</MButton>
-                            </Box>
-                        }
-                    </> : null}
-                
-            {/* tutaj zaimportowane zdjęcie */}
-            <CarImage src = {carPng} alt="car"/>
+                                    <MButton variant="outlined" onClick={()=>{setDelete(false)}} className={classes.root}>Cancel</MButton>
+                                </Box>
+                            }
+                        </> : null}
+                    
+                {/* tutaj zaimportowane zdjęcie */}
+                <CarImage src = {carPng} alt="car"/>
 
-            <div className="car-info">
-                <div>
-                    <h2>{props.car.make} {props.car.model} {props.car.deleted === 1 ? <>[DELETED]</> : null}</h2>
-                    <h5>Rok produkcji: {props.car.year}</h5>
-                </div>
+                <div className="car-info">
+                    <div>
+                        <h2>{props.car.make} {props.car.model} {props.car.deleted === 1 ? <>[DELETED]</> : null}</h2>
+                        <h5>Rok produkcji: {props.car.year}</h5>
+                    </div>
 
-                <span>
-                    <span content="Skrzynia biegów" >
-                        {/* some icon */}
-                        <FaCogs/>
-                        {/* and description */}
-                        {props.car.transmission === "manual" ? "M" : "A"}
-                    </span>
-
-                    <span content="Ilość miejsc">
-                        {/* some icon */}
-
-                        {/* and description */}
-                        Seats: {props.car.seats}
-                    </span>
-                    <span content="Średnie spalanie" >
-                        {/* some icon */}
-                        <FaGasPump/>
-                        {/* and description */}
-                        [l/100km]: {props.car.fuelConsumption}
-                    </span>
-                    <span content="Napęd" >
-                        {/* some icon */}
-
-                        {/* and description */}
-                        Napęd: {props.car.drivetrain}
-                    </span>
-                </span>
-
-                <div className="options">
                     <span>
-                        <FaCheck/>Bezpłatne odwołanie rezerwacji
+                        <span content="Skrzynia biegów" >
+                            {/* some icon */}
+                            <FaCogs/>
+                            {/* and description */}
+                            {props.car.transmission === "manual" ? "M" : "A"}
+                        </span>
+
+                        <span content="Ilość miejsc">
+                            {/* some icon */}
+
+                            {/* and description */}
+                            Seats: {props.car.seats}
+                        </span>
+                        <span content="Średnie spalanie" >
+                            {/* some icon */}
+                            <FaGasPump/>
+                            {/* and description */}
+                            [l/100km]: {props.car.fuelConsumption}
+                        </span>
+                        <span content="Napęd" >
+                            {/* some icon */}
+
+                            {/* and description */}
+                            Napęd: {props.car.drivetrain}
+                        </span>
                     </span>
-                    <span >
-                        <FaCheck/>Bez limitu km
-                    </span>
+
+                    <div className="options">
+                        <span>
+                            <FaCheck/>Bezpłatne odwołanie rezerwacji
+                        </span>
+                        <span >
+                            <FaCheck/>Bez limitu km
+                        </span>
+                    </div>
+
+                    <div className="price">
+                        {props.discount !== 0 ? <h1>{Math.round((props.car.price)*(100-props.discount)/100/30*props.days)} PLN</h1> : null}
+                        {props.discount === 0 ? <h1>{Math.round(props.car.price/30*props.days)} PLN</h1> :
+                            <h2><s>{Math.round(props.car.price/30*props.days)} PLN</s></h2>}
+                        <h3> cena za {props.days} dni</h3>
+                        <h5>Opłata przygotowawcza +29 PLN</h5>
+                        <h5>Wydanie pojazdu poza godzinami pracy +39 PLN</h5>
+                    </div>
                 </div>
 
-                <div className="price">
-                    {props.discount !== 0 ? <h1>{Math.round((props.car.price)*(100-props.discount)/100/30*props.days)} PLN</h1> : null}
-                    {props.discount === 0 ? <h1>{Math.round(props.car.price/30*props.days)} PLN</h1> :
-                        <h2><s>{Math.round(props.car.price/30*props.days)} PLN</s></h2>}
-                    <h3> cena za {props.days} dni</h3>
-                    <h5>Opłata przygotowawcza +29 PLN</h5>
-                    <h5>Wydanie pojazdu poza godzinami pracy +39 PLN</h5>
-                </div>
-            </div>
+                {/* zrobić ładniejszy troche ten przycisk */}
+                {!rent && !props.car.deleted && props.renderRent ?
+                    <MButton variant="outlined" sx={{margin: '10px', width: 120}} onClick={rentCar} className={classes.root}>RENT</MButton> :
+                    null
+                }
 
-            {/* zrobić ładniejszy troche ten przycisk */}
-            {!rent && !props.car.deleted && props.renderRent ?
-                <MButton variant="outlined" sx={{margin: '10px', width: 120}} onClick={rentCar} className={classes.root}>RENT</MButton> :
-                null
-            }
-
-        </div>
+            </div> : null }
+        </>
     )
 };
 

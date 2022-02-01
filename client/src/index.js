@@ -44,7 +44,7 @@ render(
       <Route path="employees" element={<Employees/>}/>
       <Route path="FAQ" element={<FAQ/>}/>
       <Route path="*" element={
-        <main style={{ padding: "1rem" }}>
+        <main style={{ padding: "1rem"}}>
           <p>There's nothing here!</p>
         </main>
       } />

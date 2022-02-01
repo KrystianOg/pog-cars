@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom'
 import { Button, ButtonLink} from './ReserveComponents'
 
-const RentalComponents = (params) => {
+const RentalComponents = (props) => {
 
     const [car,setCar] = useState(null)
     const [agency,setAgency] = useState(null)
@@ -19,15 +19,15 @@ const RentalComponents = (params) => {
     
     return (
         <tr>
-        <td width="25">{params.model}</td>
-        <td width="200">{params.cena}</td>
-        <td width="150">{params.miasto}</td>
-        <td width="300">{params.begin}</td>
-        <td width="300">{params.end}</td>
-        <td width="300">{params.ocena}</td>
-        <td width="300">{params.twojaocena}</td>
+        <td width="25">{props.model}</td>
+        <td width="200">{props.cena}</td>
+        <td width="150">{props.miasto}</td>
+        <td width="300">{props.begin}</td>
+        <td width="300">{props.end}</td>
+        <td width="300">{props.ocena}</td>
+        <td width="300">{props.twojaocena}</td>
         
-        {params.added ? <Button><ButtonLink to='/account'>Dodaj ocenę</ButtonLink></Button> : null}
+        {props.added ? <Button><ButtonLink to='/account'>Dodaj ocenę</ButtonLink></Button> : null}
     </tr>
     )
 };

@@ -70,14 +70,14 @@ const EmployeesComponent = (props) => {
         <div classname="employees-container">
             <table>
             <tr>
-            <th WIDTH="50">{props.employees.user_id}</th>
-            <th WIDTH="100">{props.employees.firstname}</th>
-            <th WIDTH="150">{props.employees.lastname}</th>
-            <th WIDTH="100">{props.employees.username}</th>
-            <th WIDTH="150">{props.employees.email}</th>
-            <th WIDTH="50">{props.employees.type}</th>
-            <th WIDTH="150">Twoja ocena pracownika</th>
-            <th WIDTH="150">ocena klientów</th>
+            <th width="50">{props.employees.user_id}</th>
+            <th width="100">{props.employees.firstname}</th>
+            <th width="150">{props.employees.lastname}</th>
+            <th width="100">{props.employees.username}</th>
+            <th width="250">{props.employees.email}</th>
+            <th width="50">{props.employees.type}</th>
+            <th width="150">Twoja ocena pracownika</th>
+            <th width="150">ocena klientów</th>
             
             <Button>
                 <MButton type="submit" onClick={()=>deleteEmployee()}>Usuń użytkownika</MButton>

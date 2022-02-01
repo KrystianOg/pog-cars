@@ -9,15 +9,17 @@ const EmployeesHeader = () => {
         <form className="table">
             <table>
             <tr>
-            <th colspan="5">Nasi pracownicy</th>
+                <th colspan="8">Nasi pracownicy</th>
             </tr>
             <tr>
             <th WIDTH="150">imię</th>
-            <th WIDTH="200">nazwisko</th>
-            <th WIDTH="150">nazwa użytkownika</th>
+            <th WIDTH="150">Nazwisko</th>
+            <th WIDTH="100">nazwa użytkownika</th>
             <th WIDTH="250">adres email</th>
-            <th WIDTH="250">Twoja ocena pracownika</th>
-            <th WIDTH="250">ocena klientów</th>
+            <th width="50">typ</th>
+            <th WIDTH="150">Twoja ocena pracownika</th>
+            <th WIDTH="150">ocena klientów</th>
+            <th width="480">opcje</th>
             </tr>
             </table>
         </form>
