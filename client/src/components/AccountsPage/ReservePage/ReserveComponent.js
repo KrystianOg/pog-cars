@@ -15,8 +15,7 @@ const ReserveComponent = (params) => {
     const navigate = useNavigate();
     const [loading,isLoading] = useState(true);
 
-    let p = params
-    getDate = 
+    //getDate = 
 
     useEffect(() =>{
         // + dane o ocenach

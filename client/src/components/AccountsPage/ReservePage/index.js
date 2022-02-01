@@ -17,8 +17,7 @@ const ReserveContainer = () => {
     var d = new Date();
 
     useEffect(() =>{
-    const loadreservehistorycurrent = () => {
-        return fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/users/reserve/current/user=${ReactSession.get('user_id', d)}`,{
+        fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/users/reserve/current/user=${ReactSession.get('user_id', d)}`,{
             "method": "GET",
             "headers": {
                 "Content-Type": "application/json",
@@ -37,34 +36,29 @@ const ReserveContainer = () => {
             }
         })
         .catch(err => console.log(err))
-    }
-    loadreservehistorycurrent()
     },[])
 
     useEffect(() =>{
-        const loadreservehistoryold = () => {
-            return fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/users/reserve/old/user=${ReactSession.get('user_id', d)}`,{
-                "method": "GET",
-                "headers": {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "Access-Control-Allow-Origin": "no-cors"
-                }
-            })
-            .then(async response =>{
-                //let [user_id,type]= await response.data
-                if(response.status !== 200){
-                    navigate('/', {replace: true})
-                } else {
-                    response = await response.json()
-                    setreservehistory(response)
-                    isLoading(false)
-                }
-            })
-            .catch(err => console.log(err))
-        }
-        loadreservehistorycurrent()
-        },[])
+        fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/users/reserve/old/user=${ReactSession.get('user_id', d)}`,{
+            "method": "GET",
+            "headers": {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Access-Control-Allow-Origin": "no-cors"
+            }
+        })
+        .then(async response =>{
+            //let [user_id,type]= await response.data
+            if(response.status !== 200){
+                navigate('/', {replace: true})
+            } else {
+                response = await response.json()
+                setreservehistory(response)
+                isLoading(false)
+            }
+        })
+        .catch(err => console.log(err))
+    },[])
 
     return (
         <div className="reservehistory">
