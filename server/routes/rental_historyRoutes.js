@@ -11,4 +11,10 @@ router.route("/user=:id").get(rental_historyControllers.getRentalHistoryByUserId
 
 router.route("/car=:car").get(rental_historyControllers.getRentalHistoryByCarId)
 
+//current
+router.route("/current/user=:id/:d").get(rental_historyControllers.getRentalHistoryByUserIdCurrent);
+
+//user
+router.route("/old/user=:id/:d").get(rental_historyControllers.getRentalHistoryByUserIdOld);
+
 module.exports = router;

@@ -63,6 +63,12 @@ class Car{
         return db.execute(sql);
     }
 
+    static findNotDeleted(){
+        let sql = "SELECT * FROM cars WHERE deleted='0';"
+
+        return db.execute(sql);
+    }
+
     static findById(id){
         let sql = `SELECT car_id, FROM cars WHERE car_id=${id}`;
 

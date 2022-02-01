@@ -52,6 +52,16 @@ class Rental_history{
         return db.execute(sql);
     }
 
+    static findByUserIdCurrent(user_id, getDate){
+        let sql = `SELECT * FROM rental_history WHERE user_id=${user_id} AND rental_end<=${getDate}`;
+        return db.execute(sql);
+    }
+
+    static findByUserIdOld(user_id, getDate){
+        let sql = `SELECT * FROM rental_history WHERE user_id=${user_id} AND rental_end>${getDate}`;
+        return db.execute(sql);
+    }
+
     // updating
 }
 
