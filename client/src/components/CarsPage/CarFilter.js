@@ -2,11 +2,17 @@ import React from 'react';
 import useCarFilterForm from './useCarFilterForm';
 import validateInfo from './validateInfo';
 import './CarComponent.css'
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import Menu from '@mui/material/Menu';
 
 
 const CarFilter = ({submit}) => {
     const {handleChange,values,handleSubmit,errors} = useCarFilterForm(submit, validateInfo);
-
+    
+    
     return (
         <form className="filter-form def-box" onSubmit={handleSubmit}>
             <div className="car-form-inputs">
@@ -40,6 +46,25 @@ const CarFilter = ({submit}) => {
             <button className="form-input-btn submit-small" type="submit">
                     Submit
                 </button>
+            
+            {/*
+            <div>
+                <FormControl sx={{ m: 1, minWidth: 95 }}>
+                <InputLabel id="demo-simple-select-autowidth-label">Sort by</InputLabel>
+                <Select
+                    labelId="demo-simple-select-autowidth-label"
+                    id="demo-simple-select-autowidth"
+                    onChange={handleChange}
+                    autoWidth 
+                >
+                    <Menu value = {this.state.selectedItem} onChange={this.menuClicked}>
+                    <MenuItem value={price_asc}>Price</MenuItem>
+                    <MenuItem value={fuel_consumption_asc}>Fuel consumption</MenuItem>
+                    <MenuItem value={horsepower_desc}>Horsepower</MenuItem>
+                    </Menu>
+                </Select>
+                </FormControl>
+            </div>*/}
         </form>
     )
 };

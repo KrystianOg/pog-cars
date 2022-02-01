@@ -1,10 +1,25 @@
 const Article = require('../models/articles');
+const db = require('../config/db')
 
 exports.getAllArticles = async (req,res,next) => {
     try{
         let [articles,_] = await Article.findAll();
         res.status(200).json(articles);
     }  catch(err){
+        console.log(err)
+        next(err);
+    }
+}
+
+exports.getArticlesWithAnchor = async (req,res,next) => {
+    try{
+        let anchor = req.params.anchor
+        let amount = req.params.amount
+        let sql = `select deleted, title, content, creator_firstname, creator_lastname FROM articles LEFT JOIN (SELECT user_id, firstname as creator_firstname, lastname as creator_lastname FROM users GROUP BY user_id) as a ON articles.creator_id = a.user_id WHERE article_id > ${anchor} AND article_id <= ${anchor+amount};`
+        let [articles,_]= await db.execute(sql)
+        res.status(200).json(articles);
+    } catch(err){
+        res.status(400).json({message:"Bad request"});
         console.log(err)
         next(err);
     }
