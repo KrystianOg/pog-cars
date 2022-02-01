@@ -18,7 +18,7 @@ const ReserveContainer = () => {
 
     useEffect(() =>{
     const loadreservehistorycurrent = () => {
-        return fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/users/reserve/current/user=${ReactSession.get('user_id', d)}`,{
+        return fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/users/reserve/current/user=${ReactSession.get('user_id')}/${d}`,{
             "method": "GET",
             "headers": {
                 "Content-Type": "application/json",
@@ -29,7 +29,7 @@ const ReserveContainer = () => {
         .then(async response =>{
             //let [user_id,type]= await response.data
             if(response.status !== 200){
-                navigate('/', {replace: true})
+                navigate('/account/reserve', {replace: true})
             } else {
                 response = await response.json()
                 setreservehistory(response)
@@ -43,7 +43,7 @@ const ReserveContainer = () => {
 
     useEffect(() =>{
         const loadreservehistoryold = () => {
-            return fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/users/reserve/old/user=${ReactSession.get('user_id', d)}`,{
+            return fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/users/reserve/old/user=${ReactSession.get('user_id')}/${d})}`,{
                 "method": "GET",
                 "headers": {
                     "Content-Type": "application/json",
@@ -54,7 +54,7 @@ const ReserveContainer = () => {
             .then(async response =>{
                 //let [user_id,type]= await response.data
                 if(response.status !== 200){
-                    navigate('/', {replace: true})
+                    navigate('/account/reserve', {replace: true})
                 } else {
                     response = await response.json()
                     setreservehistory(response)
@@ -63,7 +63,7 @@ const ReserveContainer = () => {
             })
             .catch(err => console.log(err))
         }
-        loadreservehistorycurrent()
+        loadreservehistoryold()
         },[])
 
     return (
