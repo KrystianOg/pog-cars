@@ -43,7 +43,7 @@ const EmployeesComponent = (props) => {
 
     const deleteEmployee = () => {
             //request
-            fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/users/delete=${props.employees.user_id}`,{
+            fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/users/id=${props.employees.user_id}`,{
                 "method": "PATCH",
                 "headers": {
                     "Content-Type": "application/json",

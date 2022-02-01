@@ -15,14 +15,15 @@ const ReserveComponent = (props) => {
     const navigate = useNavigate();
     const [loading,isLoading] = useState(true);
 
-    //getDate = 
+    let p = params
+    const d = Date.now()
 
     /*
     useEffect(() =>{
         // + dane o ocenach
 
         const loadReservehistory = () => {
-            return fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/rental_history/user=${ReactSession.get(params.user_id)}`,{
+            return fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/rental_history/user=${ReactSession.get(params.user_id)/{d}}`,{
                 "method": "GET",
                 "headers": {
                     "Content-Type": "application/json",
@@ -33,7 +34,7 @@ const ReserveComponent = (props) => {
             .then(async response =>{
                 //let [user_id,type]= await response.data
                 if(response.status !== 200){
-                    navigate('/', {replace: true})
+                    navigate('/account/reserve', {replace: true})
                 } else {
                     response = await response.json()
                     setCars(response)
