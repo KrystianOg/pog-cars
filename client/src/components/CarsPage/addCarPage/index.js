@@ -35,7 +35,7 @@ const AddCarComponent = () => {
 
     const navigate = useNavigate()
 
-    let [prevCar, setPrevCar] = useState({
+    const [prevCar, setPrevCar] = useState({
         deleted: 0,
         avg_rating: 5,
         make: '',

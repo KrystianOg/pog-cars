@@ -3,6 +3,7 @@ import Sidebar from '../components/Sidebar/index';
 import Navbar from '../components/Navbar/index';
 import { Helmet } from 'react-helmet'
 import { ResetpasswordContainer } from '../components/AccountsPage/ResetpasswordPage/index';
+import Footer from '../components/Footer';
 
 const Resetpassword = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -21,6 +22,7 @@ const Resetpassword = () => {
             <Sidebar isOpen={isOpen} toggle={toggle}/>
             <Navbar toggle={toggle}/>
             <ResetpasswordContainer/>
+            <Footer toggle ={toggle}/>
         </>
     )
 };

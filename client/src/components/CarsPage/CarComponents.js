@@ -35,3 +35,25 @@ export const CarImage = styled.img`
     height: 80%;
     display: block;
 `
+
+export const FilterContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 760px;
+    height: 100%;
+    margin: 8px;
+    padding: 8px;
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+`
+
+export const FilterWrapper = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 0.2em;
+    column-gap: 0.2em;
+`

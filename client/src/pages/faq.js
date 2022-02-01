@@ -3,6 +3,7 @@ import Sidebar from '../components/Sidebar/index';
 import Navbar from '../components/Navbar/index';
 import { Helmet } from 'react-helmet'
 import { FAQContainer } from '../components/FAQPage/index';
+import Footer from '../components/Footer';
 
 const FAQ = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -21,6 +22,7 @@ const FAQ = () => {
             <Sidebar isOpen={isOpen} toggle={toggle}/>
             <Navbar toggle={toggle}/>
             <FAQContainer/>
+            <Footer toggle ={toggle}/>
         </>
     )
 };

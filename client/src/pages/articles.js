@@ -3,6 +3,7 @@ import Sidebar from '../components/Sidebar/index';
 import Navbar from '../components/Navbar/index';
 import { Helmet } from 'react-helmet'
 import { ArticleContainer } from '../components/Articles/index';
+import Footer from '../components/Footer';
 
 const Articles = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -20,6 +21,7 @@ const Articles = () => {
             <Sidebar isOpen={isOpen} toggle={toggle}/>
             <Navbar toggle={toggle}/>
             <ArticleContainer/>
+            <Footer toggle ={toggle}/>
         </>
     )
 };

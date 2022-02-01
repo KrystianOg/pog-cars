@@ -3,20 +3,19 @@ import {useState, useEffect} from 'react';
 const useCarFilterForm = (callback,validate) => {
     const [values,setValues] = useState({
         make: '',
-        price_min: '',
-        price_max: '',
-        horsepower_min: '',
-        horsepower_max: '',
-        year_min: '',
-        year_max: ''
+        model: '',
+        price_min: 0,
+        price_max: Number.MAX_SAFE_INTEGER,
+        horsepower_min: 0,
+        horsepower_max: Number.MAX_SAFE_INTEGER,
+        year_min: 0,
+        year_max: Number.MAX_SAFE_INTEGER
     })
 
     const [errors,setErrors] = useState({})
     const [isSubmitting, setIsSubmitting] = useState(false)
 
-    const handleChange = (e) => {
-        const {name, value} = e.target
-
+    const handleChange = (name,value) => {
         setValues({
             ...values,
             [name]: value
@@ -33,6 +32,7 @@ const useCarFilterForm = (callback,validate) => {
     useEffect(()=>{
         if(Object.keys(errors).length === 0 && isSubmitting){
             callback(values)
+            setIsSubmitting(false)
         }
     }, [errors])
 

@@ -58,7 +58,7 @@ class Car{
     // filters
 
     static findAll(){
-        let sql = "select cars.car_id, mileage, horsepower, seats, transmission, drivetrain, fuel, fuel_consumption, price, agency_id, year, deleted, model, make, avg_rating FROM cars LEFT JOIN (select car_id, ROUND(avg(star_rating),1) as avg_rating FROM car_reviews GROUP BY car_id) as a ON cars.car_id = a.car_id;"
+        let sql = `select cars.car_id, mileage, horsepower, seats, transmission, drivetrain, fuel, fuel_consumption, price, agency_id, year, deleted, model, make, avg_rating FROM cars LEFT JOIN (select car_id, ROUND(avg(star_rating),1) as avg_rating FROM car_reviews GROUP BY car_id) as a ON cars.car_id = a.car_id;`
 
         return db.execute(sql);
     }
@@ -77,33 +77,34 @@ class Car{
 //cena ocena 
     static filter(req)
     {
-        'use strict'
-        let {mileage_min, mileage_max, horsepower_min, horsepower_max,price_min,price_max,year_min,year_max,seats,transmission,drivetrain,fuel,agency_id,make,model} = req.body
-        
+        //'use strict'
+        let {mileage_min, mileage_max, horsepower_min, horsepower_max, price_min, price_max, year_min, year_max, seats, transmission, drivetrain, fuel, agency_id, make, model} = req.body
+
         let sql = `SELECT * FROM cars WHERE `;
 
         var dictionary = {}
-        dictionary[ `mileage >= ${mileage_min}`] = mileage_min == null;
-        dictionary[ `mileage <= ${mileage_max}`] = mileage_max == null;
-        dictionary[ `horsepower >= ${horsepower_min}`] = horsepower_min == null;
-        dictionary[ `horsepower >= ${horsepower_max}`] = horsepower_max == null;
-        dictionary[ `price >= ${price_min}`] = price_min == null;
-        dictionary[ `price <= ${price_max}`] = price_max == null;
-        dictionary[ `year >= ${year_min}`] = year_min == null;
-        dictionary[ `year <= ${year_max}`] = year_min == null;
-        dictionary[ `seats = ${seats}`] = seats == null;
-        dictionary[ `transmission = '${transmission}'`] = transmission == null;
-        dictionary[ `fuel = '${fuel}'`] = fuel == null;
-        dictionary[ `agency_id = ${agency_id}`] = agency_id == null;
-        dictionary[ `make = '${make}'`] = make == null;
-        dictionary[ `model = '${model}'`] = model == null;
-        dictionary[ `drivetrain = '${drivetrain}'`] = drivetrain == null;
+            dictionary[ `mileage >= ${mileage_min}`] = mileage_min === undefined;
+            dictionary[ `mileage <= ${mileage_max}`] = mileage_max === undefined;
+            dictionary[ `horsepower >= ${horsepower_min}`] = horsepower_min === undefined;
+            dictionary[ `horsepower >= ${horsepower_max}`] = horsepower_max === undefined;
+            dictionary[ `price >= ${price_min}`] = price_min === undefined;
+            dictionary[ `price <= ${price_max}`] = price_max === undefined;
+            dictionary[ `year >= ${year_min}`] = year_min === undefined;
+            dictionary[ `year <= ${year_max}`] = year_max === undefined;
+            dictionary[ `seats = ${seats}`] = seats === undefined;
+            dictionary[ `transmission = '${transmission}'`] = transmission === undefined;
+            dictionary[ `fuel = '${fuel}'`] = fuel === undefined;
+            dictionary[ `agency_id = ${agency_id}`] = agency_id === undefined;
+            dictionary[ `make = '${make}'`] = make === undefined;
+            dictionary[ `model = '${model}'`] = model === undefined;
+            dictionary[ `drivetrain = '${drivetrain}'`] = drivetrain === undefined;
         for(const[key,value] of Object.entries(dictionary)){
             sql += !value ? key+" AND " : ""
         }
 
         sql = sql.slice(0,sql.lastIndexOf("AND"))
-        sql += ";";
+        sql += `;`;
+        console.log(sql)
         return db.execute(sql);
     }
 

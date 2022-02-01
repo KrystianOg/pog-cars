@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet'
 //import {useParams} from 'react-router-dom'
 //import {GLOBAL} from '../../config'
 import {RentCarComponent} from '../../components/CarsPage/rentCarPage/index'
+import Footer from '../../components/Footer';
 
 const RentCar = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -22,6 +23,7 @@ const RentCar = () => {
             <Sidebar isOpen={isOpen} toggle={toggle}/>
             <Navbar toggle={toggle}/>
             <RentCarComponent/>
+            <Footer toggle ={toggle}/>
         </>
     );
 };

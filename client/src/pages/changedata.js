@@ -3,6 +3,7 @@ import Sidebar from '../components/Sidebar/index';
 import Navbar from '../components/Navbar/index';
 import { Helmet } from 'react-helmet'
 import { ChangedataContainer } from '../components/AccountsPage/ChangedataPage/index';
+import Footer from '../components/Footer';
 
 const Changedata = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -21,6 +22,7 @@ const Changedata = () => {
             <Sidebar isOpen={isOpen} toggle={toggle}/>
             <Navbar toggle={toggle}/>
             <ChangedataContainer/>
+            <Footer toggle ={toggle}/>
         </>
     )
 };

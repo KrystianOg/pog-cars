@@ -3,6 +3,7 @@ import Sidebar from '../components/Sidebar/index';
 import Navbar from '../components/Navbar/index';
 import { Helmet } from 'react-helmet'
 import { ReserveContainer } from '../components/AccountsPage/ReservePage/index';
+import Footer from '../components/Footer';
 
 const Reserve = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -21,6 +22,7 @@ const Reserve = () => {
             <Sidebar isOpen={isOpen} toggle={toggle}/>
             <Navbar toggle={toggle}/>
             <ReserveContainer/>
+            <Footer toggle ={toggle}/>
         </>
     )
 };

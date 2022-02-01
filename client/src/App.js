@@ -11,8 +11,6 @@ function App() {
                 <link rel="icon" type="image/png" href="favicon.ico" sizes="16x16"/>
             </Helmet>
             <Home/>
-
-
         </>
     );
 }

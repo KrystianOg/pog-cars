@@ -3,6 +3,7 @@ import Sidebar from '../../components/Sidebar/index';
 import Navbar from '../../components/Navbar/index';
 import { Helmet } from 'react-helmet'
 import { CarsContainer } from '../../components/CarsPage/index';
+import Footer from '../../components/Footer';
 
 const Cars = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -20,6 +21,7 @@ const Cars = () => {
             <Sidebar isOpen={isOpen} toggle={toggle}/>
             <Navbar toggle={toggle}/>
             <CarsContainer/>
+            <Footer toggle ={toggle}/>
         </>
     )
 };

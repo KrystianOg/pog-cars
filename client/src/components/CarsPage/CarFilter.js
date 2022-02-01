@@ -1,11 +1,13 @@
-import React from 'react';
+import React, { useEffect , useState} from 'react';
 import useCarFilterForm from './useCarFilterForm';
 import validateInfo from './validateInfo';
 import './CarComponent.css'
-import {Button as MButton} from '@mui/material';
+import {Button} from '@mui/material';
 import { ReactSession } from 'react-client-session';
 import { useNavigate } from 'react-router-dom'
 import {makeStyles} from '@mui/styles'
+import { TextField, MenuItem,  Box} from '@mui/material';
+import {FilterContainer, FilterWrapper} from './CarComponents'
 
 const useStyles = makeStyles({
     root: {
@@ -27,45 +29,31 @@ const CarFilter = ({submit}) => {
     const navigate = useNavigate();
     //dodać stylowanie przyciskow
     const classes = useStyles();
+
     return (
-        <form className="filter-form def-box" onSubmit={handleSubmit}>
-            <div className="car-form-inputs">
-                <label htmlFor="make" className="form-label">Car make</label>
-                <input id="make" type="text" name="make" className="form-input" placeholder="Enter make" value={values.make} onChange={handleChange}/> 
-                {/* albo pobrac marki jakie posiadamy */}
-                {errors.make && <p>{errors.make}</p>}
-            </div>
+        <FilterWrapper>
+            <FilterContainer>
+                <Box sx={{display: 'grid', gap: 1, gridTemplateColumns: 'repeat(5,1fr)'}}>
 
-            <div className="car-form-inputs">
-                <label htmlFor="price" className="form-label">Price</label>
-                <input id="price_min" type="text" name="price_min" className="form-input" placeholder="from" value={values.price_min} onChange={handleChange}/> 
-                <input id="price_max" type="text" name="price_max" className="form-input" placeholder="to" value={values.price_max} onChange={handleChange}/> 
-                {errors.price && <p>{errors.price}</p>}
-            </div>
+                    <TextField style={{width: '130px', margin: '8px auto'}} label="Marka" variant="standard" onChange={(e) => handleChange('make',e.target.value)}/>
+                    <TextField style={{width: '130px', margin: '8px auto'}} label="Cena max" variant="standard" onChange={(e) => handleChange('price_max',parseFloat(!isNaN(e.target.value) ? e.target.value : ""))}/>
+                    <TextField style={{width: '130px', margin: '8px auto'}} label="Rok max" variant="standard" onChange={(e) => handleChange('year_max',parseFloat(!isNaN(e.target.value) ? e.target.value : ""))}/>
+                    <TextField style={{width: '130px', margin: '8px auto'}} label="Moc max [KM]" variant="standard" onChange={(e) => handleChange('horsepower_max',parseFloat(!isNaN(e.target.value) ? e.target.value : ""))}/>
 
-            <div className="car-form-inputs">
-                <label htmlFor="hp" className="form-label">Horse power</label>
-                <input id="horsepower_min" type="text" name="horsepower_min" className="form-input" placeholder="from" vlaue={values.horsepower_min} onChange={handleChange}/> 
-                <input id="horsepower_max" type="text" name="horsepower_max" className="form-input" placeholder="to" value={values.horsepower_max} onChange={handleChange}/> 
-                {errors.hp && <p>{errors.hp}</p>}
-            </div>
 
-            <div className="car-form-inputs">
-                <label htmlFor="yp" className="form-label">Year </label>
-                <input id="year_min" type="text" name="year_min" className="form-input" placeholder="from" value={values.year_min} onChange={handleChange}/> 
-                <input id="year_max" type="text" name="year_max" className="form-input" placeholder="to" value={values.year_max} onChange={handleChange}/> 
-                {errors.year && <p>{errors.year}</p>}
-            </div>
+                    <Button className={classes.root} onClick={handleSubmit}>SUBMIT</Button>
+                    
+                    <TextField style={{width: '130px', margin: '8px auto'}} label="Model" variant="standard" onChange={(e) => handleChange('model',e.target.value)}/>
+                    <TextField style={{width: '130px', margin: '8px auto'}} label="Cena min" variant="standard" onChange={(e) => handleChange('price_min',parseFloat(!isNaN(e.target.value) ? e.target.value : ""))}/>
+                    <TextField style={{width: '130px', margin: '8px auto'}} label="Rok min" variant="standard" onChange={(e) => handleChange('year_min',parseFloat(!isNaN(e.target.value) ? e.target.value : ""))}/>
+                    <TextField style={{width: '130px', margin: '8px auto'}} label="Moc min [KM]" variant="standard" onChange={(e) => handleChange('horsepower_min',parseFloat(!isNaN(e.target.value) ? e.target.value : ""))}/>
 
-            <div className="car-form-inputs">
-                <MButton variant="outlined" className={classes.root} onClick={handleSubmit}>SUBMIT</MButton>
-                
-                { ReactSession.get('type') === 'ADMIN' || ReactSession.get('type') === 'AGENT' ? 
-                <MButton variant="outlined" className={classes.root} onClick={()=>{ navigate('/cars/add', {replace: true})}}>ADD CAR</MButton>
-                : null }
-            </div>
-
-        </form>
+                    { ReactSession.get('type') === 'ADMIN' || ReactSession.get('type') === 'AGENT' ? 
+                    <Button className={classes.root} onClick={()=>{ navigate('/cars/add', {replace: true})}}>ADD CAR</Button>
+                    : null }
+                </Box>
+            </FilterContainer>
+        </FilterWrapper>
     )
 };
 
