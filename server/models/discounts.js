@@ -34,11 +34,9 @@ class Discount{
     }
 
     static findByCode(code){
-        let sql = `SELECT expiration_date,user_id,value,car_id FROM discounts WHERE discount_id=${id}`;
+        let sql = `SELECT expiration_date ,user_id, value, car_id FROM discounts WHERE code='${code}'`;
         return db.execute(sql);
     }
-
-    
 
     // updating - shouldn't really be updated once it's added
 }

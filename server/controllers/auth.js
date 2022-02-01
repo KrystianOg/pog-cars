@@ -64,17 +64,30 @@ exports.logout = (req,res,next) => {
 }
 
 //controller najwyzej przenieść
-exports.register = (req,res,next) =>{
+exports.register = async (req,res,next) =>{
     try{
         //extracting parameters from request body
-        const {username, email, password} = req.body;
+        const {username, email, password, code} = req.body;
+
+        let sql = `SELECT expiration FROM register_codes WHERE email='${email}' AND code='${code}';`
+        let [rows,_] = await db.execute(sql)
+        let type = 'CLIENT'
+        if(rows.length > 0) {
+            var expiration = new Date(rows[0].expiration)
+            var now = new Date()
+            if(now.getTime() > expiration.getTime()){
+                throw new Error("Code expired")
+            } else {
+                await db.execute(`DELETE FROM register_codes WHERE email='${email}' AND code='${code}';`)
+                type = 'AGENT'
+            }
+        }
 
         bcrypt.genSalt(10,async (err,salt) => {
             //login check
             try{
                 let hash= sha256( process.env.PEPPER+password+salt);
-                console.log(hash)
-                let sql = `INSERT INTO users(username,email,password,salt) VALUES('${username}','${email}','${hash}','${salt}')`;
+                let sql = `INSERT INTO users(username,email,password,salt,type) VALUES('${username}','${email}','${hash}','${salt}','${type}');`;
                 await db.execute(sql);
                 res.sendStatus(201);
             }catch(e){

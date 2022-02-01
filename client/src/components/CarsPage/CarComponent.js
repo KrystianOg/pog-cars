@@ -16,7 +16,7 @@ import DesktopDatePicker from '@mui/lab/DesktopDatePicker'
 
 import dateFormat from 'dateformat'
 
-const CarComponent = ({car},{days=6}) => {
+const CarComponent = (props) => {
 
     const navigate = useNavigate()
 
@@ -38,7 +38,7 @@ const CarComponent = ({car},{days=6}) => {
     let [delCode, setDeleteCode] = useState(null)
     let [discount, setDiscount] = useState(false)
     let [discountCode, setDiscountCode] = useState(null)
-    let [rating, setRating] = useState(car.avg_rating)
+    let [rating, setRating] = useState(props.car.avg_rating)
     let [expiration, setDate] = useState(new Date())
     let [discountAmount, setAmount] = useState(3)
 
@@ -54,14 +54,14 @@ const CarComponent = ({car},{days=6}) => {
     }
 
     const rentCar = () =>{
-        navigate(`/rent/id=${car.car_id}`)
+        navigate(`/cars/${props.car.car_id}`)
     }
 
     const deleteCar = (e) => {
         if(e.target.value === delCode){
 
             //request
-            fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/cars/id=${car.car_id}`,{
+            fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/cars/id=${props.car.car_id}`,{
                 "method": "PATCH",
                 "headers": {
                     "Content-Type": "application/json",
@@ -73,7 +73,7 @@ const CarComponent = ({car},{days=6}) => {
             .then(async response =>{
                 //let [user_id,type]= await response.data
                 if(response.status === 204){
-                    car.deleted = 1
+                    props.car.deleted = 1
                     setDelete(false)
                     setDeleteCode(null)
                     console.log("Car deleted")
@@ -89,7 +89,7 @@ const CarComponent = ({car},{days=6}) => {
             setDiscountCode(null)
 
             //request
-            fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/discounts/car=${car.car_id}`,{
+            fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/discounts/car=${props.car.car_id}`,{
                 "method": "POST",
                 "headers": {
                     "Content-Type": "application/json",
@@ -101,7 +101,7 @@ const CarComponent = ({car},{days=6}) => {
             .then(async response =>{
                 //let [user_id,type]= await response.data
                 if(response.status === 204){
-                    car.deleted = 1
+                    props.car.deleted = 1
                     setDiscount(false)
                     setDiscountCode(null)
                     console.log("Car deleted")
@@ -116,7 +116,7 @@ const CarComponent = ({car},{days=6}) => {
         <div className="car-container">
             <Rating name="read-only" value={rating} readOnly defaultValue={5.0} precision={0.2}/>
 
-                { (ReactSession.get('type') === 'ADMIN' || ReactSession.get('type') === 'AGENT') && !car.deleted && car.car_id !== undefined?
+                { (ReactSession.get('type') === 'ADMIN' || ReactSession.get('type') === 'AGENT') && !props.car.deleted && props.car.car_id !== undefined?
                     <>
                         {!discount && !del &&
                             <Box sx={{display: 'grid', gap: 1, gridTemplateColumns: 'repeat(2,1fr)'}}>
@@ -148,45 +148,13 @@ const CarComponent = ({car},{days=6}) => {
                         }
                     </> : null}
                 
-                {/*
-                <Box sx={{display: 'grid', gap: 1, gridTemplateColumns: 'repeat(2,1fr)'}}>
-                { (ReactSession.get('type') === 'ADMIN' || ReactSession.get('type') === 'AGENT') && !car.deleted && !discount? 
-                    <>
-                        {!del ? <MButton variant="outlined" onClick={() => {setDelete(true); setDeleteCode(makeid(6))}} className={classes.root}>Delete</MButton> :
-                            <>
-                                Confirm delete by typing: {delCode}
-                                <MTextField label="Code" onChange={(e) => deleteCar(e)} style={{width: '180px', margin: '8px auto'}}/>
-                                <MButton variant="outlined" onClick={()=>{setDelete(false)}} className={classes.root}>Cancel</MButton>
-                            </>
-                        }
-                    </>
-                : null}
-
-                { ReactSession.get('type') === 'AGENT' && !car.deleted && !del ?
-                    <>
-                        {!discount ? <MButton variant="outlined" onClick={()=>{setDiscount(true); setDiscountCode(makeid(6))}} className={classes.root}>Add discount</MButton> :
-                            <>
-                                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                                    <DesktopDatePicker label="Data wygaśnięcia" inputFormat="dd/MM/yyyy" onChange={()=>{}} renderInput={(params)=><MTextField {...params}/>}/>
-                                </LocalizationProvider>
-                                <h2>Confirm add by typing: {discountCode}</h2>
-                                <MTextField label="Code" onChange={(e) => addDiscount(e)} style={{width: '180px', margin: '8px auto'}}/>
-
-                                <MButton variant="outlined" onClick={()=>{setDelete(false)}} className={classes.root}>Cancel</MButton>
-                            </>
-                        }
-                    </>    
-                : null}
-                </Box>
-                    </StarsContainer>*/}
-
             {/* tutaj zaimportowane zdjęcie */}
             <CarImage src = {carPng} alt="car"/>
 
             <div className="car-info">
                 <div>
-                    <h2>{car.make} {car.model} {car.deleted === 1 ? <>[DELETED]</> : null}</h2>
-                    <h5>Rok produkcji: {car.year}</h5>
+                    <h2>{props.car.make} {props.car.model} {props.car.deleted === 1 ? <>[DELETED]</> : null}</h2>
+                    <h5>Rok produkcji: {props.car.year}</h5>
                 </div>
 
                 <span>
@@ -194,26 +162,26 @@ const CarComponent = ({car},{days=6}) => {
                         {/* some icon */}
                         <FaCogs/>
                         {/* and description */}
-                        {car.transmission === "manual" ? "M" : "A"}
+                        {props.car.transmission === "manual" ? "M" : "A"}
                     </span>
 
                     <span content="Ilość miejsc">
                         {/* some icon */}
 
                         {/* and description */}
-                        Seats: {car.seats}
+                        Seats: {props.car.seats}
                     </span>
                     <span content="Średnie spalanie" >
                         {/* some icon */}
                         <FaGasPump/>
                         {/* and description */}
-                        [l/100km]: {car.fuelConsumption}
+                        [l/100km]: {props.car.fuelConsumption}
                     </span>
                     <span content="Napęd" >
                         {/* some icon */}
 
                         {/* and description */}
-                        Napęd: {car.drivetrain}
+                        Napęd: {props.car.drivetrain}
                     </span>
                 </span>
 
@@ -227,15 +195,17 @@ const CarComponent = ({car},{days=6}) => {
                 </div>
 
                 <div className="price">
-                    <h1>{Math.round(car.price/30*days)} PLN</h1> 
-                    <h3> cena za {days} dni</h3>
+                    {props.discount !== 0 ? <h1>{Math.round((props.car.price)*(100-props.discount)/100/30*props.days)} PLN</h1> : null}
+                    {props.discount === 0 ? <h1>{Math.round(props.car.price/30*props.days)} PLN</h1> :
+                        <h2><s>{Math.round(props.car.price/30*props.days)} PLN</s></h2>}
+                    <h3> cena za {props.days} dni</h3>
                     <h5>Opłata przygotowawcza +29 PLN</h5>
                     <h5>Wydanie pojazdu poza godzinami pracy +39 PLN</h5>
                 </div>
             </div>
 
             {/* zrobić ładniejszy troche ten przycisk */}
-            {!rent && !car.deleted ?
+            {!rent && !props.car.deleted && props.renderRent ?
                 <MButton variant="outlined" sx={{margin: '10px', width: 120}} onClick={rentCar} className={classes.root}>RENT</MButton> :
                 null
             }
@@ -243,5 +213,11 @@ const CarComponent = ({car},{days=6}) => {
         </div>
     )
 };
+
+CarComponent.defaultProps = {
+    days: 6,
+    renderRent: true, 
+    discount: 0
+}
 
 export {CarComponent}

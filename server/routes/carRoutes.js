@@ -12,7 +12,7 @@ router.route("/id=:id").get(carControllers.getCarById).patch(carControllers.remo
 
 router.route("/delete=:id").delete(carControllers.removeCarById);
 
-router.route("/reserve=:id").post(carControllers.reserveCar);
+router.route("/rent=:id").post(carControllers.reserveCar);
 
 router.route("/filter").post(carControllers.filter);
 

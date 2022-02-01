@@ -19,7 +19,7 @@ const Sidebar = ({isOpen,toggle}) => {
                     <SidebarLink to="/cars" $active={path === "/cars"} onClick={toggle}>Cars</SidebarLink>
                     <SidebarLink to="/discounts" $active={path === "/discounts"} onClick={toggle}>Discounts</SidebarLink>
                     <SidebarLink to="/account" $active={path === "/account"} onClick={toggle}>Account</SidebarLink>
-                    <SidebarLink to="/register" $active={path === "/register"} onClick={toggle}>Sign Up</SidebarLink>
+                    <SidebarLink to="/register&type=client" $active={path === "/register"} onClick={toggle}>Sign Up</SidebarLink>
                     </SidebarMenu>
                 <SideBtnWrap>
                     <SidebarRoute to="/login">Log In</SidebarRoute>

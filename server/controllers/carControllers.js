@@ -46,16 +46,17 @@ exports.getCarById = async (req,res,next) => {
 
 exports.reserveCar = async (req,res,next) => {
     try{
-        let {rental_begin,rental_end, user_id, agency_id} = req.body;
+        let {rental_begin,rental_end, user_id, agency_id, price} = req.body;
 
         let car_id = req.params.id
 
-        let _sql = `SELECT price, agency_id FROM cars WHERE car_id = ${car_id};`
-        let [rows,_]= await db.execute(_sql)
+        let sql = `INSERT INTO rental_history SET car_id=${car_id}, user_id=${user_id}, rental_begin='${rental_begin}', rental_end='${rental_end}', agency_id=${agency_id}, price=${price};`
 
-        await Car.reserveCar(car_id,user_id,agency_id,rental_begin,rental_end, rows[0].agency_id,rows[0].price)
+        await db.execute(sql)
+
         res.status(201).json({message:"Car reserved successfully"});
     } catch(err){
+        res.status(400).json({message:"Bad request"});
         console.log(err)
         next(err);
     }

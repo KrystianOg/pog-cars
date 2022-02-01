@@ -5,7 +5,8 @@ const useSignupForm = (callback, validate) => {
         username: '',
         email: '',
         password: '',
-        password2: ''
+        password2: '',
+        code: ''
     })
 
     const [errors,setErrors] = useState({})

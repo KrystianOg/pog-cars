@@ -5,7 +5,7 @@ const router = express.Router();
 //@route GET && POST /cars
 router.route("/car=:id").post(discountControllers.addNewDiscount);
 
-router.route("/code=:code").get(discountControllers.useDiscount);
+router.route("/code=:code").post(discountControllers.useDiscount);
 
 router.route("/all").get(discountControllers.getAllDiscounted);
 

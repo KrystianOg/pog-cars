@@ -1,6 +1,7 @@
 const Rental_history = require('../models/rental_history');
 const Auth = require('./auth');
 const db = require('../config/db');
+
 exports.getAllRentalHistory = async (req,res,next) => {
     
     try{

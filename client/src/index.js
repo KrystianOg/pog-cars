@@ -25,10 +25,10 @@ render(
     <Routes>
       <Route path="/" element={<App/>}/>
       <Route path="login" element={<Login/>}/>
-      <Route path="register" element={<Register/>}/>
+      <Route path="register&type=:type" element={<Register/>}/>
       <Route path="cars" element={<Cars/>}/>
       <Route path="cars/add" element={<AddCar/>}/>
-      <Route path="rent/id=:id" element={<RentCar/>}/>
+      <Route path="cars/:id" element={<RentCar/>}/>
       <Route path="articles" element={<Articles/>}/>
       <Route path="discounts" element={<Discounts/>}/>
       <Route path="users" element={<Users/>}/>

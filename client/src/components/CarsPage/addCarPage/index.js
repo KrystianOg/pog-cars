@@ -1,7 +1,6 @@
 import React, {useState,useEffect} from 'react';
 import {CarComponent} from '../CarComponent'
 import {AddCarContainer, AddCarColumn} from './AddCarComponents'
-import {FaCogs, FaTachometerAlt, FaGasPump, FaCheck} from 'react-icons/fa'
 import {CarImage} from '../CarComponents'
 import { useNavigate } from 'react-router-dom'
 import carPng from '../../../images/cars/mustang.png';

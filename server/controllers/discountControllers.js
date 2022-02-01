@@ -27,22 +27,20 @@ exports.useDiscount = async (req,res,next) => {
     try{
         let [discount,_] = await Discount.findByCode(req.params.code);
 
-        let {code, expiration, value, car_id=null, user_id=null} = discount[0]
-        let car = req.params.car_id
+        let {expiration, value, car_id=null, user_id=null} = discount[0]
+        let {car, user} = req.body
         let date = new Date(expiration)
 
-        if(date < new Date()){
+        if(date < new Date().getTime()){
             res.status(400).json({message:"Discount expired"});
         }
 
-        if(user_id == null && car_id == null){
-            res.status(200).json({message:"Discount applied successfully"});
-        }else if(user_id == null && car_id == car){
-            res.status(200).json({message:"Discount applied successfully"});
-        } else if(user_id == req.session.user_id && car_id == null){
-            res.status(200).json({message:"Discount applied successfully"});
-        } else if(user_id ==req.session.user_id && car_id == null){
-            res.status(200).json({message:"Discount applied successfully"});
+        if(user_id === null && car_id === null){
+            res.status(200).json({message:"Discount applied successfully", 'value': value});
+        }else if(user_id === null && car_id === car){
+            res.status(200).json({message:"Discount applied successfully", 'value': value});
+        } else if(user_id === user && car_id === null){
+            res.status(200).json({message:"Discount applied successfully", 'value': value});
         } else {
             res.status(400).json({message:"Discount not applicable"});
         }
