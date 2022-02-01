@@ -62,8 +62,8 @@ exports.getRentalHistoryByCarId = async(req,res,next) => {
 exports.getRentalHistoryByUserIdCurrent = async (req,res,next) => {
     //check requirements
     try{
-        if(await Auth.checkAuth(req.body.user_id,'AGENT')||req.body.user_id === req.params.id){
-            let [rental_history,_] = await Rental_history.findByUserIdCurrent(req.params.id)
+        if(await Auth.checkAuth(req.body.user_id,'AGENT')||req.body.user_id == req.params.user){
+            let [rental_history,_] = await Rental_history.findByUserIdCurrent(req.params.user)
             res.status(200).json(rental_history);
         } else {
             res.status(403).json({message:"You are not allowed to access this page"})
@@ -77,8 +77,8 @@ exports.getRentalHistoryByUserIdCurrent = async (req,res,next) => {
 exports.getRentalHistoryByUserIdOld = async (req,res,next) => {
     //check requirements
     try{
-        if(await Auth.checkAuth(req.body.user_id,'AGENT')||req.body.user_id === req.params.id){
-            let [rental_history,_] = await Rental_history.findByUserIdOld(req.params.id)
+        if(await Auth.checkAuth(req.body.user_id,'AGENT')||req.body.user_id == req.params.user){
+            let [rental_history,_] = await Rental_history.findByUserIdOld(req.params.user)
             res.status(200).json(rental_history);
         } else {
             res.status(403).json({message:"You are not allowed to access this page"})

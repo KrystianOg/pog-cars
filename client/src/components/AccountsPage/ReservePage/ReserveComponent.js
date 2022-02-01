@@ -6,7 +6,7 @@ import RentalComponent from './RentalComponents'
 import {GLOBAL} from '../../../config'
 import { ReactSession } from 'react-client-session';
 
-const ReserveComponent = (params) => {
+const ReserveComponent = (props) => {
 
     const [cars,setCars] = useState(null)
     const [agencies,setAgency] = useState(null)
@@ -17,6 +17,7 @@ const ReserveComponent = (params) => {
 
     //getDate = 
 
+    /*
     useEffect(() =>{
         // + dane o ocenach
 
@@ -43,11 +44,20 @@ const ReserveComponent = (params) => {
         }
         
         loadReservehistory()
-    },[])
+    },[])*/
 
+    console.log(props.reserve_history)
+
+    //params.reserve_history
     return (
         <div className="reserve-container">
-
+            <p>{props.reserve_history.rent_id}</p>
+            <p>{props.reserve_history.car_id}</p>
+            <p>{props.reserve_history.user_id}</p>
+            <p>{props.reserve_history.agency_id}</p>
+            <p>{props.reserve_history.rental_begin}</p>
+            <p>{props.reserve_history.rental_end}</p>
+            <p>{props.reserve_history.price}</p>
         </div>
     )
 };

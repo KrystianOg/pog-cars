@@ -1,4 +1,5 @@
 const db = require('../config/db')
+const date = require('date-and-time')
 
 class Rental_history{
     constructor(car_id, user_id, agency_id, rental_begin, rental_end, price){
@@ -52,13 +53,15 @@ class Rental_history{
         return db.execute(sql);
     }
 
-    static findByUserIdCurrent(user_id, getDate){
-        let sql = `SELECT * FROM rental_history WHERE user_id=${user_id} AND rental_end<=${getDate}`;
+    static findByUserIdCurrent(user_id){
+        const string = date.format(new Date(),'YYYY-MM-DD')
+        let sql = `SELECT * FROM rental_history WHERE user_id=${user_id} AND rental_end >= '${string}}'`;
         return db.execute(sql);
     }
 
-    static findByUserIdOld(user_id, getDate){
-        let sql = `SELECT * FROM rental_history WHERE user_id=${user_id} AND rental_end>${getDate}`;
+    static findByUserIdOld(user_id){
+        const string = date.format(new Date(),'YYYY-MM-DD')
+        let sql = `SELECT * FROM rental_history WHERE user_id=${user_id} AND rental_end < '${string}'`;
         return db.execute(sql);
     }
 
