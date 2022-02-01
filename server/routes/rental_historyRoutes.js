@@ -9,4 +9,10 @@ router.route("/rental=:id").get(rental_historyControllers.getRentalHistoryById);
 
 router.route("/user=:id").get(rental_historyControllers.getRentalHistoryByUserId);
 
+//current
+router.route("/current/user=:id/:d").get(rental_historyControllers.getRentalHistoryByUserIdCurrent);
+
+//user
+router.route("/old/user=:id/:d").get(rental_historyControllers.getRentalHistoryByUserIdOld);
+
 module.exports = router;

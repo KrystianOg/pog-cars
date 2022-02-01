@@ -10,6 +10,7 @@ class Car_article{
         // save to db
         let d = new Date();
         let yyyy = d.getFullYear();
+        d.Date
 
         let sql = `INSERT INTO car_articles(
             article_id, 
