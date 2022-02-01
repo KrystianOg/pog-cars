@@ -1,5 +1,6 @@
 const Comment = require('../models/comments');
 
+const checkAuth = require('./auth').checkAuth;
 
 exports.getCommentsByArticleId = async (req,res,next) => {
     try{
@@ -15,8 +16,7 @@ exports.getCommentsByArticleId = async (req,res,next) => {
 exports.addNewComment = async (req,res,next) => {
     try{
         //extracting parameters from request body
-        let {article_id, content} = req.body;
-        let creator_id = req.session.user_id;
+        let {creator_id, article_id, content} = req.body;
         let comment = new Comment(creator_id, article_id, content)
 
         await comment.save();
@@ -39,8 +39,8 @@ exports.getCommentById = async (req,res,next) => {
 
 exports.removeCommentById = async(req,res,next) => {
     try{
-        if(req.session.user_type == 'ADMIN' || req.session.user_type == 'AGENT'){
-            let [comment,_] = await Comment.removeComment(req.params.id);
+        if(checkAuth(req.body.user_id, 'AGENT')){
+            await Comment.removeComment(req.params.id);
             res.status(204).json({message:"Comment removed successfully"});
         } else {
             res.status(401).json({message:"Unauthorized"});

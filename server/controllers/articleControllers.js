@@ -1,4 +1,5 @@
 const Article = require('../models/articles');
+const db = require('../config/db')
 
 exports.getAllArticles = async (req,res,next) => {
     try{
@@ -10,11 +11,25 @@ exports.getAllArticles = async (req,res,next) => {
     }
 }
 
+exports.getArticlesWithAnchor = async (req,res,next) => {
+    try{
+        let anchor = req.params.anchor
+        let amount = req.params.amount
+        let sql = `select article_id, deleted, title, content, creator_firstname, creator_lastname FROM articles LEFT JOIN (SELECT user_id, firstname as creator_firstname, lastname as creator_lastname FROM users GROUP BY user_id) as a ON articles.creator_id = a.user_id WHERE article_id > ${anchor} AND article_id <= ${anchor+amount};`
+        let [articles,_]= await db.execute(sql)
+        res.status(200).json(articles);
+    } catch(err){
+        res.status(400).json({message:"Bad request"});
+        console.log(err)
+        next(err);
+    }
+}
+
 exports.addNewArticle = async (req,res,next) => {
     try{
         //extracting parameters from request body
-        let {title, content} = req.body; 
-        let creator_id = req.session.user_id;
+        let {creator_id,title, content} = req.body; 
+        
         let article = new Article(creator_id, 0, title, content); 
 
         article= await article.save();
@@ -36,6 +51,7 @@ exports.deleteArticle = async (req,res,next) => {
 
 exports.getArticleById = async (req,res,next) => {
     try{
+        console.log(req.params.id)
         let [article,_] = await Article.findById(req.params.id);
         res.status(200).json(article);
     } catch(err){
