@@ -1,14 +1,13 @@
 import React, {useState,useEffect} from 'react';
 import {CarComponent} from '../CarComponent'
 import {AddCarContainer, AddCarColumn} from './AddCarComponents'
-import {FaCogs, FaTachometerAlt, FaGasPump, FaCheck} from 'react-icons/fa'
 import {CarImage} from '../CarComponents'
 import { useNavigate } from 'react-router-dom'
 import carPng from '../../../images/cars/mustang.png';
 import '../CarComponent.css'
 
 import { ReactSession } from 'react-client-session';
-import {Button, TextField, MenuItem} from '@mui/material';
+import {Button, TextField, MenuItem, Box} from '@mui/material';
 import { makeStyles } from '@mui/styles'
 import {GLOBAL} from '../../../config'
 
@@ -96,6 +95,7 @@ const AddCarComponent = () => {
 
                     <div className="car-info">
 
+                    <Box sx={{display: 'grid', gap: 1, gridTemplateColumns: 'repeat(2,1fr)'}}>
                         <TextField variant="standard" label="marka" id="fullwidth" className={classes.root} onChange={(e) =>{handleChange('make',e.target.value)}}/>
                         <TextField variant="standard" label="model" id="fullwidth" className={classes.root} onChange={(e) =>{handleChange('model',e.target.value)}}/>
                         <TextField variant="standard" label="rok produkcji" id="fullwidth" className={classes.root} onChange={(e) =>{handleChange('year',parseInt(e.target.value))}}/>
@@ -133,8 +133,9 @@ const AddCarComponent = () => {
 
                         <TextField variant="standard" label="cena [PLN]" id="fullwidth" className={classes.root} onChange={(e) =>{handleChange('price',parseInt(e.target.value))}}/>
                         <TextField variant="standard" label="Id agencji" id="fullwidth" className={classes.root} onChange={(e) =>{handleChange('agency_id',parseInt(e.target.value))}}/>
+                    </Box>
                     </div>
-                    <Button variant="outlined"  className={classes.btn} onClick={addCar}>Add car</Button>
+                    <Button variant="outlined" sx={{margin: '10px'}} className={classes.btn} onClick={addCar}>Add car</Button>
                 </div>
 
             </AddCarColumn>

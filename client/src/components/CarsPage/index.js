@@ -40,28 +40,26 @@ const CarsContainer = () => {
     useEffect(() =>{
         // + dane o ocenach
 
-        const loadUser = () => {
-            return fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/cars`,{
-                "method": "GET",
-                "headers": {
-                    "Content-Type": "application/json",
-                    "Accept": "application/json",
-                    "Access-Control-Allow-Origin": "no-cors"
-                }
-            })
-            .then(async response =>{
-                //let [user_id,type]= await response.data
-                if(response.status !== 200){
-                    navigate('/', {replace: true})
-                } else {
-                    response = await response.json()
-                    setCars(response)
-                    isLoading(false)
-                }
-            })
-            .catch(err => console.log(err))
-        }
-        loadUser()
+        fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/cars`,{
+            "method": "GET",
+            "headers": {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Access-Control-Allow-Origin": "no-cors"
+            }
+        })
+        .then(async response =>{
+            //let [user_id,type]= await response.data
+            if(response.status !== 200){
+                navigate('/', {replace: true})
+            } else {
+                response = await response.json()
+                setCars(response)
+                isLoading(false)
+            }
+        })
+        .catch(err => console.log(err))
+        
     },[])
 
     return (

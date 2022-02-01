@@ -1,5 +1,6 @@
 const Rental_history = require('../models/rental_history');
 const Auth = require('./auth');
+const db = require('../config/db');
 
 exports.getAllRentalHistory = async (req,res,next) => {
     
@@ -46,11 +47,23 @@ exports.getRentalHistoryByUserId = async (req,res,next) => {
     }
 }
 
+exports.getRentalHistoryByCarId = async(req,res,next) => {
+    try{
+        let sql = `SELECT rental_begin, rental_end FROM rental_history WHERE car_id =${req.params.car} AND rental_end > NOW();`;
+        let [history,_] = await db.execute(sql);
+
+        res.status(200).json(history);
+    } catch(e){
+        console.log(e)
+        next(e)
+    }
+}
+
 exports.getRentalHistoryByUserIdCurrent = async (req,res,next) => {
     //check requirements
     try{
-        if(await Auth.checkAuth(req.body.user_id,'AGENT')||req.body.user_id === req.params.id){
-            let [rental_history,_] = await Rental_history.findByUserIdCurrent(req.params.id)
+        if(await Auth.checkAuth(req.body.user_id,'AGENT')||req.body.user_id == req.params.user){
+            let [rental_history,_] = await Rental_history.findByUserIdCurrent(req.params.user)
             res.status(200).json(rental_history);
         } else {
             res.status(403).json({message:"You are not allowed to access this page"})
@@ -64,8 +77,8 @@ exports.getRentalHistoryByUserIdCurrent = async (req,res,next) => {
 exports.getRentalHistoryByUserIdOld = async (req,res,next) => {
     //check requirements
     try{
-        if(await Auth.checkAuth(req.body.user_id,'AGENT')||req.body.user_id === req.params.id){
-            let [rental_history,_] = await Rental_history.findByUserIdOld(req.params.id)
+        if(await Auth.checkAuth(req.body.user_id,'AGENT')||req.body.user_id == req.params.user){
+            let [rental_history,_] = await Rental_history.findByUserIdOld(req.params.user)
             res.status(200).json(rental_history);
         } else {
             res.status(403).json({message:"You are not allowed to access this page"})

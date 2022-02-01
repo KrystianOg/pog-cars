@@ -3,9 +3,9 @@ const discountControllers = require('../controllers/discountControllers')
 const router = express.Router();
 
 //@route GET && POST /cars
-router.route("/").post(discountControllers.addNewDiscount);
+router.route("/car=:id").post(discountControllers.addNewDiscount);
 
-router.route("/code=:code").get(discountControllers.useDiscount);
+router.route("/code=:code").post(discountControllers.useDiscount);
 
 router.route("/all").get(discountControllers.getAllDiscounted);
 

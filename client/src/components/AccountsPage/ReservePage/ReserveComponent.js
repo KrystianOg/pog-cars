@@ -6,7 +6,7 @@ import RentalComponent from './RentalComponents'
 import {GLOBAL} from '../../../config'
 import { ReactSession } from 'react-client-session';
 
-const ReserveComponent = (params) => {
+const ReserveComponent = (props) => {
 
     const [cars,setCars] = useState(null)
     const [agencies,setAgency] = useState(null)
@@ -15,14 +15,14 @@ const ReserveComponent = (params) => {
     const navigate = useNavigate();
     const [loading,isLoading] = useState(true);
 
-    let p = params
-    const d = Date.now()
+    //getDate = 
 
+    /*
     useEffect(() =>{
         // + dane o ocenach
 
         const loadReservehistory = () => {
-            return fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/rental_history/user=${ReactSession.get(params.user_id)/{d}}`,{
+            return fetch(`http://${GLOBAL.SERVER_IP}:${GLOBAL.SERVER_PORT}/rental_history/user=${ReactSession.get(params.user_id)}`,{
                 "method": "GET",
                 "headers": {
                     "Content-Type": "application/json",
@@ -33,7 +33,7 @@ const ReserveComponent = (params) => {
             .then(async response =>{
                 //let [user_id,type]= await response.data
                 if(response.status !== 200){
-                    navigate('/account/reserve', {replace: true})
+                    navigate('/', {replace: true})
                 } else {
                     response = await response.json()
                     setCars(response)
@@ -44,11 +44,20 @@ const ReserveComponent = (params) => {
         }
         
         loadReservehistory()
-    },[])
+    },[])*/
 
+    console.log(props.reserve_history)
+
+    //params.reserve_history
     return (
         <div className="reserve-container">
-
+            <p>{props.reserve_history.rent_id}</p>
+            <p>{props.reserve_history.car_id}</p>
+            <p>{props.reserve_history.user_id}</p>
+            <p>{props.reserve_history.agency_id}</p>
+            <p>{props.reserve_history.rental_begin}</p>
+            <p>{props.reserve_history.rental_end}</p>
+            <p>{props.reserve_history.price}</p>
         </div>
     )
 };

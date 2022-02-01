@@ -2,9 +2,12 @@ import React from 'react';
 import useSignupForm from './useSignupForm';
 import validateInfo  from './validateInfo';
 import './SignupForm.css'
+import {useParams} from 'react-router-dom'
 
 const FormSignup = ({submitForm}) => {
     const {handleChange, values, handleSubmit, errors} = useSignupForm(submitForm, validateInfo);
+
+    let { type } = useParams();
 
     return (
         <div className="form-content-right">
@@ -34,6 +37,11 @@ const FormSignup = ({submitForm}) => {
                     value={values.repeatPassword} onChange={handleChange}/>
                     {errors.password2 && <p>{errors.password2}</p>}
                 </div>
+                {type === 'employee' ? <div className="form-inputs">
+                    <label htmlFor="employeeCode" className="form-label">Use employee code</label>
+                    <input id="code" type="text" name="code" className="form-input" placeholder="Enter code here"
+                    value={values.code} onChange={handleChange}/>
+                </div> : null}
                 <button className="form-input-btn" type="submit">
                     Sign up
                 </button>

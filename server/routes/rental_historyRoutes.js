@@ -9,10 +9,12 @@ router.route("/rental=:id").get(rental_historyControllers.getRentalHistoryById);
 
 router.route("/user=:id").get(rental_historyControllers.getRentalHistoryByUserId);
 
+router.route("/car=:car").get(rental_historyControllers.getRentalHistoryByCarId)
+
 //current
-router.route("/current/user=:id/:d").get(rental_historyControllers.getRentalHistoryByUserIdCurrent);
+router.route("/current/user=:user").post(rental_historyControllers.getRentalHistoryByUserIdCurrent);
 
 //user
-router.route("/old/user=:id/:d").get(rental_historyControllers.getRentalHistoryByUserIdOld);
+router.route("/old/user=:user").post(rental_historyControllers.getRentalHistoryByUserIdOld);
 
 module.exports = router;

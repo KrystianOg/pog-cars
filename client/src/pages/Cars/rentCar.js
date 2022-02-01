@@ -1,10 +1,12 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import Sidebar from '../../components/Sidebar/index';
 import Navbar from '../../components/Navbar/index';
 import { Helmet } from 'react-helmet'
-import { CarsContainer } from '../../components/CarsPage/index';
+//import {useParams} from 'react-router-dom'
+//import {GLOBAL} from '../../config'
+import {RentCarComponent} from '../../components/CarsPage/rentCarPage/index'
 
-const Cars = () => {
+const RentCar = () => {
     const [isOpen, setIsOpen] = useState(false)
 
     const toggle = () => {
@@ -12,16 +14,16 @@ const Cars = () => {
     }
 
     return (
-        <>  
+        <>
             <Helmet>
                 <title>PogCars | Cars</title>
                 <link rel="icon" type="image/png" href="favicon.ico" sizes="16x16"/>
             </Helmet>
             <Sidebar isOpen={isOpen} toggle={toggle}/>
             <Navbar toggle={toggle}/>
-            <CarsContainer/>
+            <RentCarComponent/>
         </>
-    )
+    );
 };
 
-export {Cars};
+export {RentCar};

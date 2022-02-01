@@ -5,9 +5,7 @@ import './ChangedataComponent.css'
 import { Button, ButtonLink} from './ChangedataComponents'
 
 
-const ChangedataComponent = (account, days) => {
-
-    let a = new Account('Anna', 'Stawska', '05.06.1976', 'anna1976', 'poczta@jakas.tam', 'klient', false, 'aaaaa', 'a&7gv6H{g4');
+const ChangedataComponent = (props) => {
 
 
     return (
@@ -19,14 +17,11 @@ const ChangedataComponent = (account, days) => {
             Nowe nazwisko:
             <input type="text" id="txt" name="txt" maxlength="25"/>
 
-            Nowa data urodzenia:
-            <input type="text" id="txt" name="txt" maxlength="15"/>
-
             Nowy pseudonim:
             <input type="text" id="txt" name="txt" minlength="5" maxlength="20"/>
             
             Wpisz swoje hasło:
-            <input type="password" id="pwd" name="pwd" minlength="5" maxlength="20"/>
+            <input type="password" id="pwd" name="pwd" minlength="8" maxlength="32"/>
 
             <Button>
                 <ButtonLink to='/account'>Potwierdź</ButtonLink>
