@@ -35,7 +35,8 @@ exports.addNewCar = async (req,res,next) => {
 
 exports.getCarById = async (req,res,next) => {
     try{
-        let [car,_] = await Car.findById(req.params.id);
+        let sql = `SELECT * FROM cars WHERE car_id =${req.params.id}`
+        let [car,_] = await db.execute(sql)
         res.status(200).json(car);
     } catch(err){
         console.log(err)

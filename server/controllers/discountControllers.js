@@ -1,12 +1,16 @@
 const Discount = require('../models/discounts');
 const db = require('../config/db')
+const checkAuth = require('./auth').checkAuth;
 
 exports.addNewDiscount = async (req,res,next) => {
     try{
-        if(req.session.user_type =='ADMIN' || req.session.user_type == 'AGENT'){
+        let {user_id} = req.body
+
+        if(checkAuth(user_id,'AGENT')){
             //extracting parameters from request body
-            let {code, expiration, value, car_id=null, user_id=null} = req.body;
-            let discount = new Discount(code, expiration, user_id, value, car_id)
+            let {code, expiration, amount} = req.body;
+            let car_id = parseInt(req.params.id);
+            let discount = new Discount(code, expiration, null, amount, car_id)
             discount= await discount.save();
             res.status(201).json({message:"Discount added successfully"});
         } else {

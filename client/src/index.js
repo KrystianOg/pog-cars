@@ -6,7 +6,8 @@ import { ReactSession } from 'react-client-session';
 import App from './App'; //home page
 import Login from './pages/login'
 import Register from './pages/register'
-import Cars from './pages/Cars/cars'
+import {Cars} from './pages/Cars/cars'
+import {RentCar} from './pages/Cars/rentCar'
 import AddCar from './pages/Cars/addCar'
 import Articles from './pages/articles'
 import Discounts from './pages/discounts'
@@ -27,12 +28,13 @@ render(
       <Route path="register" element={<Register/>}/>
       <Route path="cars" element={<Cars/>}/>
       <Route path="cars/add" element={<AddCar/>}/>
+      <Route path="rent/id=:id" element={<RentCar/>}/>
       <Route path="articles" element={<Articles/>}/>
       <Route path="discounts" element={<Discounts/>}/>
       <Route path="users" element={<Users/>}/>
       <Route path="account" element={<Account/>}/>
       <Route path="account/changedata" element={<Changedata/>}/>
-      <Route path="account/resetpassword" element={<Resetpassword/>}/>
+      <Route path="account/resetpassword" element={<Resetpassword />}/>
       <Route path="account/reserve" element={<Reserve/>}/>
       <Route path="*" element={
         <main style={{ padding: "1rem" }}>

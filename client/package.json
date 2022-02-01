@@ -4,6 +4,7 @@
   "private": true,
   "proxy": "http://localhost:5000",
   "dependencies": {
+    "@date-io/date-fns": "^2.13.1",
     "@date-io/moment": "^2.13.1",
     "@emotion/react": "^11.7.1",
     "@emotion/styled": "^11.6.0",
@@ -17,6 +18,8 @@
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
+    "date-fns": "^2.28.0",
+    "dateformat": "^5.0.2",
     "module": "^1.2.5",
     "ngx-pagination": "^5.1.1",
     "pagination": "^0.4.6",
