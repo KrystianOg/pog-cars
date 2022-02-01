@@ -7,12 +7,31 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Menu from '@mui/material/Menu';
+import {Button as MButton} from '@mui/material';
+import { ReactSession } from 'react-client-session';
+import { useNavigate } from 'react-router-dom'
+import {makeStyles} from '@mui/styles'
 
+const useStyles = makeStyles({
+    root: {
+        background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+        border: 0,
+        borderRadius: 10,
+        boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+        color: 'white',
+        height: 48,
+        padding: '0 30px',
+        margin: '5px auto',
+        width: '140px'
+    }
+});
 
 const CarFilter = ({submit}) => {
     const {handleChange,values,handleSubmit,errors} = useCarFilterForm(submit, validateInfo);
-    
-    
+
+    const navigate = useNavigate();
+    //dodać stylowanie przyciskow
+    const classes = useStyles();
     return (
         <form className="filter-form def-box" onSubmit={handleSubmit}>
             <div className="car-form-inputs">
@@ -65,6 +84,14 @@ const CarFilter = ({submit}) => {
                 </Select>
                 </FormControl>
             </div>*/}
+            <div className="car-form-inputs">
+                <MButton variant="outlined" className={classes.root} onClick={handleSubmit}>SUBMIT</MButton>
+                
+                { ReactSession.get('type') === 'ADMIN' || ReactSession.get('type') === 'AGENT' ? 
+                <MButton variant="outlined" className={classes.root} onClick={()=>{ navigate('/cars/add', {replace: true})}}>ADD CAR</MButton>
+                : null }
+            </div>
+
         </form>
     )
 };

@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
-import Sidebar from '../components/Sidebar/index';
-import Navbar from '../components/Navbar/index';
+import Sidebar from '../../components/Sidebar/index';
+import Navbar from '../../components/Navbar/index';
 import { Helmet } from 'react-helmet'
-import { CarsContainer } from '../components/CarsPage/index';
+import { CarsContainer } from '../../components/CarsPage/index';
 
 const Cars = () => {
     const [isOpen, setIsOpen] = useState(false)
@@ -24,4 +24,4 @@ const Cars = () => {
     )
 };
 
-export default Cars;
+export {Cars};

@@ -1,10 +1,21 @@
-const User = require('../models/users')
 const bcrypt = require ('bcrypt');
 const db = require('../config/db')
 const sha256 = require('js-sha256');
 
-exports.checkAuth = async (req,res,next) =>{
-    
+exports.checkAuth = async (id,needed) =>{
+    try{
+        let res = await db.execute(`SELECT type from users WHERE user_id='${id}';`)
+        if(res[0] === needed){
+            return true
+        } else if(res[0] === "ADMIN" && needed === "AGENT"){
+            return true
+        } else {
+            return false
+        }
+    } catch(e){
+        console.log(e)
+        return false
+    }
 }
 
 //security
@@ -14,7 +25,7 @@ exports.login = async (req,res,next) =>{
         //let sql = `SELECT user_id, type FROM users WHERE users.email='${email}' AND users.password=SHA2('${process.env.PEPPER+password}'+users.salt,256);`;
         
         //get usersalt
-        let sql = `SELECT salt FROM users WHERE users.email='${email}'`;
+        let sql = `SELECT salt FROM users WHERE users.email='${email}' AND deleted = 0;`;
         let [rows,fields] = await db.execute(sql);
 
         let salt = rows[0].salt

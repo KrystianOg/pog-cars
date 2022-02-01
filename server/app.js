@@ -50,7 +50,13 @@ app.use(session({secret: 'secret', resave: true, saveUninitialized: true}));
 app.use(bodyParser.urlencoded({extended : true}));
 app.use(bodyParser.json());
 
-app.use(cors({origin: 'http://localhost:3000'}))
+const corsOptions = {
+  origin: '*',
+  credentials: false,
+  optionSuccessStatus: 200
+}
+
+app.use(cors(corsOptions));
 
 app.use('/users',require('./routes/userRoutes'));
 app.use('/agencies',require('./routes/agencyRoutes'));
@@ -69,6 +75,20 @@ app.use('/auth',require('./routes/authRoutes'));
 app.use((req, res, next) =>{
   next(createError(404));
 });
+
+app.get('/',(req,res,next) =>{
+  console.log(req.body.Id)
+  //if(req.body.Id)
+
+  next()
+})
+
+app.post('/',(req,res,next) =>{
+  console.log(req.body.Id)
+  //if(req.body.Id)
+
+  next()
+})
 
 // error handler
 app.use((err, req, res, next) => {

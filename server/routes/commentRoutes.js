@@ -3,7 +3,7 @@ const commentControllers = require('../controllers/commentControllers')
 const router = express.Router();
 
 //@route GET && POST /cars
-router.route("/").post(commentControllers.addNewComment);
+router.route("/add").post(commentControllers.addNewComment);
 
 router.route("/id=:id").get(commentControllers.getCommentById).patch(commentControllers.removeCommentById);
 

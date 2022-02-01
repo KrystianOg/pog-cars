@@ -21,7 +21,7 @@ const DiscountComponent = (props) => {
         'November',
         'December'
     ]
- 
+
     //let formatted = `${d.getDate()} ${months[d.getMonth()]} ${d.getFullYear()}`
     return (
         <div className="discount-container">

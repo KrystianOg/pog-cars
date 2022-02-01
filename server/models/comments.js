@@ -41,7 +41,7 @@ class Comment{
     
 
     static findByArticleId(id){
-        let sql = `SELECT * FROM comments WHERE article_id=${id} AND deleted = 0;`;
+        let sql = `SELECT comment_id, deleted, firstname, lastname, content FROM pog_cars.comments LEFT JOIN (SELECT firstname, lastname,user_id FROM users) as a ON comments.user_id = a.user_id WHERE article_id=${id};`;
         return db.execute(sql);
     }
 

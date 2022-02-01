@@ -6,8 +6,11 @@ import { ReactSession } from 'react-client-session';
 import App from './App'; //home page
 import Login from './pages/login'
 import Register from './pages/register'
-import Cars from './pages/cars'
+import {Cars} from './pages/Cars/cars'
+import {RentCar} from './pages/Cars/rentCar'
+import AddCar from './pages/Cars/addCar'
 import Articles from './pages/articles'
+import AddArticle from './pages/addArticle';
 import Discounts from './pages/discounts'
 import Account from './pages/account'
 import Users from './pages/users'
@@ -16,6 +19,7 @@ import Resetpassword from './pages/resetpassword'
 import Reserve from './pages/reserve'
 import Employees from './pages/employees'
 import FAQ from './pages/faq'
+
 
 
 ReactSession.setStoreType("localStorage")
@@ -27,7 +31,10 @@ render(
       <Route path="login" element={<Login/>}/>
       <Route path="register" element={<Register/>}/>
       <Route path="cars" element={<Cars/>}/>
+      <Route path="cars/add" element={<AddCar/>}/>
+      <Route path="rent/id=:id" element={<RentCar/>}/>
       <Route path="articles" element={<Articles/>}/>
+      <Route path="articles/add" element = {<AddArticle/>}/>
       <Route path="discounts" element={<Discounts/>}/>
       <Route path="users" element={<Users/>}/>
       <Route path="account" element={<Account/>}/>

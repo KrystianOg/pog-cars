@@ -52,14 +52,13 @@ class Car{
             '${this.make}'
             )`
 
-        
         return db.execute(sql);
     }
 
     // filters
 
     static findAll(){
-        let sql = "SELECT * FROM cars;"
+        let sql = "select cars.car_id, mileage, horsepower, seats, transmission, drivetrain, fuel, fuel_consumption, price, agency_id, year, deleted, model, make, avg_rating FROM cars LEFT JOIN (select car_id, ROUND(avg(star_rating),1) as avg_rating FROM car_reviews GROUP BY car_id) as a ON cars.car_id = a.car_id;"
 
         return db.execute(sql);
     }
@@ -71,7 +70,7 @@ class Car{
     }
 
     static findById(id){
-        let sql = `SELECT * FROM cars WHERE car_id=${id}`;
+        let sql = `SELECT car_id, FROM cars WHERE car_id=${id}`;
 
         return db.execute(sql);
     }
@@ -100,7 +99,7 @@ class Car{
         dictionary[ `model = '${model}'`] = model == null;
         dictionary[ `drivetrain = '${drivetrain}'`] = drivetrain == null;
         for(const[key,value] of Object.entries(dictionary)){
-            sql += value == false ? key+" AND " : ""
+            sql += !value ? key+" AND " : ""
         }
 
         sql = sql.slice(0,sql.lastIndexOf("AND"))
@@ -156,7 +155,7 @@ class Car{
         //removedCar.deleted = true; tu też
 
         //sprawdzic czy uzytkownik jest adminem
-
+        
         let sql = `UPDATE cars SET deleted = 1 WHERE car_id=${id}`;
 
         return db.execute(sql);
